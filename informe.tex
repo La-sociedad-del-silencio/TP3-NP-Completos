@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{amsfonts}          % Para las negrita de pizarra
+\usepackage{indentfirst}       % Para que quede mas lindo el formateo
+\usepackage{graphicx}          % Para graficos
+\usepackage{minted}            % Para poner codigo y que quede con sintaxis fachera
+\usepackage{hyperref}          % Para meter hipervinculos
+\usepackage[dvipsnames]{xcolor}% Para usar colores
+\usepackage{hhline}            % Mas configuracion para las líneas en tablas
+\usepackage{amsmath}           % Agregado para tags de ecuaciones
+\usepackage{xcolor}            % Coloreado de ecuaciones
+\usepackage{quoting, xparse}   % Usado para citar
+% \usepackage{svg}               % Para usar imagenes svg que se ven lindas independientemente del zoom. WARNING REQUIERE DE INKSCAPE. Tal vez no vale la pena
+\usepackage{amsmath}
+
+\graphicspath{ {./images/} }
+
+\newcommand{\docuPy}{%
+  {\href{https://wiki.python.org/moin/TimeComplexity}{documentacion oficial}}
+  }%
+
+  % Comandos para facilitar el citado
+  % Fuente: https://tex.stackexchange.com/a/391739/273865
+\NewDocumentCommand{\bywhom}{m}{% the Bourbaki trick
+  {\nobreak\hfill\penalty50\hskip1em\null\nobreak
+   \hfill\mbox{\normalfont(#1)}%
+   \parfillskip=0pt \finalhyphendemerits=0 \par}%
+}
+
+\begin{document}
+
+\begin{titlepage}
+  \vspace*{1cm}
+
+  \begin{center}
+    {\Huge{Trabajo Práctico 3: Problemas NP-Completos para la defensa de la Tribu del Agua}}
+  \end{center}
+
+  \vspace{0.4cm}
+
+  \begin{center}
+    {\LARGE{Facultad de Ingeniería de la Universidad de Buenos Aires}}\\
+    \vspace{0.3cm}
+    {\Large{Teoría de Algoritmos}}\\
+    \vspace{0.3cm}
+    {\large{Cátedra Buchwald-Genender}}\\
+  \end{center}
+
+  \vspace{0.8cm}
+  \begin{center}
+    \includegraphics[scale=0.8]{Logo-fiuba}
+  \end{center}
+
+  \vspace{1.4cm}
+  \begin{center}
+
+    {\begin{minipage}[t]{.32\textwidth}
+        \begin{center}
+          Gómez Belis, Sofía\\
+          {\small{Padrón: 109358}}\\
+          {\small{email: sgomezb@fi.uba.ar}}
+        \end{center}
+          \end{minipage}
+          \begin{minipage}[t]{.32\textwidth}
+        \begin{center}
+          Llanos Pontaut, Valentina\\
+          {\small{Padrón: 104413}}\\
+          {\small{email: vllanos@fi.uba.ar}}\\
+        \end{center}
+      \end{minipage}
+      \begin{minipage}[t]{.32\textwidth}
+        \begin{center}
+          Orsi, Tomas Fabrizio\\
+          {\small{Padrón: 109735}}\\
+          {\small{email: torsi@fi.uba.ar}}
+        \end{center}
+      \end{minipage}}
+
+  \end{center}
+\end{titlepage}
+
+\renewcommand*\contentsname{Indice}
+\tableofcontents
+\pagebreak
+
+\section{Análisis del problema}
+\subsection{Descripción y objetivo}
+
+\section{Demostración de problema NP-Completo}
+\subsection{Problema NP}
+\subsection{Reducción}
+
+\section{Complejidad algorítmica}
+\subsection{Complejidad lectura de archivos}
+
+\subsection{Complejidad algoritmo de Backtracking}
+\subsection{Complejidad algoritmo de programación lineal}
+\subsection{Complejidad algoritmo de aproximación}
+
+\subsection{Efecto de las variables sobre el algoritmo}
+
+\section{Ejemplos de ejecución}
+\label{sec:ejemplos}
+\section{Mediciones de tiempo}
+\label{sec:medTiempo}
+\subsection{Algoritmo de backtracking}
+\subsection{Algoritmo de programación lineal}
+\subsection{Algoritmo de aproximación}
+
+
+\section{Conclusión}
+
+
+\end{document}
