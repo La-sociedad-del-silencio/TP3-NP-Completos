@@ -38,10 +38,10 @@ B = 1640690
 print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma == B
 
 B = 1640691
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma > B
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma < B
 
 B = 1640689
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: Suma < B
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: Suma > B
 
 S[2].remove("Hama")
 print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: un maestro no tiene grupo
