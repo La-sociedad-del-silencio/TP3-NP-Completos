@@ -35,5 +35,23 @@ habilidades = [("Hasook", 120), ("Hama", 445), ("Senna", 546), ("Hama I", 222), 
 S = [{"Wei", "Hasook"}, {"Senna", "Hama I"}, {"Hama", "Wei I"}]
 B = 1640690
 
-print(validador_problema_tribu_del_agua(habilidades, k, B, S))
-#cada grupo tiene menos de n maestros necesariamente, pero en el peor caso, si k=1, tendrá a todos: O(n)
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma == B
+
+B = 1640691
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma > B
+
+B = 1640689
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: Suma < B
+
+S[2].remove("Hama")
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: un maestro no tiene grupo
+
+S[2].add("Hama")
+S[2].add("Wei")
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: un maestro tiene más de un grupo
+
+S.pop()
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: hay menos de k grupos
+
+S = [{"Wei", "Hasook"}, {"Senna", "Hama I"}, {"Hama", "Wei I"}, {"Infiltrado"}]
+print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: hay más de k grupos
