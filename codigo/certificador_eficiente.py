@@ -12,6 +12,8 @@ def validador_problema_tribu_del_agua(habilidades_maestros_agua, k, B, S):
     # O(n * k)
     for grupo in S: # k grupos: O(k)
         suma_grupo = 0 #O(1)
+        if len(grupo) == 0:
+            return False
         for maestro in grupo: # En el peor caso O(n)
             if maestro in maestros or maestro not in dic_habilidades:
                 return False # El maestro dado está en más de un grupo
