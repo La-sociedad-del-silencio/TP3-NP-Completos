@@ -82,8 +82,20 @@
 \tableofcontents
 \pagebreak
 
-\section{Análisis del problema}
+\section{Introducción}
 \subsection{Descripción y objetivo}
+
+Continuando con el ataque de la Nación del Fuego sobre el resto de las naciones, esta vez es la Tribu del Agua la que requiere de nuestra ayuda para defenderse. 
+
+Cada maestro agua tiene una fuerza o habilidad positiva $x_i$, y contamos con el conjunto de todos los valores $(x_i, x_2, \dots, x_n)$. Basándonos en estos, el maestro Pakku desea separar los maestros en \texttt{k} grupos $(S_1, S_2, \dots, S_k)$ parejos tal que cuando un grupo se canse, entrará el siguiente en el combate, obteniendo un ataque constante que les permita salir victoriosos, aprovechando también la ventaja del agua por sobre el fuego.
+
+Para que los grupos estén lo más parejos posibles, nos han encomendado minimizar la adición de los cuadrados de las sumas de las fuerzas de los grupos:
+
+$$
+\min \sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2
+$$
+
+En este trabajo desarrollaremos algoritmos de backtracking, programación lineal y posibles aproximaciones buscando resolver el problema planteado con el objetivo de ayudar a los mestros de la Tribu del Agua a derrotar a la Nación del Fuego.
 
 \section{Demostración de problema NP-Completo}
 \subsection{Problema NP}
