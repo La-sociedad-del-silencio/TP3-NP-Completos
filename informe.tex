@@ -154,9 +154,9 @@ $$
 Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
 
 \subsection{Reducción}
-\subsubsection{Introduccion}
-Habiendo establecido que el problema pertence a NP, ahora vamos a realizar una reduccion de un problema NP-Completo a este problema.
-Para esta reduccion, decidimos reducir el problema del Balanceo de Carga (que llamaremos B.C.) al problema de la tribu del agua (que llamaremos T.A.). Esto es decir, nuestra reduccion polinomial va a ser de la forma:
+\subsubsection{Introducción}
+Habiendo establecido que el problema pertenece a NP, ahora vamos a realizar una reducción de un problema NP-Completo a este problema.
+Para esta reducción, decidimos reducir el problema del Balanceo de Carga (que llamaremos B.C.) al problema de la tribu del agua (que llamaremos T.A.). Esto es decir, nuestra reducción polinomial va a ser de la forma:
 $$
 BC \leq_p TA
 $$
@@ -164,15 +164,15 @@ $$
 BC plantea lo siguiente: 
 \textit{Dadas m Máquinas y un conjunto n de trabajos, donde cada trabajo j toma un tiempo Tj, se desea asignar el trabajo en las Máquinas de forma balanceada. Dada una asignación A(i) para la Máquina i, su tiempo de trabajo es: $T_{i} =\displaystyle{\sum_{j \in A(i)} t_j}$. Y queremos encontrar la asignación que minimice el máx valor de Ti, que también representa el tiempo que se tardará en finalizar todos los trabajos.}
 
-Si escribimos en forma de ecuacion lo que plantea BC, obtenemos la siguiente expresion:
+Si escribimos en forma de ecuación lo que plantea BC, obtenemos la siguiente expresión:
 $$
 \min( \max (\displaystyle{\sum_{j \in A(i)} t_j}))
 $$
 
-La version de decision de este problema dice: Dado un numero $m$ de maquinas, una sucecion $n$ de trabajos, y un numero B, determinar si existe un asignacion de trabajos en las $m$ maquinas, tal que el maximo $T_i$ sea menor o igual a $B$.
+La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una succione $n$ de trabajos, y un numero B, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $B$.
 
 \subsubsection{Desarrollo}
-Basandonos en lo antes expuesto, podemos realizar la siguiente reduccion:
+Basándonos en lo antes expuesto, podemos realizar la siguiente reducción:
 Por cada trabajo $n_i$, definimos un maestro agua $x_i$. 
 
 
