@@ -84,6 +84,7 @@
 
 \section{Introducción}
 \subsection{Descripción y objetivo}
+\label{sec:descripcion}
 
 Continuando con el ataque de la Nación del Fuego sobre el resto de las naciones, esta vez es la Tribu del Agua la que requiere de nuestra ayuda para defenderse. 
 
@@ -153,6 +154,22 @@ $$
 Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
 
 \subsection{Reducción}
+Habiendo establecido que el problema pertence a NP, ahora vamos a realizar una reduccion de un problema NP-Completo a este problema.
+Para esta reduccion, decidimos reducir el problema del Balanceo de Carga (que llamaremos B.C.) al problema de los maestros del agua (que llamaremos M.A.). Esto es decir, nuestra reduccion polinomial va a ser de la forma:
+$$
+BC \leq_p MA
+$$
+
+BC plantea lo siguiente: 
+\textit{Dadas m Máquinas y un conjunto n de trabajos, donde cada trabajo j toma un tiempo Tj, se desea asignar el trabajo en las Máquinas de forma balanceada. Dada una asignación A(i) para la Máquina i, su tiempo de trabajo es: $T_{i} =\displaystyle{\sum_{j \in A(i)} t_j}$. Y queremos encontrar la asignación que minimice el máx valor de Ti, que también representa el tiempo que se tardará en finalizar todos los trabajos.}
+
+Si escribimos en forma de ecuacion lo que plantea BC, obtenemos la siguiente expresion:
+$$
+\min \displaystyle{\sum_{i = 1}^{m}} (\displaystyle{\sum_{j \in A(i)} t_j})
+$$
+
+A simple vista, vemos que tiene una gran similutd con el planteamiento de nuestro problema, descripto en \nameref{sec:descripcion}.
+
 
 \section{Complejidad algorítmica}
 \subsection{Complejidad lectura de archivos}
