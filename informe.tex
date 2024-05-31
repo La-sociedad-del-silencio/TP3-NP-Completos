@@ -169,7 +169,7 @@ $$
 \min( \max (\displaystyle{\sum_{j \in A(i)} t_j}))
 $$
 
-La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una succione $n$ de trabajos, y un numero B, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $B$.
+La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una succione $n$ de trabajos, y un numero $C$, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $C$.
 
 \subsubsection{Desarrollo}
 El problema de decisión de BC, busca minimizar el máximo valor de las maquinas; mientras que TA busca lograr que todos los subgrupos tengan una duración pareja. La pregunta entonces es: ¿Hay relación entre estas dos búsquedas?. ¡La respuesta es que si! Buscar minimizar el máximo valor de las maquinas, está implícitamente buscando lograr que todas las máquinas tengan una duración pareja.
@@ -177,9 +177,9 @@ Para reducir el tiempo de uso de una maquina, yo tengo que darle alguno de sus t
 Esto implica que en el momento que tenga todas las máquinas con igual $T_i$, es el momento en donde va a estar el mínimo valor máximo de $T_i$. Esto se ve en que si una maquina le da un trabajo a otra, una maquina va a estar por debajo de todas las anteriores, pero la otra va a tener un valor por encima de todas estas. Esto implica un mayor nivel máximo de $T_i$.
 
 Basándonos, podemos realizar la siguiente reducción:
-Por cada trabajo $n_i$, definimos un maestro agua $x_i$. Por cada máquina $m_i$ definimos un subgrupo $S_i$ .
-
-
+Por cada trabajo $n_i$, definimos un maestro agua $x_i$. Por cada máquina $m_i$ definimos un subgrupo $S_i$ ($m$ sería nuestro $k$).
+Luego tenemos $C$, el cual representa una cota máxima para el máximo valor de $T_i$. Para transformalo a $B$ en tiempo polinomial, tenemos que elevar $C$ al cuadrado y sumarle a este nuevo valor todo los otros valores de $T_i$ al cuadrado. Esto nos va a dar una cota equivalente al problema de desicion de TA.
+Entonces, despues de realizar estas transformaciones, le tenemos que pasar esta instancia de problema al validador de problemas de TA, el cual nos va a decir si la solución es válida o no.
 
 \section{Complejidad algorítmica}
 \subsection{Complejidad lectura de archivos}
