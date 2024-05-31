@@ -154,10 +154,11 @@ $$
 Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
 
 \subsection{Reducción}
+\subsubsection{Introduccion}
 Habiendo establecido que el problema pertence a NP, ahora vamos a realizar una reduccion de un problema NP-Completo a este problema.
-Para esta reduccion, decidimos reducir el problema del Balanceo de Carga (que llamaremos B.C.) al problema de los maestros del agua (que llamaremos M.A.). Esto es decir, nuestra reduccion polinomial va a ser de la forma:
+Para esta reduccion, decidimos reducir el problema del Balanceo de Carga (que llamaremos B.C.) al problema de la tribu del agua (que llamaremos T.A.). Esto es decir, nuestra reduccion polinomial va a ser de la forma:
 $$
-BC \leq_p MA
+BC \leq_p TA
 $$
 
 BC plantea lo siguiente: 
@@ -165,10 +166,15 @@ BC plantea lo siguiente:
 
 Si escribimos en forma de ecuacion lo que plantea BC, obtenemos la siguiente expresion:
 $$
-\min \displaystyle{\sum_{i = 1}^{m}} (\displaystyle{\sum_{j \in A(i)} t_j})
+\min( \max (\displaystyle{\sum_{j \in A(i)} t_j}))
 $$
 
-A simple vista, vemos que tiene una gran similutd con el planteamiento de nuestro problema, descripto en \nameref{sec:descripcion}.
+La version de decision de este problema dice: Dado un numero $m$ de maquinas, una sucecion $n$ de trabajos, y un numero B, determinar si existe un asignacion de trabajos en las $m$ maquinas, tal que el maximo $T_i$ sea menor o igual a $B$.
+
+\subsubsection{Desarrollo}
+Basandonos en lo antes expuesto, podemos realizar la siguiente reduccion:
+Por cada trabajo $n_i$, definimos un maestro agua $x_i$. 
+
 
 
 \section{Complejidad algorítmica}
