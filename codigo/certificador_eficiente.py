@@ -31,29 +31,3 @@ def validador_problema_tribu_del_agua(habilidades_maestros_agua, k, B, S):
     return True
     
 # T(n) = O(1) + O(k * n) + 2*O(n) = O(k * n). En el peor caso k=n (1 maestro por grupo) y sería O(n^2)
-        
-k = 3
-habilidades = [("Hasook", 120), ("Hama", 445), ("Senna", 546), ("Hama I", 222), ("Wei", 551), ("Wei I", 330)] 
-S = [{"Wei", "Hasook"}, {"Senna", "Hama I"}, {"Hama", "Wei I"}]
-B = 1640690
-
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma == B
-
-B = 1640691
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # True: Suma < B
-
-B = 1640689
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: Suma > B
-
-S[2].remove("Hama")
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: un maestro no tiene grupo
-
-S[2].add("Hama")
-S[2].add("Wei")
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: un maestro tiene más de un grupo
-
-S.pop()
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: hay menos de k grupos
-
-S = [{"Wei", "Hasook"}, {"Senna", "Hama I"}, {"Hama", "Wei I"}, {"Infiltrado"}]
-print(validador_problema_tribu_del_agua(habilidades, k, B, S)) # False: hay más de k grupos
