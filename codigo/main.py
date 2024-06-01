@@ -20,15 +20,14 @@ def main():
         
     else:
         # TESTS / EJEMPLOS
-        
+    
         print("---Ejemplos de la cátedra---\n")
         generarResultados("ejemplos_catedra")
             
         
         
-        #print("---Ejemplos adicionales---\n")
-        #for resultado in generarResultados("ejemplos_adicionales"):
-        #    print(resultado)
+        print("---Ejemplos adicionales---\n")
+        generarResultados("ejemplos_adicionales")
 
 
 main()
