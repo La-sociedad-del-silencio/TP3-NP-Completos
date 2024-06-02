@@ -1,7 +1,6 @@
 from random import randint
-from backtracking import *
-
-MAESTROS = ['Yakone', 'Yue', 'Pakku', 'Wei', 'Pakku I', 'Hasook', 'Senna', 'Hama I', 'Hama', 'Wei I', 'Huu', 'Eska', 'Sura', 'Sangok', 'Ming-Hua', 'Katara', 'Rafa', 'Unalaq', 'Amon', 'Tonraq', 'Misu', 'Siku', 'La', 'Siku I', 'Desna', 'Desna I', 'Tho', 'Kya', 'Siku II', 'Misu I', 'Kuruk', 'Eska I', 'Tonraq I', 'Eska II', 'Sangok I', 'Huu I', 'Huu II', 'Kya I', 'Ming-Hua I', 'Kuruk I', 'Senna II', 'Senna I', 'Hasook I', 'Yakone I', 'Amon I', 'Pakku II', 'Yue I', 'Yue II', 'Amon II', 'Tho I', 'Rafa I', 'Sura I', 'Sangok II', 'Misu II', 'Huu III']
+from backtracking import problema_tribu_del_agua_bt
+from grafico_complejidad import *
 
 def obtener_maestros():
     maestros_sin_repetidos = []
@@ -19,16 +18,6 @@ def obtener_maestros():
                         maestros_sin_repetidos.append(maestro)
 
     return maestros_sin_repetidos 
-
-def generar_test(cantidad):
-    nombres_maestros = MAESTROS
-    maestros_y_habilidades = []
-    
-    for i in range(cantidad):
-        habilidad = randint(50, 1000)
-        maestros_y_habilidades.append((nombres_maestros[i], habilidad))
-        
-    return maestros_y_habilidades    
     
 def escribir_test(nombre_archivo, k, maestros, coeficiente, grupos):
     
