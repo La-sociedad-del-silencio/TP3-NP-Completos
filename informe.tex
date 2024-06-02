@@ -213,12 +213,29 @@ $$
 \min( \max (\displaystyle{\sum_{j \in A(i)} t_j}))
 $$
 
-La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una succione $n$ de trabajos, y un numero $C$, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $C$.
+La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una serie $n$ de trabajos, y un numero $C$, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $C$.
 
 Cabe destacar que en clase nosotros estudiamos al problema de BC como un problema NP-Hard; resta aun demostrar que es un problema NP-Completo. Vamos a resolver esto en la próxima sección.
 
 \subsubsection{Demostración de problema NP-Completo}
-FALTA REDUCCIÓN DESDE 2-PARTITION!
+\label{sec:np-completo-bc}
+Para demostrar que BC es un problema NP-Completo, vamos a usar el problema 2P (el cual demostramos que es NP completo en \nameref{sec:np-completo-2p}). Es decir que vamos a realizar la reducción
+$$
+2P \leq_p TA
+$$
+
+Nosotros partimos de una serie de números $S = \{a_1, a_2, \ldots, a_n \}$. Por cada numero $a_i$ definimos un trabajo $n$ con duración $a_i$.  
+Luego, por cada uno de los dos subconjunto $S_i$, definimos una maquina $m_i$.
+Finalmente, decimos que nuestros valor $C$ va a ser la mitad de la suma de todos los $a_i$.
+
+Cuando le pasemos este nuevo problema al validador de BC, este nos va a decir si es posible partir el conjunto en dos subconjuntos. Esto se debe a que solo va a ser posible partir el conjunto en dos si como mucho, cada subconjunto tiene exactamente la mitad de la suma. 
+
+Con esto mostramos que el problema BC es un problema NP-Completo.
+
+
+
+
+
 \subsubsection{Desarrollo}
 El problema de decisión de BC, busca minimizar el máximo valor de las maquinas; mientras que TA busca lograr que todos los subgrupos tengan una duración pareja. La pregunta entonces es: ¿Hay relación entre estas dos búsquedas?. ¡La respuesta es que si! Buscar minimizar el máximo valor de las maquinas, está implícitamente buscando lograr que todas las máquinas tengan una duración pareja.
 Para reducir el tiempo de uso de una maquina, se le tiene que dar alguno de sus trabajos a otra máquina. Cuanto mas trabajos se pueda pasar a otra maquina (sin que esta se convierta en la nueva maquina de mayor duración), mas voy a lograr minimizar el valor máximo de las maquinas.
