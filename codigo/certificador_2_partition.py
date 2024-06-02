@@ -11,13 +11,16 @@ def validador_2_partition(valores, s1, s2):
         
     valores_no_repetidos = {}
     for valor in valores:
-        valores_no_repetidos[valor] = valores_no_repetidos.get(valor, 0) + 1
+        nuevoValor = valores_no_repetidos.get(valor, 0) + 1
+        valores_no_repetidos[valor] = nuevoValor
         
     if len(apariciones) != len(valores_no_repetidos):
         return False
     
     for valor, cantidad in apariciones:
-        if valor not in valores_no_repetidos or valores_no_repetidos[valor] != cantidad:
+        if valor not in valores_no_repetidos:
+            return False
+        elif valores_no_repetidos[valor] != cantidad:
             return False
         
     return True        

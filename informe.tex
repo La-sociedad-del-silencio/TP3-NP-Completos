@@ -162,7 +162,7 @@ Para demostrar que el problema de la tribu del agua es NP-Completo haremos uso d
 Enunciamos el problema de decisión asociado: dado un conjunto \( \{a_1, a_2, \ldots, a_n\} \), ¿existen dos subconjuntos \( S_1 \) y \( S_2 \) tales que \( \sum_{x \in S_1} x = \sum_{x \in S_2} x \)?
 
 A continuación mostramos la implementación de un validador:
-\inputminted[linenos, firstline=1, lastline=23]{python}{codigo/certificador_2_partition.py}
+\inputminted[linenos]{python}{codigo/certificador_2_partition.py}
 
 Hay tres ciclos \texttt{for}. Uno de ellos recorre todos los valores del conjunto. Considerando que hay \texttt{n}, es una operación $O(n)$. Los conjuntos $S_1$ y $S_2$ deberían contener en total $n$ elementos, pudiendo uno de ellos tener hasta  $n-1$. En total, ambos conllevan $O(n)$. Por lo tanto, la complejidad temporal del validador es $O(n)$, constituyendo un certificador eficiente. Como el problema 2-Partition puede ser verificado en tiempo polinomial, podemos afirmar que se encuentra en NP.
 
