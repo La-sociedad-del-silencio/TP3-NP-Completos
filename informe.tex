@@ -103,7 +103,7 @@ En este trabajo desarrollaremos algoritmos de backtracking, programación lineal
 
 Los problemas NP-Completos son los problemas más difíciles de NP. Cualquier problema en NP puede ser reducido a uno NP-Completo.
 
-Para demostrar que el problema de la Tribu del Agua es NP-Completo, primero debemos demostrar que se encuentra en NP. Posteriormente, si logramos hacer una reducción polinomial de un problema NP-Completo a éste, entonces esto implica que también se trata de un problema NP-Completo. Ésto se debe a que la reducción $Y \leq_p X$ implica que la dificultad de resolver \texttt{Y} se reduce polinomialmente a la dificultad de resolver \texttt{X}, o que \texttt{X} es al menos tan difícil de resolver como \texttt{Y}. Si \texttt{Y} es un problema NP-Completo, entonces \texttt{X} es al menos tan difícul de resolver como un problema NP-Completo.
+Para demostrar que el problema de la Tribu del Agua es NP-Completo, primero debemos demostrar que se encuentra en NP. Posteriormente, si logramos hacer una reducción polinomial de un problema NP-Completo a éste, entonces esto implica que también se trata de un problema NP-Completo. Ésto se debe a que la reducción $Y \leq_p X$ implica que la dificultad de resolver \texttt{Y} se reduce polinomialmente a la dificultad de resolver \texttt{X}, o que \texttt{X} es al menos tan difícil de resolver como \texttt{Y}. Si \texttt{Y} es un problema NP-Completo, entonces \texttt{X} es al menos tan difícil de resolver como un problema NP-Completo.
 
 Para realizar la demostración y la reducción, necesitamos basarnos en el problema de decisión:
 
@@ -167,6 +167,7 @@ A continuación mostramos la implementación de un validador:
 Hay tres ciclos \texttt{for}. Uno de ellos recorre todos los valores del conjunto. Considerando que hay \texttt{n}, es una operación $O(n)$. Los conjuntos $S_1$ y $S_2$ deberían contener en total $n$ elementos, pudiendo uno de ellos tener hasta  $n-1$. En total, ambos conllevan $O(n)$. Por lo tanto, la complejidad temporal del validador es $O(n)$, constituyendo un certificador eficiente. Como el problema 2-Partition puede ser verificado en tiempo polinomial, podemos afirmar que se encuentra en NP.
 
 \subsubsection{Reducción}
+\label{sec:np-completo-2p}
 
 Como hemos visto en clase, el problema de subset sum es NP-Completo. Utilizaremos esta conclusión para demostrar que 2-Partition también lo es.
 
@@ -192,7 +193,7 @@ Luego, existe un subset sum de valor $B$ en $S$ si y solo si existe un 2-Partiti
 
 Como esta reducción conlleva una transformación polinomial, podemos afirmar que 2-Partition es un problema NP-Completo.
 
-Ejemplo 1: La entrada de Subset Sum es \( S = \{3, 1, 4, 2, 2\} \) y \( B = 6 \). Como la suma de los valores de $S$ es 12, agregamos el elemento $12 - 2 \cdot 6 = 0$ \( S' = \{3, 1, 4, 2, 2, 0\} \). Este conjunto puede ser particionado en \( \{3, 1, 2\} \) y \( \{4, 2, 0\} \), ambas con suma 6, donde \( T = \{3, 1, 2\} \) es un subconjunto de \( S \) que suma \( 6 \). Por lo tanto, la caja negra que resuelve el problema de partición, nos devolverá que es posible encoentrar un subset sum que sume $B$.
+Ejemplo 1: La entrada de Subset Sum es \( S = \{3, 1, 4, 2, 2\} \) y \( B = 6 \). Como la suma de los valores de $S$ es 12, agregamos el elemento $12 - 2 \cdot 6 = 0$ \( S' = \{3, 1, 4, 2, 2, 0\} \). Este conjunto puede ser particionado en \( \{3, 1, 2\} \) y \( \{4, 2, 0\} \), ambas con suma 6, donde \( T = \{3, 1, 2\} \) es un subconjunto de \( S \) que suma \( 6 \). Por lo tanto, la caja negra que resuelve el problema de partición, nos devolverá que es posible encontrar un subset sum que sume $B$.
 
 Ejemplo 2: La entrada de Subset Sum es \( S = \{5, 3, 2, 7\} \), que suma 17, y \( B = 10 \). Agregamos el valor $17 - 2 \cdot 10 = -3$. Entonces, \( S' = \{5, 3, 2, 7, -3\} \) y se puede dividir en  \( \{7\} \) y \( \{2, 5, 3, -3\} \), donde \( T = \{2, 5, 3\} \) es el subconjunto que suma \( 10 \). Nuevamente existe solución. En cambio, si $B = 6$, tendríamos \( S' = \{5, 3, 2, 7, 5\} \) no puede dividirse en dos subconjuntos que sumen $22 \over 2 = 11$, por lo que no existirá un subset sum con $B = 6$ en $S$.
 
@@ -214,19 +215,19 @@ $$
 
 La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una succione $n$ de trabajos, y un numero $C$, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $C$.
 
-Cabe destacar que en clase nosotros estudiamos al problema de BC como un problema NP-Hard; resta aun demostrar que es un problema NP-Completo. 
+Cabe destacar que en clase nosotros estudiamos al problema de BC como un problema NP-Hard; resta aun demostrar que es un problema NP-Completo. Vamos a resolver esto en la próxima sección.
 
 \subsubsection{Demostración de problema NP-Completo}
 FALTA REDUCCIÓN DESDE 2-PARTITION!
 \subsubsection{Desarrollo}
 El problema de decisión de BC, busca minimizar el máximo valor de las maquinas; mientras que TA busca lograr que todos los subgrupos tengan una duración pareja. La pregunta entonces es: ¿Hay relación entre estas dos búsquedas?. ¡La respuesta es que si! Buscar minimizar el máximo valor de las maquinas, está implícitamente buscando lograr que todas las máquinas tengan una duración pareja.
-Para reducir el tiempo de uso de una maquina, yo tengo que darle alguno de sus trabajos a otra máquina. Cuanto mas trabajos yo pueda darle a otra maquina (sin que esta se convierta en la nueva maquina de mayor duración), mas voy a lograr minimizar el valor máximo de las maquinas.
-Esto implica que en el momento que tenga todas las máquinas con igual $T_i$, es el momento en donde va a estar el mínimo valor máximo de $T_i$. Esto se ve en que si una maquina le da un trabajo a otra, una maquina va a estar por debajo de todas las anteriores, pero la otra va a tener un valor por encima de todas estas. Esto implica un mayor nivel máximo de $T_i$.
+Para reducir el tiempo de uso de una maquina, se le tiene que dar alguno de sus trabajos a otra máquina. Cuanto mas trabajos se pueda pasar a otra maquina (sin que esta se convierta en la nueva maquina de mayor duración), mas voy a lograr minimizar el valor máximo de las maquinas.
+Esto implica que en el momento que se tenga todas las máquinas con igual $T_i$, es el momento en donde va a estar el mínimo valor máximo de $T_i$. Esto se ve en que si una maquina le da un trabajo a otra, una maquina va a estar por debajo de todas las anteriores, pero la otra va a tener un valor por encima de todas estas. Esto implica un mayor nivel máximo de $T_i$.
 
 Basándonos, podemos realizar la siguiente reducción:
 Por cada trabajo $n_i$, definimos un maestro agua $x_i$. Por cada máquina $m_i$ definimos un subgrupo $S_i$ ($m$ sería nuestro $k$).
-Luego tenemos $C$, el cual representa una cota máxima para el máximo valor de $T_i$. Para transformalo a $B$ en tiempo polinomial, tenemos que elevar $C$ al cuadrado y sumarle a este nuevo valor todo los otros valores de $T_i$ al cuadrado. Esto nos va a dar una cota equivalente al problema de desicion de TA.
-Entonces, despues de realizar estas transformaciones, le tenemos que pasar esta instancia de problema al validador de problemas de TA, el cual nos va a decir si la solución es válida o no.
+Luego tenemos $C$, el cual representa una cota máxima para el máximo valor de $T_i$. Para transformarlo a $B$ en tiempo polinomial, tenemos que elevar $C$ al cuadrado y sumarle a este nuevo valor todo los otros valores de $T_i$ al cuadrado. Esto nos va a dar una cota equivalente al problema de decisión de TA.
+Entonces, después de realizar estas transformaciones, le tenemos que pasar esta instancia de problema al validador de problemas de TA, el cual nos va a decir si la solución es válida o no.
 
 \section{Complejidad algorítmica}
 \subsection{Complejidad lectura de archivos}
