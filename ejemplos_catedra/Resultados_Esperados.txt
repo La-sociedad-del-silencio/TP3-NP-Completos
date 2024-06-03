@@ -165,12 +165,12 @@ Grupo 5: Hasook I, Hasook, Tonraq I, Yue I, Misu I
 Coeficiente: 16828799
 
 20_8.txt
-Grupo 1: Wei, Ming-Hua, Katara
-Grupo 2: Kuruk, Sangok, Sura I
-Grupo 3: Unalaq, Sura, La
-Grupo 4: Yakone, Pakku
-Grupo 5: Tonraq, Amon I, Hama I
+Grupo 1: Wei, Sangok, Hama I
+Grupo 2: Kuruk, Katara, Sura I
+Grupo 3: Unalaq, Amon I
+Grupo 4: Yakone, Ming-Hua, Sura
+Grupo 5: Tonraq, Pakku, La
 Grupo 6: Misu, Ming-Hua I
 Grupo 7: Tho, Amon
 Grupo 8: Hama, Rafa
-Coeficiente: 11423730
+Coeficiente: 11417428
