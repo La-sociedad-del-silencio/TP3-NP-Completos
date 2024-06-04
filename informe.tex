@@ -102,11 +102,39 @@ En este trabajo desarrollaremos algoritmos de backtracking, programación lineal
 \subsection{Reducción}
 
 \section{Complejidad algorítmica}
+
+El problema de la tribu del agua fue resuelto utilizando distintas técnicas de programación. En las próximas secciones presentaremos el código correspondiente y analizaremos la complejidad temporal de cada uno de los algoritmos planteados:
+\begin{itemize}
+    \item Backtracking
+    \item Programación Lineal
+    \item Aproximación propuesta por la cátedra
+    \item Aproximación adicional
+\end{itemize}
+
 \subsection{Complejidad lectura de archivos}
+A continuación mostramos la función principal de lectura de archivos. 
+\inputminted[linenos, firstline=9, lastline=24]{python}{codigo/archivos.py}
+
+La función lee la línea que contiene la cantidad de conjuntos de maestros a crear. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores $x_i$ de tuplas (nombre, habilidad). Esto tiene una complejidad temporal $O(n)$.
 
 \subsection{Complejidad algoritmo de Backtracking}
-\subsection{Complejidad algoritmo de programación lineal}
-\subsection{Complejidad algoritmo de aproximación}
+Nuestro algoritmo de bactracking utiliza la siguiente función auxiliar para calcular la adición de los cuadrados de la suma de las habilidades de cada grupo:
+\inputminted[linenos, firstline=47, lastline=54]{python}{codigo/backtracking.py}
+
+Esta función recorre los $k$ grupos para calcular la suma pedida. En el peor caso, la cantidad de maestros de un grupo puede ser $n$ (con $k = n$), por lo que tiene un costo proporcional a $n \cdot k$. Diremos entonces, que la complejidad temporal de esta porción de código es $O(n \cdot k)$, con $k \leq n$ puesto que si $k > n$, nuestro algoritmo completo se ejecuta en $O(1)$.  
+
+Analizaremos ahora el código principal:
+\inputminted[linenos, firstline=1, lastline=45]{python}{codigo/backtracking.py}
+
+S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos el algoritmo funciona en $O(1)$. Sin embargo, se tratan de casos particulares. Procederemos a explicar el cso general.
+
+En la \texttt{línea 9} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 8} es una operación lineal según la cantidad de grupos $k$, es decir, $O(k)$. En cambio, recorrer la solución obtenida por la función recursiva para quedarnos únicamente con los nombres de los maestros de cada grupo implica un costo $O(n \cdot k)$ porque para cada asignación tenemos un \texttt{for} anidado que la itera, realizando operaciones constantes adicionales.
+
+La solución del problema viene dada por la función recursiva \texttt{problema\_tribu\
+\_del\_agua\_bt\_recur}. Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener combinación con una suma menor a la actual. Caso contrario, poda y prueba con el siguiente grupo. Iniciamos con una suma con valor infinito. La cantidad de posibles asignaciones es $k^n$ pues para cada uno de los $n$ maestros hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
+
+\subsection{Complejidad algoritmo de Programación Lineal}
+\subsection{Complejidad algoritmo de Aproximación}
 
 \subsection{Efecto de las variables sobre el algoritmo}
 
