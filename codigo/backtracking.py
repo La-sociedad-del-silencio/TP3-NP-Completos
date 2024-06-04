@@ -2,6 +2,9 @@ def problema_tribu_del_agua_bt(maestros_y_habilidades, k):
     if k > len(maestros_y_habilidades):
         return None
     
+    if k == 0:
+        return [], 0
+    
     S = [set() for _ in range(k)]
     maestros_y_habilidades = sorted(maestros_y_habilidades, key=lambda x: -x[1])
     S_con_habilidades, coeficiente = problema_tribu_del_agua_bt_recur(maestros_y_habilidades, k, 0, list(S), list(S), float('inf'))
