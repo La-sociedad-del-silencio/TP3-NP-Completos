@@ -18,20 +18,6 @@ def obtener_maestros():
                         maestros_sin_repetidos.append(maestro)
 
     return maestros_sin_repetidos 
-    
-def escribir_test(nombre_archivo, k, maestros, coeficiente, grupos):
-    
-    with open(f'ejemplos_adicionales/{nombre_archivo}', "w") as f:
-        f.write(f'{k}\n')
-        for maestro in maestros:
-            nombre, habilidad = maestro
-            f.write(f'{nombre}, {habilidad}\n')
-            
-    with open("ejemplos_adicionales/Resultados_Esperados.txt", "a") as f:
-        f.write(f'{nombre_archivo}\n')
-        for i, grupo in enumerate(grupos):
-            f.write(f'Grupo {i+1}: {", ".join(grupo)}\n')
-        f.write(f"Coeficiente: {coeficiente}\n\n")
         
 def caso_uno_por_grupo():
     maestros_y_habilidades = generar_test(5)
@@ -42,7 +28,7 @@ def caso_uno_por_grupo():
     for maestro, habilidad in maestros_y_habilidades:
         coeficiente += habilidad**2
         grupos.append({maestro})
-    escribir_test("uno_por_grupo.txt", k, maestros_y_habilidades, coeficiente, grupos)
+    escribir_test("ejemplos_adicionales", "uno_por_grupo.txt", k, maestros_y_habilidades, coeficiente, grupos, None)
     
 def caso_habilidades_parejas():
     nombres_maestros = MAESTROS
@@ -62,7 +48,7 @@ def caso_habilidades_parejas():
     
     coeficiente = 189113
     
-    escribir_test("habilidades_parejas.txt", k, maestros_y_habilidades, coeficiente, grupos)    
+    escribir_test("ejemplos_adicionales","habilidades_parejas.txt", k, maestros_y_habilidades, coeficiente, grupos, None)    
 
 def caso_grupos_parejos():
     nombres_maestros = MAESTROS
@@ -90,6 +76,6 @@ def caso_grupos_parejos():
     
     coeficiente = 1929612
     
-    escribir_test("grupos_parejos.txt", k, maestros_y_habilidades, coeficiente, grupos)    
+    escribir_test("ejemplos_adicionales", "grupos_parejos.txt", k, maestros_y_habilidades, coeficiente, grupos, None)    
 
 caso_grupos_parejos()
