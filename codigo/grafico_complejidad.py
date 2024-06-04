@@ -41,7 +41,7 @@ def generar_tests_y_graficar(titulo, algoritmo):
         valores_k_usados.append(mayor_k)
         tiempos.append(mayor_tiempo)
     
-    plt.figure(figsize=(10, 7))
+    plt.figure(figsize=(12, 7))
     fig, ax = plt.subplots()
     plt.plot(cantidad_maestros, tiempos, color='red')
     
@@ -49,9 +49,9 @@ def generar_tests_y_graficar(titulo, algoritmo):
     xticks_labels = [f'n={n}, k={k}' for n, k in zip(cantidad_maestros, valores_k_usados)]
     ax.set_xticks(cantidad_maestros)
     ax.set_xticklabels(xticks_labels, rotation=45, ha='right')
-    ax.set_xlabel('Número de maestros (n) con el valor de k que tuvo el mayor tiempo de ejecución')
+    ax.set_xlabel('Número de maestros (n) con el valor de k \nque tuvo el mayor tiempo de ejecución')
     ax.set_ylabel('Tiempo de ejecución (ms)\n')
-    ax.set_title(f'{titulo}: Tiempos de ejecución para diferentes valores de n y k')
+    ax.set_title(f'{titulo}: Tiempos de ejecución para \ndiferentes valores de n y k')
     plt.tight_layout()
     plt.savefig('images/graficoBacktracking.png', format="png")
     plt.show()
@@ -88,4 +88,4 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
                
-#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt)
+generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt)
