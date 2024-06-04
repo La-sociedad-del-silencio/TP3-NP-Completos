@@ -102,6 +102,7 @@ def generarResultados(carpeta, maximo):
             break
         
         maestros_y_habilidades, k = generarTestDe(carpeta + "/" + archivo)
+        if k == 0: continue
         
         dic_habilidades = {}
         for maestro, habilidad in maestros_y_habilidades:

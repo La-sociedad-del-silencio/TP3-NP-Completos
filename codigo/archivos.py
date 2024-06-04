@@ -4,20 +4,17 @@ from backtracking import problema_tribu_del_agua_bt
 #FLAGMOSTRARSECUENCIA = "--mostrarSecuencia"
 
 def generarTestDe(archivo):
-    k = 0
+    k = None
     maestros_y_habilidades = []
 
     with open(archivo, "r") as file:
-        n = None
-        elem_actual = 1
         for i, line in enumerate(file):
             line = line.strip()
             if line.startswith("#"):
                 continue
-            if not k:
+            if k is None:
                 k = int(line)
                 continue
-            maestro_y_habilidad = line
             maestro, habilidad = line.split(", ")
             maestros_y_habilidades.append((maestro, int(habilidad)))
 

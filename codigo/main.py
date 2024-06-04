@@ -27,6 +27,9 @@ def main():
         
         print("---Ejemplos adicionales---\n")
         generarResultados("ejemplos_adicionales", None)
+        
+        print("---Ejemplos mediciones---\n")
+        generarResultados("ejemplos_mediciones", 54) # hasta 10_9, sin contar k=0
     
         print("---Ejemplos de la cátedra---\n")
         generarResultados("ejemplos_catedra", maxima_cantidad_de_tests)
