@@ -88,7 +88,7 @@ def generarRtasEsperadas(archivo):
 
     return rtas 
 
-def generarResultados(carpeta):
+def generarResultados(carpeta, maximo):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
     el programa en cada uno de ellos y devuelve una lista con los resultados
@@ -96,8 +96,10 @@ def generarResultados(carpeta):
     """
     archivo_rtas_esperadas = f"{carpeta}/Resultados_Esperados.txt"
     rtas = generarRtasEsperadas(archivo_rtas_esperadas)
-
+    cantidad_tests = 0
     for archivo, rtaEsperada in rtas.items():
+        if maximo is not None and cantidad_tests == maximo:
+            break
         
         maestros_y_habilidades, k = generarTestDe(carpeta + "/" + archivo)
         
@@ -112,3 +114,4 @@ def generarResultados(carpeta):
         resultado = Resultado(rta_obtenida, rtaEsperada, archivo, tiempoQueLlevo, dic_habilidades)
 
         print(resultado)
+        cantidad_tests += 1
