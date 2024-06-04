@@ -3,6 +3,8 @@ import time
 
 from archivos import procesar_archivo
 from pruebas import *
+CIAN = '\033[96m'
+FINCO = '\033[0m'
 
 FLAGMOSTRARSECUENCIA = "--mostrarSecuencia"
 
@@ -20,6 +22,8 @@ def main():
         
     else:
         # TESTS / EJEMPLOS
+        
+        print(CIAN + "\n----BACKTRACKING----\n\n" + FINCO)
         
         maxima_cantidad_de_tests = None
         if len(argv) > 1:
