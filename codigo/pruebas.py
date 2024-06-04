@@ -1,5 +1,5 @@
 from backtracking import problema_tribu_del_agua_bt
-from archivos import generarTestDe
+from archivos import *
 import time
 
 VERDE = '\033[92m'
@@ -88,7 +88,7 @@ def generarRtasEsperadas(archivo):
 
     return rtas 
 
-def generarResultados(carpeta, maximo):
+def generarResultados(carpeta, problema_tribu_del_agua, maximo):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
     el programa en cada uno de ellos y devuelve una lista con los resultados
@@ -109,7 +109,7 @@ def generarResultados(carpeta, maximo):
             dic_habilidades[maestro] = habilidad
         
         inicio = time.time()
-        rta_obtenida = problema_tribu_del_agua_bt(maestros_y_habilidades, k)
+        rta_obtenida = problema_tribu_del_agua(maestros_y_habilidades, k)
         fin = time.time()
         tiempoQueLlevo = int((fin - inicio) * 1000)
         resultado = Resultado(rta_obtenida, rtaEsperada, archivo, tiempoQueLlevo, dic_habilidades)

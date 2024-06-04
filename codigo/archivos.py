@@ -1,7 +1,10 @@
 import time
 from backtracking import problema_tribu_del_agua_bt
-#from algoritmo import eliminar_enemigos, esOptimizable, eliminar_enemigos_optimizado
-#FLAGMOSTRARSECUENCIA = "--mostrarSecuencia"
+FLAGBACKTRACKING = "--bt"
+
+algoritmos = {
+    FLAGBACKTRACKING : problema_tribu_del_agua_bt
+}
 
 def generarTestDe(archivo):
     k = None
@@ -30,10 +33,15 @@ def procesar_archivo(argv):
     archivoAProcesar = argv[1]
     
     maestros_y_habilidades, k = generarTestDe(archivoAProcesar)
+    
+    problema_tribu_del_agua = problema_tribu_del_agua_bt
+    
+    if len(argv) > 2 and argv[2] in algoritmos:
+        problema_tribu_del_agua = algoritmos[argv[2]]
 
     inicio = time.time()
 
-    grupos, coeficiente = problema_tribu_del_agua_bt(maestros_y_habilidades, k)
+    grupos, coeficiente = problema_tribu_del_agua(maestros_y_habilidades, k)
 
     fin = time.time()
 

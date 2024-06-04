@@ -17,7 +17,7 @@ def generar_test(cantidad):
         
     return maestros_y_habilidades 
 
-def generar_tests_y_graficar():
+def generar_tests_y_graficar(titulo, algoritmo):
     max_val = 11
 
     iter = 1
@@ -33,7 +33,7 @@ def generar_tests_y_graficar():
         maestros_y_habilidades = generar_test(i)
         for k in range(min(max_val, i) + 1):  
             print(f"Iteracion {iter}/{total_iters}")
-            ms_que_llevo = correrTest(i, k, maestros_y_habilidades)
+            ms_que_llevo = correrTest(i, k, maestros_y_habilidades, algoritmo)
             if mayor_tiempo < ms_que_llevo:
                 mayor_tiempo = ms_que_llevo
                 mayor_k = k
@@ -51,16 +51,16 @@ def generar_tests_y_graficar():
     ax.set_xticklabels(xticks_labels, rotation=45, ha='right')
     ax.set_xlabel('Número de maestros (n) con el valor de k que tuvo el mayor tiempo de ejecución')
     ax.set_ylabel('Tiempo de ejecución (ms)\n')
-    ax.set_title('Backtracking: Tiempos de ejecución para diferentes valores de n y k')
+    ax.set_title(f'{titulo}: Tiempos de ejecución para diferentes valores de n y k')
     plt.tight_layout()
     plt.savefig('images/graficoBacktracking.png', format="png")
     plt.show()
 
         
-def correrTest(n, k, maestros_y_habilidades):
+def correrTest(n, k, maestros_y_habilidades, algoritmo):
     inicio = time.time()
 
-    resultado = problema_tribu_del_agua_bt(maestros_y_habilidades, k)
+    resultado = algoritmo(maestros_y_habilidades, k)
     fin = time.time()
 
     msQueLlevo = int((fin - inicio) * 1000)
@@ -86,7 +86,5 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
         if tiempo_ejecucion is not None:
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
-        
-            
-
-generar_tests_y_graficar()
+               
+#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt)
