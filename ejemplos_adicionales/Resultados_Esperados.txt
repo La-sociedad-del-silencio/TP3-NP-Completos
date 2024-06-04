@@ -41,3 +41,8 @@ una_habilidad_alta.txt
 Grupo 1: Pakku 
 Grupo 2: Yue, Yakone, Wei, Pakku I
 Coeficiente: 24100
+
+k_menor_a_n.txt
+Grupo 1: Yakone, Yue
+Grupo 2: Pakku
+Coeficiente: 1800

@@ -67,7 +67,8 @@ def correrTest(n, k, maestros_y_habilidades, algoritmo):
 
     if resultado is not None:
         grupos, coeficiente = resultado
-        escribir_test("./ejemplos_mediciones", f"{n}_{k}.txt", k, maestros_y_habilidades, coeficiente, grupos, msQueLlevo)
+        # Solo ejecutar la primera vez
+        #escribir_test("./ejemplos_mediciones", f"{n}_{k}.txt", k, maestros_y_habilidades, coeficiente, grupos, msQueLlevo)
     
     return msQueLlevo
 

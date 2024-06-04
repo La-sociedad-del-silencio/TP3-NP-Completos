@@ -140,6 +140,49 @@ La solución del problema viene dada por la función recursiva \texttt{problema\
 
 \section{Ejemplos de ejecución}
 \label{sec:ejemplos}
+
+En la carpeta \texttt{ejemplos\_adicionales} se pueden encontrar distintos casos de prueba que agregamos con el objetivo de comprobar la correctitud de los algoritmos propuestos. A continuación detallamos cada uno:
+\begin{itemize}
+    \item \texttt{uno\_por\_grupo.txt} $\rightarrow$ En este caso $k = n$, por lo que cada maestro será asignado a un grupo distinto.
+    \item \texttt{habilidades\_similares.txt} $\rightarrow$ Los maestros tienen habilidades distintas, pero parejas.
+    \item \texttt{habilidades\_ascendentes.txt} $\rightarrow$ Las tuplas de maestros vienen ordenadas en orden ascendente según la fuerza.
+    \item \texttt{habilidades\_descendentes.txt} $\rightarrow$ Las tuplas de maestros vienen ordenadas en orden descendente según la fuerza.
+    \item \texttt{habilidades\_iguales.txt} $\rightarrow$ Los maestros tienen la misma habilidad.
+    \item \texttt{grupos\_parejos.txt} $\rightarrow$ Las habilidades de los maestros son tales que, al realizar la asignación, cada grupo tendrá la misma suma.
+    \item \texttt{una\_habilidad\_alta.txt} $\rightarrow$ Uno de los maestros tiene una habilidad muy alta en comparación con la del resto.
+    \item \texttt{k\_menor\_a\_n.txt} $\rightarrow$ Caso general cuando $k < n$ .
+\end{itemize}
+
+De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados para las mediciones. Los mismos se encuentran en \texttt{ejemplos\_mediciones}. Por defecto, al ejecutar todos los tests solo se ejecutan aquellos en los que $k \ne 0$.
+
+\subsection{Ejecución del programa}
+
+En esta sección explicaremos las distintas formas de ejecutar el programa.
+\begin{itemize}
+    \item \texttt{python3\ codigo/main.py}: ejecutará todos los casos de prueba existentes y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra.
+    \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}: procesará los datos del archivo dado y ejecutará todos los algoritmos, mostrando el resultado de cada uno, así como su tiempo de ejecución.
+    \item \texttt{python3\ codigo/main.py ruta\_a\_ejemplo\ --flag}: ejecutará el algoritmo según el flag utilizado. Si es inválido, por defecto actúa como el anterior.
+    \begin{itemize}
+        \item \texttt{--bt} $\rightarrow$ Backtracking
+        \item \texttt{--pl} $\rightarrow$ Programación Lineal
+        \item \texttt{--a1} $\rightarrow$ Algoritmo de aproximación propuesto por la cátedra
+        \item \texttt{--a2} $\rightarrow$ Algoritmo de aproximación adicional
+    \end{itemize}
+    \item \texttt{python3\ codigo/main.py\ --flag}: Ejecuta todos los tests usando el algoritmo propuesto. Si es inválido, por defecto se comporta como si no tuviera el flag.
+
+    \item \texttt{python3\ codigo/main.py\ N}: Ejecuta los tests usando todos los algoritmos, pero limita los ejemplos de la cátedra a N. El objetivo es poder ejecutar la mayor cantidad de tests en un tiempo menor.
+
+    \item \texttt{python3\ codigo/main.py\ N\ --flag}: Se comporta como el anterior, pero solo ejecuta los tests con el algoritmo indicado.
+        
+\end{itemize}
+
+Recomendamos utilizar:
+\begin{itemize}
+    \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}
+    \item \texttt{python3\ codigo/main.py\ N\ --flag}
+\end{itemize}
+
+
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
 \subsection{Algoritmo de backtracking}

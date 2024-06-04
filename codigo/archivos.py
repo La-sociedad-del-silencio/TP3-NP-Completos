@@ -1,6 +1,10 @@
 import time
 from backtracking import problema_tribu_del_agua_bt
 FLAGBACKTRACKING = "--bt"
+FLAGPL = "--pl"
+FLAGAPROXCATEDRA = "--a1"
+FLAGAPROXADICIONAL = "--a2"
+
 
 algoritmos = {
     FLAGBACKTRACKING : problema_tribu_del_agua_bt
@@ -33,15 +37,21 @@ def procesar_archivo(argv):
     archivoAProcesar = argv[1]
     
     maestros_y_habilidades, k = generarTestDe(archivoAProcesar)
-    
-    problema_tribu_del_agua = problema_tribu_del_agua_bt
-    
+        
     if len(argv) > 2 and argv[2] in algoritmos:
-        problema_tribu_del_agua = algoritmos[argv[2]]
-
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmos[argv[2]])  
+    
+    else:
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt)
+        # PL
+        # Aprox 1
+        # Aprox 2  
+        
+        
+def ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmo):
     inicio = time.time()
 
-    grupos, coeficiente = problema_tribu_del_agua(maestros_y_habilidades, k)
+    grupos, coeficiente = algoritmo(maestros_y_habilidades, k)
 
     fin = time.time()
 
@@ -50,5 +60,5 @@ def procesar_archivo(argv):
     for i, grupo in enumerate(grupos):
         print(f"Grupo {i+1}: {grupo}")
     print(f'Coeficiente: {coeficiente}')
-    print(f"Tiempo total: {tiempoQueLlevo} mili-segundos")    
-        
+    print(f"Tiempo total: {tiempoQueLlevo} mili-segundos") 
+    
