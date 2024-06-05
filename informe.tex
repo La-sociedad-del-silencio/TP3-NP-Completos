@@ -115,6 +115,7 @@ $$
 
 y cada elemento $x_i$ esté asignado a solamente un grupo?
 \subsection{Problema en NP}
+\label{sec:taEnNp}
 
 Un problema se encuentra en NP si existe un certificador eficiente para el mismo. Es decir, si puede ser verificado o validado en tiempo polinomial. 
 
@@ -191,7 +192,7 @@ Luego, existe un subset sum de valor $B$ en $S$ si y solo si existe un 2-Partiti
 
     $\leftarrow$ Digamos que existe una partición de \texttt{S'} en dos conjuntos tal que la suma de cada conjunto es \(s - B\). Uno de estos conjuntos contiene el número \(s - 2 \cdot B\). Eliminando este número, obtenemos un conjunto de números cuya suma es $B$, y todos estos números están en $S$.
 
-Como esta reducción conlleva una transformación polinomial, podemos afirmar que 2-Partition es un problema NP-Completo.
+Como esta reducción conlleva una transformación polinomial, \textbf{podemos afirmar que 2-Partition es un problema NP-Completo}.
 
 Ejemplo 1: La entrada de Subset Sum es \( S = \{3, 1, 4, 2, 2\} \) y \( B = 6 \). Como la suma de los valores de $S$ es 12, agregamos el elemento $12 - 2 \cdot 6 = 0$ \( S' = \{3, 1, 4, 2, 2, 0\} \). Este conjunto puede ser particionado en \( \{3, 1, 2\} \) y \( \{4, 2, 0\} \), ambas con suma 6, donde \( T = \{3, 1, 2\} \) es un subconjunto de \( S \) que suma \( 6 \). Por lo tanto, la caja negra que resuelve el problema de partición, nos devolverá que es posible encoentrar un subset sum que sume $B$.
 
