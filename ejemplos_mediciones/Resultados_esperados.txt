@@ -1,0 +1,484 @@
+0_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+1_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+1_1.txt
+Grupo 1: Yakone
+Tiempo de ejecucion: 0 ms
+Coeficiente: 148225
+
+2_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+2_1.txt
+Grupo 1: Yakone, Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 509796
+
+2_2.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 408356
+
+3_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+3_1.txt
+Grupo 1: Yakone, Pakku, Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 2588881
+
+3_2.txt
+Grupo 1: Yakone
+Grupo 2: Pakku, Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 1307725
+
+3_3.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Tiempo de ejecucion: 0 ms
+Coeficiente: 963899
+
+4_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+4_1.txt
+Grupo 1: Wei, Yakone, Pakku, Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 6140484
+
+4_2.txt
+Grupo 1: Pakku, Yue
+Grupo 2: Wei, Yakone
+Tiempo de ejecucion: 0 ms
+Coeficiente: 3114050
+
+4_3.txt
+Grupo 1: Yue
+Grupo 2: Wei
+Grupo 3: Yakone, Pakku
+Tiempo de ejecucion: 0 ms
+Coeficiente: 2072972
+
+4_4.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Tiempo de ejecucion: 0 ms
+Coeficiente: 1757410
+
+5_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+5_1.txt
+Grupo 1: Pakku, Yakone, Yue, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 4052169
+
+5_2.txt
+Grupo 1: Wei, Pakku I, Pakku
+Grupo 2: Yakone, Yue
+Tiempo de ejecucion: 2 ms
+Coeficiente: 2026845
+
+5_3.txt
+Grupo 1: Pakku
+Grupo 2: Yakone
+Grupo 3: Wei, Pakku I, Yue
+Tiempo de ejecucion: 4 ms
+Coeficiente: 1355627
+
+5_4.txt
+Grupo 1: Pakku
+Grupo 2: Yakone
+Grupo 3: Yue
+Grupo 4: Wei, Pakku I
+Tiempo de ejecucion: 3 ms
+Coeficiente: 1093103
+
+5_5.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Tiempo de ejecucion: 2 ms
+Coeficiente: 1037327
+
+6_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+6_1.txt
+Grupo 1: Pakku, Yakone, Hasook, Yue, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 13875625
+
+6_2.txt
+Grupo 1: Wei, Pakku I, Yakone
+Grupo 2: Hasook, Pakku, Yue
+Tiempo de ejecucion: 2 ms
+Coeficiente: 6938737
+
+6_3.txt
+Grupo 1: Yakone, Pakku I
+Grupo 2: Pakku, Yue
+Grupo 3: Wei, Hasook
+Tiempo de ejecucion: 1 ms
+Coeficiente: 4650921
+
+6_4.txt
+Grupo 1: Pakku I
+Grupo 2: Pakku
+Grupo 3: Hasook, Yakone
+Grupo 4: Wei, Yue
+Tiempo de ejecucion: 9 ms
+Coeficiente: 3520109
+
+6_5.txt
+Grupo 1: Pakku I
+Grupo 2: Pakku
+Grupo 3: Hasook
+Grupo 4: Wei
+Grupo 5: Yakone, Yue
+Tiempo de ejecucion: 19 ms
+Coeficiente: 2861209
+
+6_6.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Grupo 6: Hasook
+Tiempo de ejecucion: 0 ms
+Coeficiente: 2657929
+
+7_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+7_1.txt
+Grupo 1: Senna, Pakku, Yakone, Hasook, Yue, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 1731856
+
+7_2.txt
+Grupo 1: Yakone, Wei, Hasook, Yue
+Grupo 2: Senna, Pakku I, Pakku
+Tiempo de ejecucion: 0 ms
+Coeficiente: 866810
+
+7_3.txt
+Grupo 1: Yakone, Wei
+Grupo 2: Senna, Pakku I
+Grupo 3: Hasook, Pakku, Yue
+Tiempo de ejecucion: 7 ms
+Coeficiente: 579560
+
+7_4.txt
+Grupo 1: Wei
+Grupo 2: Pakku I
+Grupo 3: Hasook, Pakku
+Grupo 4: Yakone, Senna, Yue
+Tiempo de ejecucion: 30 ms
+Coeficiente: 440362
+
+7_5.txt
+Grupo 1: Wei
+Grupo 2: Pakku I
+Grupo 3: Pakku
+Grupo 4: Yue
+Grupo 5: Yakone, Senna, Hasook
+Tiempo de ejecucion: 44 ms
+Coeficiente: 386472
+
+7_6.txt
+Grupo 1: Wei
+Grupo 2: Pakku I
+Grupo 3: Pakku
+Grupo 4: Yue
+Grupo 5: Yakone, Hasook
+Grupo 6: Senna
+Tiempo de ejecucion: 114 ms
+Coeficiente: 370872
+
+7_7.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Grupo 6: Hasook
+Grupo 7: Senna
+Tiempo de ejecucion: 0 ms
+Coeficiente: 363722
+
+8_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+8_1.txt
+Grupo 1: Senna, Pakku, Yakone, Hasook, Yue, Hama I, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 14554225
+
+8_2.txt
+Grupo 1: Wei, Pakku I, Pakku, Hasook
+Grupo 2: Senna, Yakone, Hama I, Yue
+Tiempo de ejecucion: 0 ms
+Coeficiente: 7277125
+
+8_3.txt
+Grupo 1: Wei, Yakone
+Grupo 2: Senna, Pakku, Yue
+Grupo 3: Hasook, Pakku I, Hama I
+Tiempo de ejecucion: 13 ms
+Coeficiente: 4853125
+
+8_4.txt
+Grupo 1: Wei, Hasook
+Grupo 2: Senna, Yue
+Grupo 3: Pakku I, Pakku
+Grupo 4: Yakone, Hama I
+Tiempo de ejecucion: 70 ms
+Coeficiente: 3645835
+
+8_5.txt
+Grupo 1: Wei
+Grupo 2: Yue
+Grupo 3: Hasook, Pakku I
+Grupo 4: Senna, Yakone
+Grupo 5: Hama I, Pakku
+Tiempo de ejecucion: 208 ms
+Coeficiente: 2917769
+
+8_6.txt
+Grupo 1: Wei
+Grupo 2: Yue
+Grupo 3: Pakku I
+Grupo 4: Yakone
+Grupo 5: Hasook, Hama I
+Grupo 6: Senna, Pakku
+Tiempo de ejecucion: 445 ms
+Coeficiente: 2494067
+
+8_7.txt
+Grupo 1: Wei
+Grupo 2: Yue
+Grupo 3: Pakku I
+Grupo 4: Yakone
+Grupo 5: Hama I
+Grupo 6: Pakku
+Grupo 7: Senna, Hasook
+Tiempo de ejecucion: 820 ms
+Coeficiente: 2274823
+
+8_8.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Grupo 6: Hasook
+Grupo 7: Senna
+Grupo 8: Hama I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 2175883
+
+9_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+9_1.txt
+Grupo 1: Senna, Pakku, Hasook, Yakone, Hama, Yue, Hama I, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 36276529
+
+9_2.txt
+Grupo 1: Hasook, Senna, Wei, Pakku
+Grupo 2: Yakone, Hama, Yue, Hama I, Pakku I
+Tiempo de ejecucion: 8 ms
+Coeficiente: 18138877
+
+9_3.txt
+Grupo 1: Senna, Wei, Hama
+Grupo 2: Hasook, Yakone, Yue
+Grupo 3: Pakku I, Pakku, Hama I
+Tiempo de ejecucion: 112 ms
+Coeficiente: 12098845
+
+9_4.txt
+Grupo 1: Yakone, Senna
+Grupo 2: Hasook, Hama I
+Grupo 3: Hama, Pakku
+Grupo 4: Wei, Pakku I, Yue
+Tiempo de ejecucion: 483 ms
+Coeficiente: 9080221
+
+9_5.txt
+Grupo 1: Senna
+Grupo 2: Hasook, Wei
+Grupo 3: Pakku I, Pakku
+Grupo 4: Hama, Yue
+Grupo 5: Yakone, Hama I
+Tiempo de ejecucion: 2284 ms
+Coeficiente: 7400309
+
+9_6.txt
+Grupo 1: Senna
+Grupo 2: Hasook
+Grupo 3: Pakku
+Grupo 4: Wei, Hama
+Grupo 5: Pakku I, Hama I
+Grupo 6: Yakone, Yue
+Tiempo de ejecucion: 6893 ms
+Coeficiente: 6188243
+
+9_7.txt
+Grupo 1: Senna
+Grupo 2: Hasook
+Grupo 3: Pakku
+Grupo 4: Hama
+Grupo 5: Hama I
+Grupo 6: Yakone, Wei
+Grupo 7: Pakku I, Yue
+Tiempo de ejecucion: 11143 ms
+Coeficiente: 5422487
+
+9_8.txt
+Grupo 1: Senna
+Grupo 2: Hasook
+Grupo 3: Pakku
+Grupo 4: Hama
+Grupo 5: Hama I
+Grupo 6: Yakone
+Grupo 7: Yue
+Grupo 8: Wei, Pakku I
+Tiempo de ejecucion: 15158 ms
+Coeficiente: 4714393
+
+9_9.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Grupo 6: Hasook
+Grupo 7: Senna
+Grupo 8: Hama I
+Grupo 9: Hama
+Tiempo de ejecucion: 0 ms
+Coeficiente: 4229531
+
+10_0.txt
+Tiempo de ejecucion: 0 ms
+Coeficiente: 0
+
+10_1.txt
+Grupo 1: Senna, Pakku, Yakone, Hasook, Hama, Yue, Wei I, Hama I, Wei, Pakku I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 24157225
+
+10_2.txt
+Grupo 1: Hasook, Wei, Pakku, Hama I
+Grupo 2: Senna, Yakone, Hama, Yue, Wei I, Pakku I
+Tiempo de ejecucion: 5 ms
+Coeficiente: 12078625
+
+10_3.txt
+Grupo 1: Wei, Yue
+Grupo 2: Senna, Yakone, Pakku I, Wei I
+Grupo 3: Hasook, Hama I, Pakku, Hama
+Tiempo de ejecucion: 51 ms
+Coeficiente: 8052469
+
+10_4.txt
+Grupo 1: Wei, Senna, Pakku I, Hama
+Grupo 2: Hasook, Yakone
+Grupo 3: Hama I, Yue
+Grupo 4: Wei I, Pakku
+Tiempo de ejecucion: 236 ms
+Coeficiente: 6067683
+
+10_5.txt
+Grupo 1: Wei
+Grupo 2: Yakone, Hama
+Grupo 3: Senna, Pakku I, Yue
+Grupo 4: Hasook, Wei I
+Grupo 5: Pakku, Hama I
+Tiempo de ejecucion: 690 ms
+Coeficiente: 4867279
+
+10_6.txt
+Grupo 1: Wei
+Grupo 2: Yakone
+Grupo 3: Yue
+Grupo 4: Pakku I, Wei I
+Grupo 5: Senna, Pakku, Hama
+Grupo 6: Hasook, Hama I
+Tiempo de ejecucion: 2562 ms
+Coeficiente: 4093063
+
+10_7.txt
+Grupo 1: Wei
+Grupo 2: Yakone
+Grupo 3: Yue
+Grupo 4: Wei I
+Grupo 5: Pakku, Hama
+Grupo 6: Senna, Hama I
+Grupo 7: Hasook, Pakku I
+Tiempo de ejecucion: 7769 ms
+Coeficiente: 3548783
+
+10_8.txt
+Grupo 1: Wei
+Grupo 2: Yakone
+Grupo 3: Yue
+Grupo 4: Wei I
+Grupo 5: Pakku
+Grupo 6: Hama I
+Grupo 7: Hasook
+Grupo 8: Senna, Pakku I, Hama
+Tiempo de ejecucion: 9297 ms
+Coeficiente: 3326383
+
+10_9.txt
+Grupo 1: Wei
+Grupo 2: Yakone
+Grupo 3: Yue
+Grupo 4: Wei I
+Grupo 5: Pakku
+Grupo 6: Hama I
+Grupo 7: Hasook
+Grupo 8: Pakku I
+Grupo 9: Senna, Hama
+Tiempo de ejecucion: 63619 ms
+Coeficiente: 3294967
+
+10_10.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Grupo 6: Hasook
+Grupo 7: Senna
+Grupo 8: Hama I
+Grupo 9: Hama
+Grupo 10: Wei I
+Tiempo de ejecucion: 0 ms
+Coeficiente: 3283559
+

@@ -1,0 +1,48 @@
+Los resultados mostrados aquí son óptimos. Es decir, el resultado de la cantidad de tropas debe coincidir con el mostrado.
+Si llegan a otra secuencia de Maestros que lleven al mismo valor óptimo, también será correcto, por supuesto.
+
+uno_por_grupo.txt
+Grupo 1: Yakone
+Grupo 2: Yue
+Grupo 3: Pakku
+Grupo 4: Wei
+Grupo 5: Pakku I
+Coeficiente: 2135699
+
+habilidades_similares.txt
+Grupo 1: Wei, Yakone, Hasook
+Grupo 2: Pakku I, Pakku, Yue
+Coeficiente: 189113
+
+habilidades_ascendentes.txt
+Grupo 1: Pakku I
+Grupo 2: Yakone, Wei
+Grupo 3: Yue, Pakku
+Coeficiente: 7500
+
+habilidades_descendentes.txt
+Grupo 1: Pakku, Pakku I
+Grupo 2: Wei, Yue, Yakone
+Coeficiente: 11300
+
+habilidades_iguales.txt
+Grupo 1: Yakone, Wei
+Grupo 2: Yue
+Grupo 3: Pakku
+Coeficiente: 135000
+
+grupos_parejos.txt
+Grupo 1: Hasook, Yakone
+Grupo 2: Yue, Pakku I
+Grupo 3: Wei, Pakku
+Coeficiente: 1929612
+
+una_habilidad_alta.txt
+Grupo 1: Pakku 
+Grupo 2: Yue, Yakone, Wei, Pakku I
+Coeficiente: 24100
+
+k_menor_a_n.txt
+Grupo 1: Yakone, Yue
+Grupo 2: Pakku
+Coeficiente: 1800
