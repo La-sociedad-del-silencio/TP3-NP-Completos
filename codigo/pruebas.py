@@ -45,13 +45,15 @@ class Resultado:
         return representacion
     
 def son_resultados_iguales(resultado_esperado, resultado_obtenido, habilidad_por_maestro):
-    if resultado_esperado[1] == resultado_obtenido[1]:
+    if resultado_esperado[1] != resultado_obtenido[1]:
         return False
     
     # Puede haber más de una combinación que de el mismo coeficiente
     suma = 0
     for grupo in resultado_obtenido[0]:
         suma_grupo = 0
+        if len(grupo) == 0:
+            return False
         for maestro in grupo:
             suma_grupo += habilidad_por_maestro[maestro]
         suma += suma_grupo ** 2
@@ -81,11 +83,9 @@ def generarRtasEsperadas(archivo):
                 grupos.append(set(maestros))
             elif linea.startswith('Coeficiente: '):
                 coeficiente = linea.split(': ')[1]
-                rtas[nombre_archivo] = (grupos, coeficiente)
+                rtas[nombre_archivo] = (grupos, int(coeficiente))
                 grupos = []
             
-        #rtas[nombre_archivo] = (cantidad_tropas, [estrategias])
-
     return rtas 
 
 def generarResultados(carpeta, problema_tribu_del_agua, maximo):
