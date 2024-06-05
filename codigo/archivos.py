@@ -1,5 +1,6 @@
 import time
 from backtracking import problema_tribu_del_agua_bt
+from aproximacion_catedra import problema_tribu_del_agua_aprox_catedra
 FLAGBACKTRACKING = "--bt"
 FLAGPL = "--pl"
 FLAGAPROXCATEDRA = "--a1"
@@ -7,7 +8,8 @@ FLAGAPROXADICIONAL = "--a2"
 
 
 algoritmos = {
-    FLAGBACKTRACKING : problema_tribu_del_agua_bt
+    FLAGBACKTRACKING   : problema_tribu_del_agua_bt,
+    FLAGAPROXCATEDRA   : problema_tribu_del_agua_aprox_catedra,
 }
 
 def generarTestDe(archivo):

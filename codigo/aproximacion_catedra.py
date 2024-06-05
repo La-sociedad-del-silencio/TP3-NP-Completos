@@ -1,4 +1,4 @@
-def aproximacion_propuesta(maestros_y_habilidades, k):
+def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
     if k > len(maestros_y_habilidades):
         return None
 
