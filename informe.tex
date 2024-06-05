@@ -115,6 +115,7 @@ $$
 
 y cada elemento $x_i$ esté asignado a solamente un grupo?
 \subsection{Problema en NP}
+\label{sec:taEnNp}
 
 Un problema se encuentra en NP si existe un certificador eficiente para el mismo. Es decir, si puede ser verificado o validado en tiempo polinomial. 
 
@@ -155,6 +156,7 @@ $$
 Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
 
 \subsection{Problema 2-Partition}
+\label{subsec:partition}
 
 Para demostrar que el problema de la tribu del agua es NP-Completo haremos uso del problema 2-Partition. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
 
@@ -173,7 +175,7 @@ Como hemos visto en clase, el problema de subset sum es NP-Completo. Utilizaremo
 
 Dado un conjunto de números \( S = \{s_1, s_2, \ldots, s_n\} \) y un número \( V \), queremos saber si hay un subconjunto de \( S \) cuya suma sea igual a \( V \).
 
-Para realizar la reducción $SS \leq_p 2P$, con SS haciendo referencia a subset sum y 2P a 2-Partition, debemos definir cuál es la entrada (conjunto) de la caja negra que resuelve 2-Partition. Sea $s = sum(S)$ la suma de los valores del conjunto $S$, definimos \( S' = S \cup \{s - 2\cdot V\} \). Aplicamos el algoritmo en $S'$.
+Para realizar la reducción $SS \leq_p 2P$, con SS haciendo referencia a subset sum y 2P a 2-Partition, debemos definir cuál es la entrada (conjunto) de la caja negra que resuelve 2-Partition. Sea $s = sum(S)$ la suma de los valores del conjunto $S$, definimos \( S' = S \cup \{s - 2\cdot V\} \). Aplicamos el algoritmo en $S'$. Agregar un elemento a un conjunto es $O(1)$, mientras que si se desea copiar $S$ para no modificarlo, la operación es lineal en el tamaño del set. Por lo tanto, esta transformación es polinomial.
 
 Si \( T \subseteq S \) es un subconjunto con suma \( V \):
 
@@ -191,7 +193,7 @@ Luego, existe un subset sum de valor $V$ en $S$ si y solo si existe un 2-Partiti
 
     $\leftarrow$ Digamos que existe una partición de \texttt{S'} en dos conjuntos tal que la suma de cada conjunto es \(s - V\). Uno de estos conjuntos contiene el número \(s - 2 \cdot V\). Eliminando este número, obtenemos un conjunto de números cuya suma es $V$, y todos estos números están en $S$.
 
-Como esta reducción conlleva una transformación polinomial, podemos afirmar que 2-Partition es un problema NP-Completo.
+Como esta reducción conlleva una transformación polinomial, \textbf{podemos afirmar que 2-Partition es un problema NP-Completo}.
 
 Ejemplo 1: La entrada de Subset Sum es \( S = \{3, 1, 4, 2, 2\} \) y \( V = 6 \). Como la suma de los valores de $S$ es 12, agregamos el elemento $12 - 2 \cdot 6 = 0$ \( S' = \{3, 1, 4, 2, 2, 0\} \). Este conjunto puede ser particionado en \( \{3, 1, 2\} \) y \( \{4, 2, 0\} \), ambas con suma 6, donde \( T = \{3, 1, 2\} \) es un subconjunto de \( S \) que suma \( 6 \). Por lo tanto, la caja negra que resuelve el problema de partición, nos devolverá que es posible encontrar un subset sum que sume $B$.
 
@@ -261,6 +263,34 @@ $\leftarrow$ Supongamos que hemos particionado a los maestros del agua en \( k \
 Demostraremos por qué ésto implica que existen asignaciones en máquinas donde $\max T_i \leq C$ mediante ejemplos. Supongamos que se tienen los tiempos de trabajos $\{2, 3, 4, 6, 2, 2\}$, 3 máquinas y $C = 7$. Existe la siguiente solución para el problema de balanceo de carga: $m_1 = (6)$, $m_2 = (2, 4)$, $m_3 = (2, 2, 3)$. Para el problema de la tribu del agua también existirá solución. Por ejemplo, $S_1 = \{2, 6\}$, $S_2 = \{2, 3\}$, $S_3 = \{2, 4\}$ es una solución válida porque $8^2 + 5^2 + 6^2 = 125 \leq 3 \cdot 7^2 = 147$. Sin embargo, la solución mínima es $S_1 = \{6\}$, $S_2 = \{2, 4\}$, $S_3 = \{2, 2, 3\}$ con coeficiente $121 < 125$.  Si el algoritmo encuentra primero la primera solución, la caja negra nos devolvería \texttt{True} directamente, no cumpliendo que cada grupo tenga a lo sumo una suma $C$. Como sabemos que el problema BC tiene solución, no nos hacemos problema. 
 
 Veamos ahora un ejemplo en el que no existe solución para BC. Tenemos los trabajos $\{2, 3, 2, 3, 2, 3\}$, 3 máquinas y $C = 4$. La asignación $m_1 = (2, 3)$, $m_2 = (2, 3)$, $m_3 = (2, 3)$ tiene tiempos $T_i = 5 > C$. Puede haber una máquina con $T_i$ 2, 3 o 4, pero eso significará que las restantes excedan aun más a C. Por ejemplo, si $m_1 = (2, 2)$, $m_2 = (3, 3)$, $m_3 = (2, 3)$ el máximo $T_i$ ahora es 6. Por lo tanto, no tiene solución. El problema de la tribu del agua intentaría crear $S_1 = \{2, 3\}$, $S_2 = \{2, 3\}$, $S_3 = \{2, 3\}$ porque tiene coeficiente mínimo, pero $5^2 + 5^2 + 5^2 = 75 > 3 \cdot 4^2 = 48$. Entonces, tampoco tendría solución. De manera análoga y retomando el primer ejemplo, sabemos que si $C=6$ no existe solución para el problema de balanceo de carga y nuestra asignación con suma mínima $121$ es mayor a $k \cdot C = 3 \cdot 6 = 108$.
+
+\subsection{Reducción del Problema 2-Partition}
+Como hemos demostrado que el \nameref{subsec:partition} es NP-Completo, lo utilizaremos para realizar una segunda reducción y comprobar nuevamente que el problema de la tribu del agua es también NP-Completo. Además, debido a la propiedad transitiva de las reducciones tenemos que, como $2P \leq_p BC$ y $BC \leq_p TA$, entonces $2P \leq_p TA$.
+
+Dados los datos de entrada del problema de 2-Partition, \( \{a_1, a_2, \ldots, a_n\} \), podemos realizar la siguiente transformación polinomial que nos permitirá resolver el problema de decisión asociado (y enunciado previamente) utilizando la caja negra que resuelve el de la tribu del agua:
+
+\begin{itemize}
+    \item \( k = 2 \) porque según la definición de 2-Partition necesitamos dividir el conjunto en dos grupos.
+    \item La fuerzas de los maestros \( \{x_1, x_2, \ldots, x_n\} \) serán \( \{a_1, a_2, \ldots, a_n\} \).
+    \item \( B \) es el valor obtenido cuando las sumas de los elementos en cada subconjunto son iguales. Es decir, suponiendo que el problema de decisión de 2-Partition tiene solución y sabiendo que en ese caso la suma de cada subconjunto es s = \(sum(A)\over2\), entonces $B = s^2 + s^2$. 
+\end{itemize}
+Esta transformación requiere recorrer el conjunto $A = \{a_1, a_2, \ldots, a_n\}$ para crear las tuplas (maestro, habilidad), lo cual implica una operación $O(n)$, que es polinomial.
+
+El problema original de la partición tiene una solución si y solo si es posible obtener dos grupos de maestros tal que la adición de los cuadrados de las sumas de las habilidades en cada grupo sea mínima y menor o igual a $B$.
+
+$\rightarrow$ Si el conjunto $A$ puede ser particionado en 2 subconjuntos tales que la suma de los elementos en cada uno sea igual, significa que los 2 grupos de maestros estarán perfectamente parejos. Obtener conjuntos de habilidades parejas es justamente el objetivo de minimizar la adición de los cuadrados de las sumas de las fuerzas. En este caso, los cuadrados de las sumas serán iguales y, por lo tanto, la suma de los mismos será mínima. Si resolviéramos el problema de decisión para $V > B$, también llegaríamos a la conclusión de que existe solución. En cambio, si $V = B - 1$, no se puede resolver. Por lo tanto, $B$ es el coeficiente mínimo.
+
+$\leftarrow$ Si existe una solución del problema de la tribu del agua, significa que se puede dividir a los maestros en 2 grupos tal que la adición de los cuadrados de las sumas de cada uno es a lo sumo $B$. Como $B$ es el resultado de sumar dos veces $s^2$, esto implica que los 2 subconjuntos tienen suma $s$, por lo que el problema de 2-partition tiene solución.
+
+Ejemplo: $A = \{1, 2, 3\}$. Realizando la transformación, $k = 2$, $B = (\frac{6}{2})^2 + (\frac{6}{2})^2 = 18$ y $maestros = \{("", 1), ("", 2), ("", 3)\}$. Los nombres de los maestros no nos interesan porque no queremos obtener una solución para 2-Partition, sino saber si existe una. Existen múltiples combinaciones de valores para los dos subconjuntos, pero nos quedaremos con la que minimice la suma de los cuadrados, respetando que debe ser a lo sumo $B$,
+\begin{enumerate}
+    \item $S_1 = {1}$ y $S_2 = {2, 3} \rightarrow$ El coeficiente es $1^2 + (2 + 3)^2 = 26 > B$. No es solución.
+    \item $S_1 = {1, 2}$ y $S_2 = {3} \rightarrow$ El coeficiente es $(1 + 2)^2 + 3^2 = 18 = B$. Es solución.
+    \item $S_1 = {1, 3}$ y $S_2 = {2} \rightarrow$ El coeficiente es $(1 + 3)^2 + 2^2 = 20 > B$. No es solución.    
+\end{enumerate}
+Como existe solución para el problema de la tribu del agua, entonces también la existe para 2-Partition.
+
+De esta forma, hemos demostrado que el problema de la tribu del agua es al menos tan difícil como el problema de partición, que es NP-completo. Como la reducción realizada es polinomial, podemos afirmar que el problema de la tribu del agua es también NP-Completo.
 
 \section{Complejidad algorítmica}
 \subsection{Complejidad lectura de archivos}
