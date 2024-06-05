@@ -1,6 +1,6 @@
 0
-Yakone, 886
-Yue, 694
-Pakku, 199
-Wei, 211
-Pakku I, 469
+Yakone, 633
+Yue, 393
+Pakku, 653
+Wei, 168
+Pakku I, 166

@@ -1,5 +1,5 @@
 2
-Yakone, 897
-Yue, 764
-Pakku, 973
-Wei, 203
+Yakone, 689
+Yue, 862
+Pakku, 229
+Wei, 698

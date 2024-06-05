@@ -1,23 +1,23 @@
 def problema_tribu_del_agua_bt(maestros_y_habilidades, k):
-    if k > len(maestros_y_habilidades):
+    n = len(maestros_y_habilidades)
+    
+    if k > n:
         return None
     
     if k == 0:
         return [], 0
     
+    if k == n:
+        return caso_k_igual_a_n(maestros_y_habilidades)
+    
     S = [set() for _ in range(k)]
     maestros_y_habilidades = sorted(maestros_y_habilidades, 
                                     key=lambda x: -x[1])
+    
     S_con_habilidades, coeficiente = problema_tribu_del_agua_bt_recur(
         maestros_y_habilidades, k, 0, list(S), list(S), float('inf'))
-
-    resultado = []
-    
-    for i in range(len(S_con_habilidades)):
-        grupo = set()
-        for maestro, _ in S_con_habilidades[i]:
-            grupo.add(maestro)
-        resultado.append(grupo)
+        
+    resultado = obtener_resultado(S_con_habilidades)
         
     return resultado, coeficiente
             
@@ -52,3 +52,22 @@ def sumatoria(grupos):
             suma_grupo += habilidad
         suma += suma_grupo ** 2
     return suma
+
+def caso_k_igual_a_n(maestros_y_habilidades):
+    suma = 0
+    grupos = []
+    for maestro, habilidad in maestros_y_habilidades:
+        grupos.append({maestro})
+        suma += habilidad**2
+    return grupos, suma
+
+def obtener_resultado(S_con_habilidades):
+    resultado = []
+    
+    for i in range(len(S_con_habilidades)):
+        grupo = set()
+        for maestro, _ in S_con_habilidades[i]:
+            grupo.add(maestro)
+        resultado.append(grupo)
+        
+    return resultado

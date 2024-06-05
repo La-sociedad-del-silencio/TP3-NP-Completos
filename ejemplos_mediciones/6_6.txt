@@ -1,7 +1,7 @@
 6
-Yakone, 311
-Yue, 591
-Pakku, 826
-Wei, 878
-Pakku I, 975
-Hasook, 704
+Yakone, 264
+Yue, 385
+Pakku, 736
+Wei, 626
+Pakku I, 994
+Hasook, 720

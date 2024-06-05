@@ -1,10 +1,10 @@
 3
-Yakone, 836
-Yue, 597
-Pakku, 627
-Wei, 120
-Pakku I, 59
-Hasook, 947
-Senna, 967
-Hama I, 125
-Hama, 679
+Yakone, 600
+Yue, 594
+Pakku, 835
+Wei, 413
+Pakku I, 587
+Hasook, 848
+Senna, 898
+Hama I, 618
+Hama, 630

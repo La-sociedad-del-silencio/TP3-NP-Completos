@@ -123,12 +123,20 @@ Nuestro algoritmo de bactracking utiliza la siguiente función auxiliar para cal
 
 Esta función recorre los $k$ grupos para calcular la suma pedida. En el peor caso, la cantidad de maestros de un grupo puede ser $n$ (con $k = 1$), por lo que tiene un costo proporcional a $n \cdot k$. Diremos entonces, que la complejidad temporal de esta porción de código es $O(n \cdot k)$, con $k \leq n$ puesto que si $k > n$, nuestro algoritmo completo se ejecuta en $O(1)$.  
 
+A continuación mostramos otras funciones que utiliza el código principal:
+
+\inputminted[linenos, firstline=56, lastline=73]{python}{codigo/backtracking.py}
+
+Como sabemos que si $n = k$ cada grupo tendrá únicamente un maestro, decidimos que en ese caso particular no se aplique el algoritmo de backtracking. En su lugar, resolvemos la asignación con la función \texttt{caso\_k\_igual\_a\_n} que itera sobre la lista de maestros, implicando un costo de $O(n)$. Esto nos permitió disminuir notablemente el tiempo de ejecución cuando $n = k$. 
+
+Por otro lado, como necesitamos la habilidad de cada maestro para poder minimizar la función objetivo, nuestro algoritmo tiene en cuenta grupos con el nombre y la fuerza de cada maestro. Luego los filtramos para quedarnos únicamente con los nombres. Éste es el objetivo de \texttt{obtener\_resultado}. Su complejidad temporal es $O(n \cdot k)$, debido al mismo análisis que el de la función \texttt{sumatoria}.
+
 Analizaremos ahora el código principal:
 \inputminted[linenos, firstline=1, lastline=45]{python}{codigo/backtracking.py}
 
 S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos el algoritmo funciona en $O(1)$. Sin embargo, se tratan de casos particulares. Procederemos a explicar el caso general.
 
-En la \texttt{línea 9} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 8} es una operación lineal en la cantidad de grupos $k$, es decir, $O(k)$. En cambio, recorrer la solución obtenida por la función recursiva para quedarnos únicamente con los nombres de los maestros de cada grupo implica un costo $O(n \cdot k)$ porque para cada asignación tenemos un \texttt{for} anidado que la itera, realizando operaciones constantes adicionales.
+En la \texttt{línea 14} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 13} es una operación lineal en la cantidad de grupos $k$, es decir, $O(k)$. 
 
 La solución del problema viene dada por la función recursiva \texttt{problema\_tribu\
 \_del\_agua\_bt\_recur}. Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y prueba con el si-\ guiente grupo. Iniciamos con una suma con valor infinito. La cantidad de posibles asignaciones es $k^n$ pues para cada uno de los $n$ maestros hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
@@ -196,7 +204,7 @@ Con el algoritmo de backtracking obtuvimos los siguientes resultados:
 
 \includegraphics[scale=0.60]{images/graficoBacktracking.png}
 
-Como podemos observar en la tendencia de la curva, el tiempo de ejecución aumenta exponencialmente con la cantidad de maestros $n$ y también depende de $k$. El tiempo más alto ocurre cuando $k$ se acerca a $n$. Para valores pequeños de estas variables el algoritmo es relativamente rápido. Sin embargo, al incrementarlos no se vuelve práctico debido a que el tiempo no crece polinomialmente, sino exponencialmente.  Esto corrobora el análisis de la complejidad planteado previamente.
+Como podemos observar en la tendencia de la curva, el tiempo de ejecución aumenta exponencialmente con la cantidad de maestros $n$ y también depende de $k$. El tiempo más alto ocurre cuando $k$ se acerca a $n$, con $k < n$ (es lineal cuando $k = n$). Para valores pequeños de estas variables el algoritmo es relativamente rápido. Sin embargo, al incrementarlos no se vuelve práctico debido a que el tiempo no crece polinomialmente, sino exponencialmente.  Esto corrobora el análisis de la complejidad planteado previamente.
 
 \subsection{Algoritmo de programación lineal}
 \subsection{Algoritmo de aproximación}
