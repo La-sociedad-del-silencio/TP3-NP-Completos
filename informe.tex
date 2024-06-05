@@ -15,7 +15,7 @@
 \graphicspath{ {./images/} }
 
 \newcommand{\docuPy}{%
-  {\href{https://wiki.python.org/moin/TimeComplexity}{documentacion oficial}}
+  {\href{https://wiki.python.org/moin/TimeComplexity}{documentación oficial}}
   }%
 
   % Comandos para facilitar el citado
@@ -84,6 +84,7 @@
 
 \section{Introducción}
 \subsection{Descripción y objetivo}
+\label{sec:descripcion}
 
 Continuando con el ataque de la Nación del Fuego sobre el resto de las naciones, esta vez es la Tribu del Agua la que requiere de nuestra ayuda para defenderse. 
 
@@ -98,8 +99,198 @@ $$
 En este trabajo desarrollaremos algoritmos de backtracking, programación lineal y posibles aproximaciones buscando resolver el problema de optimización planteado con el objetivo de ayudar a los mestros de la Tribu del Agua a derrotar a la Nación del Fuego. También nos dedicaremos a demostrar que el problema de la tribu del agua es NP-Completo.
 
 \section{Demostración de problema NP-Completo}
-\subsection{Problema NP}
-\subsection{Reducción}
+\label{sec:np-completo}
+
+Los problemas NP-Completos son los problemas más difíciles de NP. Cualquier problema en NP puede ser reducido a uno NP-Completo.
+
+Para demostrar que el problema de la Tribu del Agua es NP-Completo, primero debemos demostrar que se encuentra en NP. Posteriormente, si logramos hacer una reducción polinomial de un problema NP-Completo a éste, entonces esto implica que también se trata de un problema NP-Completo. Ésto se debe a que la reducción $Y \leq_p X$ implica que la dificultad de resolver \texttt{Y} se reduce polinomialmente a la dificultad de resolver \texttt{X}, o que \texttt{X} es al menos tan difícil de resolver como \texttt{Y}. Si \texttt{Y} es un problema NP-Completo, entonces \texttt{X} es al menos tan difícil de resolver como un problema NP-Completo.
+
+Para realizar la demostración y la reducción, necesitamos basarnos en el problema de decisión:
+
+Dados una secuencia de \texttt{n} fuerzas de maestros agua $(x_i, x_2, \dots, x_n)$, y dos números \texttt{k} y \texttt{B}, ¿existe una partición en \texttt{k} subgrupos $(S_1, S_2, \dots, S_k)$ tal que:
+
+$$
+\sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2 \leq B
+$$
+
+y cada elemento $x_i$ esté asignado a solamente un grupo?
+\subsection{Problema en NP}
+\label{sec:taEnNp}
+
+Un problema se encuentra en NP si existe un certificador eficiente para el mismo. Es decir, si puede ser verificado o validado en tiempo polinomial. 
+
+Tenemos los siguientes datos:
+\begin{itemize}
+    \item Habilidades de los maestros $\rightarrow$ se presentan en forma de tupla (nombre maestro, fuerza)
+    \item Cantidad de subconjuntos $\rightarrow$ \texttt{k}
+    \item Cota del coeficiente $\rightarrow$ \texttt{B}
+    \item Resultado a validar $\rightarrow$ subconjuntos $S_i$ que contienen los nombres de los maestros del grupo correspondiente
+\end{itemize}
+
+También tenemos las siguientes restricciones:
+\begin{itemize}
+    \item Cada maestro debe estar asignado a un solo grupo
+    \item El resultado debe contener \texttt{k} grupos
+    \item La sumatoria resultante debe ser a lo sumo \texttt{B} 
+\end{itemize}
+
+Dados estos datos y restricciones, proponemos el siguiente certificador.
+\inputminted[linenos, firstline=1, lastline=31]{python}{codigo/certificador_eficiente.py}
+
+Para que el verificador presentado pueda ser considerado un certificador eficiente, debe ejecutarse en tiempo polinomial. Por lo tanto, procedemos a explicar y justificar la complejidad del código.
+
+Realizamos operaciones aritméticas, asignaciones y verificaciones. Todas estas son operaciones $O(1)$ puesto que consumen tiempo constante según la \docuPy. Recorremos dos veces la lista de maestros y habilidades con diferentes propósitos. Como contiene \texttt{n} tuplas, cada ciclo \texttt{for} tiene un costo $O(n)$. Con el objetivo de obtener la adición de los cuadrados de las sumas de las fuerzas de los grupos y compararla con \texttt{B}, tenemos dos ciclos anidados. El segundo recorre los maestros de un grupo que, en el peor caso, son \texttt{n}. Esto se realiza \texttt{k} veces, por lo que en total es $O(k \times n)$.
+
+Entonces,
+
+$$
+T(n) = O(1) + 2 \cdot O(n) + O(k \times n) = O(k \times n)  
+$$
+
+En el peor caso, $k = n$ y
+
+$$
+T(n) = O(n \times n) = O(n^2)
+$$
+
+Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
+
+\subsection{Problema 2-Partition}
+\label{subsec:partition}
+
+Para demostrar que el problema de la tribu del agua es NP-Completo haremos uso del problema 2-Partition. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
+
+\subsubsection{Problema en NP}
+Enunciamos el problema de decisión asociado: dado un conjunto \( A =\{a_1, a_2, \ldots, a_n\} \), ¿existen dos subconjuntos \( A_1 \) y \( A_2 \) tales que \( \sum_{a \in A_1} a = \sum_{a \in A_2} a \)?
+
+A continuación mostramos la implementación de un validador:
+\inputminted[linenos]{python}{codigo/certificador_2_partition.py}
+
+Hay tres ciclos \texttt{for}. Uno de ellos recorre todos los valores del conjunto. Considerando que hay \texttt{n}, es una operación $O(n)$. Los conjuntos $A_1$ y $A_2$ deberían contener en total $n$ elementos, pudiendo uno de ellos tener hasta  $n-1$. En total, ambos conllevan $O(n)$. Por lo tanto, la complejidad temporal del validador es $O(n)$, constituyendo un certificador eficiente. Como el problema 2-Partition puede ser verificado en tiempo polinomial, podemos afirmar que se encuentra en NP.
+
+\subsubsection{Reducción}
+\label{sec:np-completo-2p}
+
+Como hemos visto en clase, el problema de subset sum es NP-Completo. Utilizaremos esta conclusión para demostrar que 2-Partition también lo es.
+
+Dado un conjunto de números \( S = \{s_1, s_2, \ldots, s_n\} \) y un número \( V \), queremos saber si hay un subconjunto de \( S \) cuya suma sea igual a \( V \).
+
+Para realizar la reducción $SS \leq_p 2P$, con SS haciendo referencia a subset sum y 2P a 2-Partition, debemos definir cuál es la entrada (conjunto) de la caja negra que resuelve 2-Partition. Sea $s = sum(S)$ la suma de los valores del conjunto $S$, definimos \( S' = S \cup \{s - 2\cdot V\} \). Aplicamos el algoritmo en $S'$. Agregar un elemento a un conjunto es $O(1)$, mientras que si se desea copiar $S$ para no modificarlo, la operación es lineal en el tamaño del set. Por lo tanto, esta transformación es polinomial.
+
+Si \( T \subseteq S \) es un subconjunto con suma \( V \):
+
+\begin{itemize}
+    \item Sea \( O = S \setminus T \), con suma \( o = s - V \), los elementos que ``sobran''.
+    \item Sea \( T' = T \cup \{s - 2 \cdot V\} \), cuya suma es \( V + (s - 2 \cdot V) = s - V \). Es el subconjunto buscado, unido con el valor agregado a $S$.
+    \item $ O \cup T' = S'$
+\end{itemize}
+
+Entonces, la suma de \( T' \) y \( O \) es la misma, \( s - V \), lo que significa que podemos dividir \( S' \) en dos subconjuntos con la misma suma.
+
+Luego, existe un subset sum de valor $V$ en $S$ si y solo si existe un 2-Partition en $S'$:
+
+    $\rightarrow$ Si existe un conjunto de números en $S$ que suman $V$, entonces los números restantes en $S$ suman \(s - V\). Por lo tanto, existe una partición de \texttt{S'} en dos tal que cada partición suma \(s - V\): \( O = S \setminus T \) y \( T' = T \cup \{s - 2 \cdot V\} \). 
+
+    $\leftarrow$ Digamos que existe una partición de \texttt{S'} en dos conjuntos tal que la suma de cada conjunto es \(s - V\). Uno de estos conjuntos contiene el número \(s - 2 \cdot V\). Eliminando este número, obtenemos un conjunto de números cuya suma es $V$, y todos estos números están en $S$.
+
+Como esta reducción conlleva una transformación polinomial, \textbf{podemos afirmar que 2-Partition es un problema NP-Completo}.
+
+Ejemplo 1: La entrada de Subset Sum es \( S = \{3, 1, 4, 2, 2\} \) y \( V = 6 \). Como la suma de los valores de $S$ es 12, agregamos el elemento $12 - 2 \cdot 6 = 0$ \( S' = \{3, 1, 4, 2, 2, 0\} \). Este conjunto puede ser particionado en \( \{3, 1, 2\} \) y \( \{4, 2, 0\} \), ambas con suma 6, donde \( T = \{3, 1, 2\} \) es un subconjunto de \( S \) que suma \( 6 \). Por lo tanto, la caja negra que resuelve el problema de partición, nos devolverá que es posible encontrar un subset sum que sume $B$.
+
+Ejemplo 2: La entrada de Subset Sum es \( S = \{5, 3, 2, 7\} \), que suma 17, y \( V = 10 \). Agregamos el valor $17 - 2 \cdot 10 = -3$. Entonces, \( S' = \{5, 3, 2, 7, -3\} \) y se puede dividir en  \( \{7\} \) y \( \{2, 5, 3, -3\} \), donde \( T = \{2, 5, 3\} \) es el subconjunto que suma \( 10 \). Nuevamente existe solución. En cambio, si $V = 6$, tendríamos \( S' = \{5, 3, 2, 7, 5\} \) no puede dividirse en dos subconjuntos que sumen $22 \over 2 = 11$, por lo que no existirá un subset sum con $V = 6$ en $S$.
+
+\subsection{Reducción del Problema del Balanceo de Carga}
+\subsubsection{Introducción}
+Habiendo establecido que el problema pertenece a NP, ahora vamos a realizar una reducción de un problema NP-Completo a este problema.
+Para esta reducción, decidimos utilizar el problema del Balanceo de Carga (que llamaremos B.C.) al problema de la tribu del agua (que llamaremos T.A.). Esto es decir, nuestra reducción polinomial va a ser de la forma:
+$$
+BC \leq_p TA
+$$
+
+BC plantea lo siguiente: 
+\textit{Dadas m Máquinas y un conjunto n de trabajos, donde cada trabajo j toma un tiempo Tj, se desea asignar el trabajo en las Máquinas de forma balanceada. Dada una asignación A(i) para la Máquina i, su tiempo de trabajo es: $T_{i} =\displaystyle{\sum_{j \in A(i)} t_j}$. Y queremos encontrar la asignación que minimice el máx valor de Ti, que también representa el tiempo que se tardará en finalizar todos los trabajos.}
+
+Si escribimos en forma de ecuación lo que plantea BC, obtenemos la siguiente expresión:
+$$
+\min( \max (\displaystyle{\sum_{j \in A(i)} t_j}))
+$$
+
+La versión de decisión de este problema dice: Dado un numero $m$ de maquinas, una serie $n$ de trabajos, y un numero $C$, determinar si existe un asignación de trabajos en las $m$ maquinas, tal que el máximo $T_i$ sea menor o igual a $C$.
+
+Cabe destacar que en clase nosotros estudiamos al problema de BC como un problema NP-Hard; resta aun demostrar que es un problema NP-Completo. Vamos a resolver esto en la próxima sección.
+
+\subsubsection{Demostración de problema NP-Completo}
+\label{sec:np-completo-bc}
+Para demostrar que BC es un problema NP-Completo, vamos a usar el problema 2P (el cual demostramos que es NP completo en \nameref{sec:np-completo-2p}). Es decir, vamos a realizar la reducción
+$$
+2P \leq_p TA
+$$
+
+Nosotros partimos de una serie de números $S = \{a_1, a_2, \ldots, a_n \}$ que es la entrada de 2-Partition. Por cada número $a_i$ definimos un trabajo $n$ con duración $a_i$.  
+Luego, por cada uno de los dos subconjunto $S_i$, definimos una maquina $m_i$. 
+Finalmente, decimos que nuestro valor $C$ va a ser la mitad de la suma de todos los $a_i$.
+
+Cuando le pasemos este nuevo problema al validador de BC, este nos va a decir si es posible partir el conjunto en dos subconjuntos. Esto se debe a que solo va a ser posible partir el conjunto en dos si, como mucho, cada subconjunto tiene exactamente la mitad de la suma. 
+
+Podemos afirmar entones, que existe un 2-Paritition de $S$ si y solo si el mínimo valor $T_i$ resultante de las máquinas es a lo sumo $C$.
+
+$\rightarrow$ Si existe una solución para el problema de 2-partition, entonces existe una solución para el problema de balanceo de carga. Si tenemos 2 subconjuntos $S_1$ y $S_2$ tales que ambos tienen la misma suma, $C =$$ sum(S) \over 2$, entonces existe una asignación de trabajos en 2 máquinas distintas tal que el $T_i$ de cada una sea exacatmente $C$. Esto se debe a que los valores $a_i$ representan los tiempos de cada trabajo. Cualquier otra asignación no sería mínima. Como se tienen 2 máquinas, si quitamos trabajo de una para asignárselo a la otra, la segunda tendría $T_i > C$ necesariamente porque en total la suma de los $a_i$ es $2 \cdot C$.
+
+$\leftarrow$ Si existe una solución que permita minimizar el $T_i$ máximo de las máquinas, significa que este valor es a lo sumo $C$, debido a la definición del problema de decisión. $ A(i) = (\displaystyle{\sum_{i \in m_i} a_i})$, con $T_i = \max A(i)$. A la vez, $A(m_1) + A(m_2) = sum(S)$ porque las asignaciones están formadas por los valores $a_i$ y todos los trabajos son asignados. Como $C =$$ sum(S) \over2$, entonces $A(m_1) + A(m_2) = 2 \cdot C$. Ningun $A(i)$ puede ser mayor a $C$ porque asumimos que existe solución. Tampoco pueden ser menores a ese valor ya que no se cumpliría $A(m_1) + A(m_2) = sum(S)$. Por lo tanto, $A(m_1) = A(m_2) = C$. Esto significa que $S$ se puede dividir en 2 subconjuntos tales que su suma sea igual y la mitad de la total del conjunto.
+
+Ejemplo: consideramos el conjunto \(S = \{3, 1, 1, 2, 2, 1\}\). Asignamos los trabajos ${3, 1, 1, 2, 2, 1}$ a 2 máquinas $m_1$ y $m_2$ tal que el tiempo máximo de cada una sea menor o igual a $3 + 1 + 1 + 2 + 2 + 1\over2$$ =$$ 10\over2 $$= 5$. El algoritmo que resuelve el problema de decisión de BC nos indicará que existe solución ($\{3, 1, 1\}$ y $\{2, 2, 1\}$), por lo que existe una partición en 2 subconjuntos.
+
+Con esto mostramos que el problema BC es un problema NP-Completo. En la próxima seccion usaremos este hecho para demostrar que TA tambien pertenece a los problemas NP-Completos.
+
+
+\subsubsection{Desarrollo}
+El problema de decisión de BC busca minimizar el máximo valor de las maquinas, mientras que TA busca lograr que todos los subgrupos tengan una duración pareja. La pregunta entonces es: ¿Hay relación entre estas dos búsquedas?. ¡La respuesta es que si! Buscar minimizar el máximo valor de las máquinas, está implícitamente buscando lograr que todas las máquinas tengan una duración pareja.
+Para reducir el tiempo de uso de una maquina, se le tiene que dar alguno de sus trabajos a otra máquina. Cuantos más trabajos se puedan pasar a otra maquina (sin que esta se convierta en la nueva máquina de mayor duración), más se va a lograr minimizar el valor máximo de las maquinas.
+Esto implica que en el momento que se tenga todas las máquinas con similares $T_i$, es el momento en donde va a estar el mínimo valor máximo de $T_i$. 
+
+Basándonos en esto, podemos realizar la siguiente reducción:
+Por cada trabajo $n_i$, definimos un maestro agua $x_i$, donde la habilidad será el tiempo de ejecución del mismo. Por cada máquina $m_i$ definimos un subgrupo $S_i$ ($m$ sería nuestro $k$).
+Luego tenemos $C$, el cual representa una cota máxima para el máximo valor de $T_i$. Para transformarlo a $B$ en tiempo polinomial, tenemos que elevar $C$ al cuadrado y sumarle a este nuevo valor todo los otros valores de $T_i$ al cuadrado. Como todos los $T_i$ deben ser a lo sumo $C$ para que exista solución, podemos establecer $B = k \cdot C^2$. Esto nos va a dar una cota equivalente al problema de decisión de TA.
+
+Entonces, después de realizar estas transformaciones, le tenemos que pasar esta instancia de problema a la caja negra que resuelve el problema de decisión de TA, la cual nos va a decir si la solución existe o no. Esto implica que, si existe una asignación de trabajos en $m$ máquinas cuyo $T_i$ máximo sea a lo sumo $C$, entonces los maestros de la tribu del agua pueden formar $k$ grupos cuyas habilidades son parejas.
+
+$\rightarrow$ Si el máximo valor de $T_i$ es a lo sumo $C$, significa que existen $m$ conjuntos de trabajo cuya suma de tiempos es menor o igual a $C$. Como $B = k \cdot C^2$ y efectivamente se pueden obtener $m = k$ grupos, existe una asignación cuya adición de los cuadrados de la suma de cada uno sea a lo sumo $B$. Como la suma de un grupo representa su $T_i$, es posible que algunos $T_i$ sean estrictamente menores que $C$ (no se tratan de la máquina con mayor trabajo) en cuyo caso el resultado será menor a $B$. 
+
+$\leftarrow$ Supongamos que hemos particionado a los maestros del agua en \( k \) grupos tal que:
+\[
+\sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2 \leq k \cdot C^2
+\]
+Demostraremos por qué ésto implica que existen asignaciones en máquinas donde $\max T_i \leq C$ mediante ejemplos. Supongamos que se tienen los tiempos de trabajos $\{2, 3, 4, 6, 2, 2\}$, 3 máquinas y $C = 7$. Existe la siguiente solución para el problema de balanceo de carga: $m_1 = (6)$, $m_2 = (2, 4)$, $m_3 = (2, 2, 3)$. Para el problema de la tribu del agua también existirá solución. Por ejemplo, $S_1 = \{2, 6\}$, $S_2 = \{2, 3\}$, $S_3 = \{2, 4\}$ es una solución válida porque $8^2 + 5^2 + 6^2 = 125 \leq 3 \cdot 7^2 = 147$. Sin embargo, la solución mínima es $S_1 = \{6\}$, $S_2 = \{2, 4\}$, $S_3 = \{2, 2, 3\}$ con coeficiente $121 < 125$.  Si el algoritmo encuentra primero la primera solución, la caja negra nos devolvería \texttt{True} directamente, no cumpliendo que cada grupo tenga a lo sumo una suma $C$. Como sabemos que el problema BC tiene solución, no nos hacemos problema. 
+
+Veamos ahora un ejemplo en el que no existe solución para BC. Tenemos los trabajos $\{2, 3, 2, 3, 2, 3\}$, 3 máquinas y $C = 4$. La asignación $m_1 = (2, 3)$, $m_2 = (2, 3)$, $m_3 = (2, 3)$ tiene tiempos $T_i = 5 > C$. Puede haber una máquina con $T_i$ 2, 3 o 4, pero eso significará que las restantes excedan aun más a C. Por ejemplo, si $m_1 = (2, 2)$, $m_2 = (3, 3)$, $m_3 = (2, 3)$ el máximo $T_i$ ahora es 6. Por lo tanto, no tiene solución. El problema de la tribu del agua intentaría crear $S_1 = \{2, 3\}$, $S_2 = \{2, 3\}$, $S_3 = \{2, 3\}$ porque tiene coeficiente mínimo, pero $5^2 + 5^2 + 5^2 = 75 > 3 \cdot 4^2 = 48$. Entonces, tampoco tendría solución. De manera análoga y retomando el primer ejemplo, sabemos que si $C=6$ no existe solución para el problema de balanceo de carga y nuestra asignación con suma mínima $121$ es mayor a $k \cdot C = 3 \cdot 6 = 108$.
+
+\subsection{Reducción del Problema 2-Partition}
+Como hemos demostrado que el \nameref{subsec:partition} es NP-Completo, lo utilizaremos para realizar una segunda reducción y comprobar nuevamente que el problema de la tribu del agua es también NP-Completo. Además, debido a la propiedad transitiva de las reducciones tenemos que, como $2P \leq_p BC$ y $BC \leq_p TA$, entonces $2P \leq_p TA$.
+
+Dados los datos de entrada del problema de 2-Partition, \( \{a_1, a_2, \ldots, a_n\} \), podemos realizar la siguiente transformación polinomial que nos permitirá resolver el problema de decisión asociado (y enunciado previamente) utilizando la caja negra que resuelve el de la tribu del agua:
+
+\begin{itemize}
+    \item \( k = 2 \) porque según la definición de 2-Partition necesitamos dividir el conjunto en dos grupos.
+    \item La fuerzas de los maestros \( \{x_1, x_2, \ldots, x_n\} \) serán \( \{a_1, a_2, \ldots, a_n\} \).
+    \item \( B \) es el valor obtenido cuando las sumas de los elementos en cada subconjunto son iguales. Es decir, suponiendo que el problema de decisión de 2-Partition tiene solución y sabiendo que en ese caso la suma de cada subconjunto es s = \(sum(A)\over2\), entonces $B = s^2 + s^2$. 
+\end{itemize}
+Esta transformación requiere recorrer el conjunto $A = \{a_1, a_2, \ldots, a_n\}$ para crear las tuplas (maestro, habilidad), lo cual implica una operación $O(n)$, que es polinomial.
+
+El problema original de la partición tiene una solución si y solo si es posible obtener dos grupos de maestros tal que la adición de los cuadrados de las sumas de las habilidades en cada grupo sea mínima y menor o igual a $B$.
+
+$\rightarrow$ Si el conjunto $A$ puede ser particionado en 2 subconjuntos tales que la suma de los elementos en cada uno sea igual, significa que los 2 grupos de maestros estarán perfectamente parejos. Obtener conjuntos de habilidades parejas es justamente el objetivo de minimizar la adición de los cuadrados de las sumas de las fuerzas. En este caso, los cuadrados de las sumas serán iguales y, por lo tanto, la suma de los mismos será mínima. Si resolviéramos el problema de decisión para $V > B$, también llegaríamos a la conclusión de que existe solución. En cambio, si $V = B - 1$, no se puede resolver. Por lo tanto, $B$ es el coeficiente mínimo.
+
+$\leftarrow$ Si existe una solución del problema de la tribu del agua, significa que se puede dividir a los maestros en 2 grupos tal que la adición de los cuadrados de las sumas de cada uno es a lo sumo $B$. Como $B$ es el resultado de sumar dos veces $s^2$, esto implica que los 2 subconjuntos tienen suma $s$, por lo que el problema de 2-partition tiene solución.
+
+Ejemplo: $A = \{1, 2, 3\}$. Realizando la transformación, $k = 2$, $B = (\frac{6}{2})^2 + (\frac{6}{2})^2 = 18$ y $maestros = \{("", 1), ("", 2), ("", 3)\}$. Los nombres de los maestros no nos interesan porque no queremos obtener una solución para 2-Partition, sino saber si existe una. Existen múltiples combinaciones de valores para los dos subconjuntos, pero nos quedaremos con la que minimice la suma de los cuadrados, respetando que debe ser a lo sumo $B$,
+\begin{enumerate}
+    \item $S_1 = {1}$ y $S_2 = {2, 3} \rightarrow$ El coeficiente es $1^2 + (2 + 3)^2 = 26 > B$. No es solución.
+    \item $S_1 = {1, 2}$ y $S_2 = {3} \rightarrow$ El coeficiente es $(1 + 2)^2 + 3^2 = 18 = B$. Es solución.
+    \item $S_1 = {1, 3}$ y $S_2 = {2} \rightarrow$ El coeficiente es $(1 + 3)^2 + 2^2 = 20 > B$. No es solución.    
+\end{enumerate}
+Como existe solución para el problema de la tribu del agua, entonces también la existe para 2-Partition.
+
+De esta forma, hemos demostrado que el problema de la tribu del agua es al menos tan difícil como el problema de partición, que es NP-completo. Como la reducción realizada es polinomial, podemos afirmar que el problema de la tribu del agua es también NP-Completo.
 
 \section{Complejidad algorítmica}
 
