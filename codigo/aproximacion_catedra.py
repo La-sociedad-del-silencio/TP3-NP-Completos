@@ -1,3 +1,13 @@
+def obtenerCuadradoSuma(S):
+    sumaActual = 0
+    for elem in S:
+        habilidad = elem[1]
+        sumaActual += habilidad
+
+    cuadrado = sumaActual ** 2
+
+    return cuadrado
+
 def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
     if k > len(maestros_y_habilidades):
         return None
@@ -13,9 +23,9 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
             S[0].add(maestro_y_habilidad)
             continue
         grupo_con_menor_habilidad = 0
-        menor_cuadrado_suma = sum(S[0])**2
+        menor_cuadrado_suma = obtenerCuadradoSuma(S[0])
         for i in range(1, k): #O(k)
-            cuadrado_suma = sum(S[i])**2
+            cuadrado_suma = obtenerCuadradoSuma(S[i])
             if cuadrado_suma < menor_cuadrado_suma:
                 menor_cuadrado_suma = cuadrado_suma
                 grupo_con_menor_habilidad = i
