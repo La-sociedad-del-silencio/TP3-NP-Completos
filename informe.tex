@@ -183,11 +183,13 @@ De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados
 
 En esta sección explicaremos las distintas formas de ejecutar el programa.
 \begin{itemize}
-    \item \texttt{python3\ codigo/main.py}: ejecutará todos los casos de prueba existentes y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra.
-    \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}: procesará los datos del archivo dado y ejecutará todos los algoritmos, mostrando el resultado de cada uno, así como su tiempo de ejecución.
+    \item \texttt{python3\ codigo/main.py}: ejecutará todos los casos de prueba existentes y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra. En el caso de backtracking solo se ejecuta la versión mejorada.
+    \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}: procesará los datos del archivo dado y ejecutará todos los algoritmos, mostrando el resultado de cada uno, así como su tiempo de ejecución. 
     \item \texttt{python3\ codigo/main.py ruta\_a\_ejemplo\ --flag}: ejecutará el algoritmo según el flag utilizado. Si es inválido, por defecto actúa como el anterior.
     
-        \texttt{--bt} $\rightarrow$ Backtracking
+        \texttt{--bt} $\rightarrow$ Backtracking, versión inicial
+
+        \texttt{--btg} $\rightarrow$ Backtracking, versión mejorada
         
         \texttt{--pl} $\rightarrow$ Programación Lineal
         
