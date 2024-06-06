@@ -101,7 +101,7 @@ En este trabajo desarrollaremos algoritmos de backtracking, programación lineal
 \subsection{Problema NP}
 \subsection{Reducción}
 
-\section{Complejidad algorítmica}
+\section{Algoritmos y análisis de complejidad}
 
 El problema de optimización de la tribu del agua fue resuelto utilizando distintas técnicas de programación. En las próximas secciones presentaremos el código correspondiente y analizaremos la complejidad temporal de cada uno de los algoritmos planteados:
 \begin{itemize}
@@ -117,7 +117,7 @@ A continuación mostramos la función principal de lectura de archivos.
 
 La función lee la línea que contiene la cantidad de conjuntos de maestros a crear. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores $x_i$ de tuplas (nombre, habilidad). Esto tiene una complejidad temporal $O(n)$.
 
-\subsection{Complejidad algoritmo de Backtracking}
+\subsection{Algoritmo de Backtracking}
 
 Debido al alto tiempo de ejecución de nuestro algoritmo inicial de backtracking, buscamos alternativas que nos permitieran disminuirlo. Logramos realizar algunas mejoras, las cuales serán analizadas en \nameref{sec:bt-greedy}. En ambos casos se realiza una poda cuando el algoritmo se da cuenta que la solución parcial no sirve. Esto ocurre cuando se hace una asignación de un maestro a un grupo que implica una suma mayor o igual a nuestra suma óptima. Cuando se da esta situación, se corta y se intenta asignarlo a otro grupo. Presentaremos a continuación ambas versiones del algoritmo. 
 
@@ -157,7 +157,39 @@ Ambas versiones ordenan los maestros por mayor habilidad. Observamos que ésto m
 \inputminted[linenos, firstline=29, lastline=64]{python}{codigo/backtracking_con_greedy.py}
 
 El algoritmo sigue realizando una búsqueda explícita del espacio de soluciones, por lo que su complejidad temporal es exponencial. Sin embargo, las mejoras nos permitieron reducir notablemente el tiempo de ejecución. Esto se debe a que se asigna rápidamente un maestro a un grupo con una suma pequeña, lo cual puede conducir a futuras podas (no se encuentra una suma mayor a la mejor hasta el momento). La comparación con el algoritmo original puede encontrarse en \nameref{sec:medidas-bt-greedy}. 
-\subsection{Complejidad algoritmo de Programación Lineal}
+\subsection{Modelo de Programación Lineal}
+
+Debido a la dificultad de linealizar la función objetivo, nuestro modelo de programación lineal buscará, en cambio, minimizar la diferencia del grupo de mayor suma con el de menor suma. De esta forma, obtendremos una aproximación a la solución óptima. Sea $Z$ el grupo con la mayor suma de habilidades de los maestros \(\sum_{i} Z_i\) e Y el de menor suma, entonces se busca minimizar \(\sum_{i} Z_i - \sum_{j} Y_j\).
+
+Para resolver el problema utilizaremos programación lineal entera. A continuación detallaremos el modelo:
+\begin{itemize}
+    \item Constantes $\rightarrow$ Las fuerzas de los maestros son constantes del problema. $H_i$ es la habilidad del maestro $i$.
+    \item Variables $\rightarrow$
+    \begin{itemize}
+        \item $X_{i,j}$: Es una variable binaria. Vale 1 si el maestro $i$ es asigndo al grupo $j$, con $i \in [0, n-1]$ o $i \in [1, n]$ y $ j \in [0, k-1]$ o $j \in [1, k]$. En caso contrario, vale 0.
+        \item $S_{min}$: Representa el valor del grupo con la menor suma. Sea $S_j$ la suma del grupo $j$ tal que $S_j = \sum_{i=1}^{n} H_i \cdot X_{i,j} $, entonces $S_{min} = \min_j S_j$. 
+        \item $S_{max}$: Representa el valor del grupo con la mayor suma. $S_{max} = \max_j S_j$.
+    \end{itemize}
+    \item Restricciones $\rightarrow$
+    \begin{itemize}
+        \item Asignaciones: cada maestro debe ser asignado a un solo un grupo. Luego, $sum_{j=1}^{k} X_{i,j} = 1 \quad \forall i$.
+        \item Sumas: $S_{min} \leq S_j \quad \forall j$ y $S_{max} \geq S_j \quad \forall j$.
+    \end{itemize}
+    \item Función objetivo $\rightarrow$ se desea minimizar $S_{min} - S_{max}$.
+\end{itemize}
+
+Podemos observar la declaración de las variables, la función objetivo y las restricciones en el código:
+
+\inputminted[linenos, firstline=4]{python}{codigo/programacion_lineal.py}
+
+Definimos los mismos casos particulares que en los otros algoritmos, con el objetivo de disminuir el tiempo de ejecución cuando conocemos el resultado del problema.
+
+Crear las variables $X_{i,j}$ y calcular las sumas implican, para cada grupo, iterar sobre los $n$ maestros que pueden ser asignados al mismo. Por lo tanto, cada una de estas operaciones conlleva $O(k \cdot n)$. Con el objetivo de definir la restricción de las asignaciones, se obtiene, para cada maestro, todas las variables asociadas según el grupo. Luego, ésto también es $O(n \cdot k)$. En cambio, las restricciones para $S_{min}$ y $S_{max}$ implican iterar por los $k$ grupos, con un costo $O(k)$. 
+
+La función \texttt{obtener\_resultado} tiene dos ciclos anidados que realizan operaciones constantes para cada maestro según el grupo. La creación de las listas de \texttt{resultado} y \texttt{suma\_por\_grupo}, así como el cálculo del coeficiente, son operaciones lineales en la cantidad de grupos. Entonces, la complejidad temporal de la función es $T(n) = 3 \cdot O(k) + O(n \cdot k) = O(n \cdot k)$.
+
+Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp} consume tiempo exponencial porque se trata de programación lineal entera.
+
 \subsection{Complejidad algoritmo de Aproximación}
 
 \subsection{Efecto de las variables sobre el algoritmo}
