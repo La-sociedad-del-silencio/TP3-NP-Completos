@@ -110,7 +110,7 @@ def generarRtasEsperadas(archivo):
             
     return rtas 
 
-def generarResultados(carpeta, problema_tribu_del_agua, maximo):
+def generarResultados(carpeta, problema_tribu_del_agua, maximo, calcular_cota):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
     el programa en cada uno de ellos y devuelve una lista con los resultados
@@ -142,7 +142,13 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
         cantidad_tests += 1
         resultados.append((resultado, len(maestros_y_habilidades), k))
     
-    return resultados
+    cota = 1
+        
+    if calcular_cota:
+        cota = Resultado.cota_de_aproximacion_empirica(resultados)
+        print(f"Cota de aproximación empírica: {cota}\n")
+        
+    return resultados, cota
 
-resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None)
-print(Resultado.cota_de_aproximacion_empirica(resultados))
+#resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None, True)
+#print(Resultado.cota_de_aproximacion_empirica(resultados))

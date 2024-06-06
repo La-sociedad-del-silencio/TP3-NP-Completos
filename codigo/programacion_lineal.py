@@ -64,3 +64,6 @@ def obtener_resultado(num_maestros, k, maestros_y_habilidades, X):
                 
     coeficiente = sum(s**2 for s in suma_por_grupo) 
     return resultado, coeficiente
+
+# Cota set de ej adicionales: 1 
+# Cota set de mediciones: 1.0141856654211776

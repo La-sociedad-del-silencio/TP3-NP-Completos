@@ -96,9 +96,30 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
         f.write(f"Coeficiente: {coeficiente}\n\n")
         
 def correr_tests_mediciones(titulo, nombre_imagen):  
-    resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None) 
+    resultados, _ = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None, False) 
     tiempos, cantidad_maestros, valores_k = Resultado.tiempos_de_ejecucion_y_valores_k_n(resultados)
-    graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k)
+    peor_tiempo = None
+    ultima_cantidad = 1
+    peor_k = 0
+    tiempos_filtrados = [0]
+    cantidad_filtrada = [0]
+    k_filtrado = [0]
+    for i, cantidad in enumerate(cantidad_maestros):
+        if cantidad != ultima_cantidad:
+            tiempos_filtrados.append(peor_tiempo)
+            peor_tiempo = None
+            cantidad_filtrada.append(ultima_cantidad)
+            k_filtrado.append(peor_k)
+            ultima_cantidad = cantidad
+        if not peor_tiempo or tiempos[i] > peor_tiempo:
+            peor_tiempo = tiempos[i]
+            peor_k = valores_k[i]
+            
+    tiempos_filtrados.append(peor_tiempo)
+    cantidad_filtrada.append(ultima_cantidad)
+    k_filtrado.append(peor_k)
+    
+    graficar(titulo, nombre_imagen, tiempos_filtrados, cantidad_filtrada, k_filtrado)
                
 #generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
 correr_tests_mediciones("Programación lineal", "graficoProgramacionLineal")
