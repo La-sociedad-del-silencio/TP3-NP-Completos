@@ -1,6 +1,7 @@
-from backtracking import problema_tribu_del_agua_bt
+from programacion_lineal import problema_tribu_del_agua_pl
 from archivos import *
 import time
+import math
 
 VERDE = '\033[92m'
 ROJO  = '\033[91m'
@@ -43,6 +44,33 @@ class Resultado:
         representacion += "\n"
 
         return representacion
+    
+    @classmethod
+    def cota_programacion_lineal(self, resultados):
+        mayor_razon = 0
+        mayor_diferencia = 0
+        for info_resultado in resultados:
+            resultado, _, _ = info_resultado
+            proporcion = resultado.obtenido[1] / resultado.esperado[1]
+            if proporcion > mayor_razon:
+                mayor_razon = proporcion
+            diferencia = math.mod(resultado.obtenido[1] - resultado.esperado[1])
+            if diferencia > mayor_diferencia:
+                mayor_diferencia = diferencia
+        print(mayor_razon)
+        return mayor_razon, mayor_diferencia
+    
+    @classmethod
+    def tiempos_de_ejecucion_y_valores_k_n(self, resultados):
+        tiempos = []
+        cantidad_maestros = []
+        valores_k = []
+        for info_resultado in resultados:
+            resultado, n, k = info_resultado
+            tiempos.append(resultado.tiempo)
+            cantidad_maestros.append(n)
+            valores_k.append(k)
+        return tiempos, cantidad_maestros, valores_k
     
 def son_resultados_iguales(resultado_esperado, resultado_obtenido, habilidad_por_maestro):
     if resultado_esperado[1] != resultado_obtenido[1]:
@@ -97,6 +125,8 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
     archivo_rtas_esperadas = f"{carpeta}/Resultados_Esperados.txt"
     rtas = generarRtasEsperadas(archivo_rtas_esperadas)
     cantidad_tests = 0
+    resultados = []
+    
     for archivo, rtaEsperada in rtas.items():
         if maximo is not None and cantidad_tests == maximo:
             break
@@ -116,3 +146,9 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
 
         print(resultado)
         cantidad_tests += 1
+        resultados.append((resultado, len(maestros_y_habilidades), k))
+    
+    return resultados
+
+resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None)
+print(Resultado.cota_programacion_lineal(resultados))

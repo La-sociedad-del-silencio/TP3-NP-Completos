@@ -3,6 +3,8 @@ import time
 
 from backtracking import *
 from backtracking_con_greedy import *
+from programacion_lineal import *
+from pruebas import *
 
 import matplotlib.pyplot as plt
 
@@ -42,7 +44,10 @@ def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen):
             iter += 1
         valores_k_usados.append(mayor_k)
         tiempos.append(mayor_tiempo)
-    
+        
+    graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados)
+  
+def graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados):  
     plt.figure(figsize=(12, 7))
     fig, ax = plt.subplots()
     plt.plot(cantidad_maestros, tiempos, color='red')
@@ -89,6 +94,14 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
         if tiempo_ejecucion is not None:
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
+        
+def correr_tests_mediciones(titulo, nombre_imagen):  
+    resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None) 
+    tiempos, cantidad_maestros, valores_k = Resultado.tiempos_de_ejecucion_y_valores_k_n(resultados)
+    graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k)
                
 #generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
 #generar_tests_y_graficar("Backtracking con greedy", problema_tribu_del_agua_bt_greedy, "graficoBacktrackingGreedy")
+#generar_tests_y_graficar("Programación lineal", problema_tribu_del_agua_pl, "graficoProgramacionLineal")
+#generar_tests_y_graficar("Programación lineal", problema_tribu_del_agua_pl, "graficoProgramacionLineal")
+correr_tests_mediciones("Programación lineal", "graficoProgramacionLineal")

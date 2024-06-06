@@ -57,13 +57,13 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests):
         print(CIAN + f"\n----{titulo}----\n\n" + FINCO)
         
         print("---Ejemplos adicionales---\n")
-        #generarResultados("ejemplos_adicionales", algoritmo, None)
+        generarResultados("ejemplos_adicionales", algoritmo, None)
         
         print("---Ejemplos mediciones---\n")
-        #generarResultados("ejemplos_mediciones", algoritmo, None) 
+        generarResultados("ejemplos_mediciones", algoritmo, None) 
     
         print("---Ejemplos de la cátedra---\n")
-        generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests)
+        #generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests)
         #generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests)
 
 def procesar_algoritmo_a_utilizar(argv, posicion, maxima_cantidad_de_tests):
