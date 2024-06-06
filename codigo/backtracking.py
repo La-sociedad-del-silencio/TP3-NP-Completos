@@ -15,7 +15,7 @@ def problema_tribu_del_agua_bt(maestros_y_habilidades, k):
                                     key=lambda x: -x[1])
     
     S_con_habilidades, coeficiente = problema_tribu_del_agua_bt_recur(
-        maestros_y_habilidades, k, 0, list(S), list(S), float('inf'))
+        maestros_y_habilidades, 0, list(S), list(S), float('inf'))
         
     resultado = obtener_resultado(S_con_habilidades)
         
@@ -23,7 +23,7 @@ def problema_tribu_del_agua_bt(maestros_y_habilidades, k):
             
 
 def problema_tribu_del_agua_bt_recur(maestros_y_habilidades, 
-    k, indice_actual, S_actual, mejor_S, mejor_suma):
+    indice_actual, S_actual, mejor_S, mejor_suma):
     
     if indice_actual == len(maestros_y_habilidades):
         suma_actual = sumatoria(S_actual)
@@ -35,7 +35,7 @@ def problema_tribu_del_agua_bt_recur(maestros_y_habilidades,
         grupo.add(maestros_y_habilidades[indice_actual])
         if sumatoria(S_actual) < mejor_suma:
             nuevo_S, nueva_suma = problema_tribu_del_agua_bt_recur(
-                maestros_y_habilidades, k, indice_actual+1, S_actual, 
+                maestros_y_habilidades, indice_actual+1, S_actual, 
                 mejor_S, mejor_suma)
             
             if nueva_suma < mejor_suma:
