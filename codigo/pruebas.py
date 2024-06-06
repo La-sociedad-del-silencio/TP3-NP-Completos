@@ -1,7 +1,6 @@
 from programacion_lineal import problema_tribu_del_agua_pl
 from archivos import *
 import time
-import math
 
 VERDE = '\033[92m'
 ROJO  = '\033[91m'
@@ -46,19 +45,14 @@ class Resultado:
         return representacion
     
     @classmethod
-    def cota_programacion_lineal(self, resultados):
+    def cota_de_aproximacion_empirica(self, resultados):
         mayor_razon = 0
-        mayor_diferencia = 0
         for info_resultado in resultados:
             resultado, _, _ = info_resultado
             proporcion = resultado.obtenido[1] / resultado.esperado[1]
             if proporcion > mayor_razon:
                 mayor_razon = proporcion
-            diferencia = math.mod(resultado.obtenido[1] - resultado.esperado[1])
-            if diferencia > mayor_diferencia:
-                mayor_diferencia = diferencia
-        print(mayor_razon)
-        return mayor_razon, mayor_diferencia
+        return mayor_razon
     
     @classmethod
     def tiempos_de_ejecucion_y_valores_k_n(self, resultados):
@@ -151,4 +145,4 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
     return resultados
 
 resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None)
-print(Resultado.cota_programacion_lineal(resultados))
+print(Resultado.cota_de_aproximacion_empirica(resultados))

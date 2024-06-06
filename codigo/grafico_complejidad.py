@@ -101,7 +101,4 @@ def correr_tests_mediciones(titulo, nombre_imagen):
     graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k)
                
 #generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
-#generar_tests_y_graficar("Backtracking con greedy", problema_tribu_del_agua_bt_greedy, "graficoBacktrackingGreedy")
-#generar_tests_y_graficar("Programación lineal", problema_tribu_del_agua_pl, "graficoProgramacionLineal")
-#generar_tests_y_graficar("Programación lineal", problema_tribu_del_agua_pl, "graficoProgramacionLineal")
 correr_tests_mediciones("Programación lineal", "graficoProgramacionLineal")
