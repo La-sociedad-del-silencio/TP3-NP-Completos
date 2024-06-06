@@ -2,6 +2,8 @@ from random import randint
 import time
 
 from backtracking import *
+from backtracking_con_greedy import *
+
 import matplotlib.pyplot as plt
 
 MAESTROS = ['Yakone', 'Yue', 'Pakku', 'Wei', 'Pakku I', 'Hasook', 'Senna', 'Hama I', 'Hama', 'Wei I', 'Huu', 'Eska', 'Sura', 'Sangok', 'Ming-Hua', 'Katara', 'Rafa', 'Unalaq', 'Amon', 'Tonraq', 'Misu', 'Siku', 'La', 'Siku I', 'Desna', 'Desna I', 'Tho', 'Kya', 'Siku II', 'Misu I', 'Kuruk', 'Eska I', 'Tonraq I', 'Eska II', 'Sangok I', 'Huu I', 'Huu II', 'Kya I', 'Ming-Hua I', 'Kuruk I', 'Senna II', 'Senna I', 'Hasook I', 'Yakone I', 'Amon I', 'Pakku II', 'Yue I', 'Yue II', 'Amon II', 'Tho I', 'Rafa I', 'Sura I', 'Sangok II', 'Misu II', 'Huu III']
@@ -17,7 +19,7 @@ def generar_test(cantidad):
         
     return maestros_y_habilidades 
 
-def generar_tests_y_graficar(titulo, algoritmo):
+def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen):
     max_val = 11
 
     iter = 1
@@ -53,7 +55,7 @@ def generar_tests_y_graficar(titulo, algoritmo):
     ax.set_ylabel('Tiempo de ejecución (ms)\n')
     ax.set_title(f'{titulo}: Tiempos de ejecución para \ndiferentes valores de n y k')
     plt.tight_layout()
-    plt.savefig('images/graficoBacktracking.png', format="png")
+    plt.savefig(f'images/{nombre_imagen}.png', format="png")
     plt.show()
 
         
@@ -88,4 +90,5 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
                
-generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt)
+#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
+#generar_tests_y_graficar("Backtracking con greedy", problema_tribu_del_agua_bt_greedy, "graficoBacktrackingGreedy")

@@ -1,5 +1,5 @@
 from sys import argv
-from backtracking import problema_tribu_del_agua_bt
+from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 
 from archivos import procesar_archivo
 from pruebas import *
@@ -8,6 +8,7 @@ FINCO = '\033[0m'
 
 titulos = {
     FLAGBACKTRACKING: "BACKTRACKING",
+    FLAGBTGREEDY: "BACKTRACKING + GREEDY",
     FLAGPL : "PROGRAMACIÓN LINEAL",
     FLAGAPROXCATEDRA : "APROXIMACIÓN DE LA CÁTEDRA",
     FLAGAPROXADICIONAL : "APROXIMACIÓN ADICIONAL",
@@ -47,7 +48,7 @@ def main():
             procesar_algoritmo_a_utilizar(argv, 2, maxima_cantidad_de_tests)
             
         else:
-            ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt, maxima_cantidad_de_tests)
+            ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt_greedy, maxima_cantidad_de_tests)
             # PL
             # Aprox 1
             # Aprox 2
@@ -59,13 +60,14 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests):
         generarResultados("ejemplos_adicionales", algoritmo, None)
         
         print("---Ejemplos mediciones---\n")
-        generarResultados("ejemplos_mediciones", algoritmo, 54) # hasta 10_9, sin contar k=0
+        generarResultados("ejemplos_mediciones", algoritmo, None) 
     
         print("---Ejemplos de la cátedra---\n")
+        #generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests)
         generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests)
 
 def procesar_algoritmo_a_utilizar(argv, posicion, maxima_cantidad_de_tests):
-    problema_tribu_del_agua = problema_tribu_del_agua_bt # por defecto
+    problema_tribu_del_agua = problema_tribu_del_agua_bt_greedy # por defecto
     titulo = "BACKTRACKING"
     if argv[posicion] in algoritmos:
         problema_tribu_del_agua = algoritmos[argv[posicion]]
