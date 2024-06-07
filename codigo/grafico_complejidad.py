@@ -124,4 +124,4 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
 #generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
 #correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
-correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBTGreedt", problema_tribu_del_agua_bt_greedy)
+#correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)

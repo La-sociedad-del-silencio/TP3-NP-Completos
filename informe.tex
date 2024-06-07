@@ -209,7 +209,7 @@ En la carpeta \texttt{ejemplos\_adicionales} se pueden encontrar distintos casos
     \item \texttt{k\_menor\_a\_n.txt} $\rightarrow$ Caso general cuando $k < n$ .
 \end{itemize}
 
-De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados para las mediciones. Los mismos se encuentran en \texttt{ejemplos\_mediciones}. Por defecto, al ejecutar todos los tests solo se ejecutan aquellos en los que $k \ne 0$, $k \leq 9$ y $n \leq 10$.
+De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados para las mediciones. Los mismos se encuentran en \texttt{ejemplos\_mediciones}. Como siempre, en \texttt{ejemplos\_catedra} tenemos los casos de prueba provistos por la cátedra.
 
 \subsection{Ejecución del programa}
 
@@ -239,8 +239,20 @@ En esta sección explicaremos las distintas formas de ejecutar el programa.
 Recomendamos utilizar:
 \begin{itemize}
     \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}
-    \item \texttt{python3\ codigo/main.py\ 10\ --flag}
+    \item \texttt{python3\ codigo/main.py\ N\ --flag}
 \end{itemize}
+
+\subsection{Cotas de aproximación empírica}
+
+Mediante el uso de todos los ejemplos de ejecución logramos determinar de forma empírica la cota de los algoritmos de aproximación. 
+
+Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima para dicha instancia y sea \(A(I)\) la solución aproximada, se define \(A(I) \over z(I)\) \(\leq r(A)\) para todas las instancias posibles. Calculamos la cota $r(A)$ obteniendo la máxima razón \(A(I) \over z(I)\) de entre todos los casos de prueba.
+
+Los resultados obtenidos son los siguientes:
+\begin{itemize}
+    \item Programación lineal $\rightarrow$ $r(A) = 1.0141856654211776$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
+\end{itemize}
+
 
 
 \section{Mediciones de tiempo}
@@ -263,11 +275,22 @@ Procederemos a comparar esta versión del algoritmo de backtrcking con la anteri
 
 \includegraphics[scale=0.60]{images/graficoBacktrackingGreedy.png}
 
-El gráfico evidencia una drástica disminución de los tiempos de ejecución, prácticamente a la mitad de los del otro algoritmo. 
+El gráfico evidencia una drástica disminución de los tiempos de ejecución, casi a la mitad de los del otro algoritmo. 
 
 Nuevamente podemos observar la tendecia exponencial de la curva, que comprueba nuestra justificación de la complejidad temporal.
 
 \subsection{Algoritmo de programación lineal}
+
+Tomamos mediciones de tiempo con los mismos sets de datos utilizados para backtracking. Realizamos 2 gráficos para facilitar la comparación entre algoritmos. 
+
+\includegraphics[scale=0.60]{images/graficoProgramacionLinealSin10.png}
+
+El mejor algoritmo de backtracking tarda aproximadamente 35.000 milisegundos en ejecutarse en el peor caso para $n = 10$. Sin embargo, PLE ya necesita 40.000 milisegundos para $n = 9$. Esto es una gran diferencia con ambos algoritmos de backtracking que conllevan menos de 20.000 milisegundos en ese caso.
+
+\includegraphics[scale=0.60]{images/graficoProgramacionLineal.png}
+
+Analizando la totalidad de las mediciones, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a las dos implementaciones de backtracking. En todos los casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
+
 \subsection{Algoritmo de aproximación}
 
 
