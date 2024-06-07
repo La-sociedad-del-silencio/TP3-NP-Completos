@@ -95,8 +95,8 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
         
-def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen):  
-    resultados, _ = generarResultados(tests, problema_tribu_del_agua_pl, cantidad, False) 
+def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):  
+    resultados, _ = generarResultados(tests, algoritmo, cantidad, False) 
     tiempos, cantidad_maestros, valores_k = Resultado.tiempos_de_ejecucion_y_valores_k_n(resultados)
     peor_tiempo = None
     ultima_cantidad = 1
@@ -122,4 +122,6 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen):
     graficar(titulo, nombre_imagen, tiempos_filtrados, cantidad_filtrada, k_filtrado)
                
 #generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
-correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal")
+#correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
+#correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
+correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBTGreedt", problema_tribu_del_agua_bt_greedy)
