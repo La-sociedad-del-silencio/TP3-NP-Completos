@@ -63,7 +63,7 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, ca
         #_, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
-        #generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests, calcular_cota)
+        generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests, calcular_cota)
         #_, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota)
         
         #if calcular_cota:
