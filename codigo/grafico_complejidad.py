@@ -97,7 +97,6 @@ def graficar_aproximacion(titulo, nombre_imagen, tiempos, cantidad_maestros):
 
     n_log_n_normalized = n_log_n / n_log_n[-1] * tiempos[-1]
 
-    plt.figure()
     plt.plot(cantidad_maestros, tiempos,'o',color='red')
     plt.plot(cantidad_maestros, n_log_n_normalized, marker='o', color='blue', linestyle='--', label='O(n log n)')
 
@@ -170,4 +169,5 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
 #correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)
-generar_tests_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional2", 1501)
+generar_tests_aproximacion_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional5", 1501)
+#correr_tests_mediciones("ejemplos_mediciones",None,"Aproximación", "graficoAproxAdicionalMediciones", problema_tribu_del_agua_aprox_adicional)

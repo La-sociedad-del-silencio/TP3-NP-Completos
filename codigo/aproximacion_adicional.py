@@ -14,7 +14,8 @@ def problema_tribu_del_agua_aprox_adicional(maestros_y_habilidades, k):
 
     S = [set() for _ in range(k)]
     
-    maestros_y_habilidades = sorted(maestros_y_habilidades, key=lambda x: -x[1]) #O(n log n)
+    maestros_y_habilidades = sorted(maestros_y_habilidades, 
+                                    key=lambda x: -x[1])
 
     grupo_actual = 0
     sumas = [0] * k

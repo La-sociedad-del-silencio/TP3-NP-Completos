@@ -190,9 +190,30 @@ La función \texttt{obtener\_resultado} tiene dos ciclos anidados que realizan o
 
 Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp} consume tiempo exponencial porque se trata de programación lineal entera.
 
-\subsection{Complejidad algoritmo de Aproximación}
+\subsection{Algoritmos de Aproximación}
+\subsubsection{Aproximación de la cátedra}
+\subsubsection{Aproximación adicional}
+
+La siguiente aproximación propuesta sigue una lógica similar a la sugerida por la cátedra, pero con un tiempo de ejecución menor.
+
+\inputminted[linenos, firstline=3, lastline=33]{python}{codigo/aproximacion_adicional.py}
+
+Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $O(n\cdot log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
+
+La asignación de los grupos implica iterar sobre los $n$ maestros, lo cual es lineal, $O(n)$. Por otro lado, calcular el coeficiente utilizando la lista auxiliar \texttt{sumas} conlleva $O(k)$. El resto de las operaciones son constantes. En total, la complejidad del algoritmo propuesto, para el caso general, es
+
+$$
+\mathcal{T}(n) = \mathcal{O}(n \cdot log (n)) + \mathcal{O}(n) + \mathcal{O}(k) = \mathcal{O}(n \cdot log (n))
+$$
 
 \subsection{Efecto de las variables sobre el algoritmo}
+Todos los algoritmos propuestos consideran los siguientes casos
+\begin{itemize}
+    \item $k > n$: No existe solución. Devolvemos \texttt{None} en $O(1)$.
+    \item $k = 0$: Todos los algoritmos se ejecutan en $O(1)$, devolviendo una lista vacía y coeficiente 0. 
+    \item $k = n$: Cada grupo tendrá un solo maestro. Lo resolvemos en tiempo lineal $O(n)$.
+    \item $k < n$: Es el caso general y la complejidad depende del algoritmo utilizado. Los algoritmos exactos conllevan tiempo exponencial, aumetando considerablemente con el valor de $k$ y $n$.
+\end{itemize}
 
 \section{Ejemplos de ejecución}
 \label{sec:ejemplos}
@@ -251,13 +272,16 @@ Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima 
 Los resultados obtenidos son los siguientes:
 \begin{itemize}
     \item Programación lineal $\rightarrow$ $r(A) = 1,0141856654211776 \approx 1,01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
+    \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usados en las mediciones y los adicionales, $r(A) = 1,2157676348547717 \approx 1,21577$.
 \end{itemize}
 
 
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
-Para corroborar la complejidad algorítmica de los algoritmos implementación, realizamos una serie de tests. Probamos distintas combinaciones de $n$ y $k$, para $n \in [0, 10]$ y $k \in [0, n]$. Para cada $n$ tomamos en cuenta la combinación de $n$ y $k$ con mayor tiempo de ejecución. El código que usamos para generar los tests se encuentran en el archivo 
+Para corroborar la complejidad algorítmica de los algoritmos implementados, realizamos una serie de tests. Probamos distintas combinaciones de $n$ y $k$, para $n \in [0, 10]$ y $k \in [0, n]$. Para cada $n$ tomamos en cuenta la combinación de $n$ y $k$ con mayor tiempo de ejecución. Tomamos estas mediciones en todos los casos para realizar comparaciones. Para los algoritmos de aproximación también se tomaron mediciones adicionales con valores de $n$ y $k$ más elevados. 
+
+El código que usamos para generar los tests se encuentran en el archivo 
 \texttt{codigo/grafico\_complejidad.py}.
 
 \subsection{Algoritmo de backtracking}
@@ -291,7 +315,19 @@ El mejor algoritmo de backtracking tarda aproximadamente 35.000 milisegundos en 
 
 Analizando la totalidad de las mediciones, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a las dos implementaciones de backtracking. En todos los casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
 
-\subsection{Algoritmo de aproximación}
+\subsection{Algoritmos de Aproximación}
+\subsubsection{Aproximación de la cátedra}
+\subsubsection{Aproximación adicional}
+
+Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad algorítmica de esta aproximación con valores inmanejables para el algoritmo exacto.
+
+\includegraphics[scale=0.60]{images/graficoAproxAdicional.png}
+
+Se puede observar una curva azul que representa $n log n$, mientras que los puntos rojos son nuestras mediciones. 
+
+También realizamos un gráfico con el set de datos usado en backtracking y programación lineal para mostrar la rapidez de este algoritmo en comparación con los exponenciales.
+
+\includegraphics[scale=0.60]{images/graficoAproxAdicionalMediciones.png}
 
 
 \section{Conclusión}
