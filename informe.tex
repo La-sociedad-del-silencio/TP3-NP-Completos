@@ -215,7 +215,7 @@ De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados
 
 En esta sección explicaremos las distintas formas de ejecutar el programa.
 \begin{itemize}
-    \item \texttt{python3\ codigo/main.py}: ejecutará todos los casos de prueba existentes y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra. En el caso de backtracking solo se ejecuta la versión mejorada.
+    \item \texttt{python3\ codigo/main.py}: ejecutará por defecto la versión mejorada de backtracking y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra. 
     \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}: procesará los datos del archivo dado y ejecutará todos los algoritmos, mostrando el resultado de cada uno, así como su tiempo de ejecución. 
     \item \texttt{python3\ codigo/main.py ruta\_a\_ejemplo\ --flag}: ejecutará el algoritmo según el flag utilizado. Si es inválido, por defecto actúa como el anterior.
     
@@ -289,7 +289,10 @@ El mejor algoritmo de backtracking tarda aproximadamente 35.000 milisegundos en 
 
 \includegraphics[scale=0.60]{images/graficoProgramacionLineal.png}
 
-Analizando la totalidad de las mediciones, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a las dos implementaciones de backtracking. En todos los casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
+Analizando la totalidad de las mediciones para el set de datos \texttt{ejemplos\
+ mediciones}, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a las dos implementaciones de backtracking. En todos los casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
+
+Al ejecutar el algoritmo de programación lineal con los ejemplos de la cátedra, notamos que el tiempo de ejecución del mismo con los casos hasta \texttt{11\_5.txt} es mayor que el de la segunda versión de backtracking. Sin embargo, para los siguientes ejemplos, la situación se revierte.
 
 \subsection{Algoritmo de aproximación}
 

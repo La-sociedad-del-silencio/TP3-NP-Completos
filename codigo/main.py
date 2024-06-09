@@ -3,16 +3,6 @@ from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 
 from archivos import procesar_archivo
 from pruebas import *
-CIAN = '\033[96m'
-FINCO = '\033[0m'
-
-titulos = {
-    FLAGBACKTRACKING: "BACKTRACKING",
-    FLAGBTGREEDY: "BACKTRACKING MEJORADO",
-    FLAGPL : "PROGRAMACIÓN LINEAL",
-    FLAGAPROXCATEDRA : "APROXIMACIÓN DE LA CÁTEDRA",
-    FLAGAPROXADICIONAL : "APROXIMACIÓN ADICIONAL",
-}
 
 def main():
     f'''
@@ -49,26 +39,22 @@ def main():
             
         else:
             ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt_greedy, maxima_cantidad_de_tests, False)
-            # PL
-            # Aprox 1
-            # Aprox 2
             
 def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, calcular_cota):
         print(CIAN + f"\n----{titulo}----\n\n" + FINCO)
         
         print("---Ejemplos adicionales---\n")
-        #_, cota1 = generarResultados("ejemplos_adicionales", algoritmo, None, calcular_cota)
+        _, cota1 = generarResultados("ejemplos_adicionales", algoritmo, None, calcular_cota)
         
         print("---Ejemplos mediciones---\n")
-        #_, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
+        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, 53, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
-        generarResultados("faltan_correr_greedy", algoritmo, maxima_cantidad_de_tests, calcular_cota)
-        #_, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota)
+        _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota)
         
-        #if calcular_cota:
-        #    cota = max(cota1, cota2, cota3)
-        #    print(f"Cota de aproximación empírica para todos los sets de datos: {cota}\n")
+        if calcular_cota:
+            cota = max(cota1, cota2, cota3)
+            print(f"Cota de aproximación empírica para todos los sets de datos: {cota}\n")
             
 def procesar_algoritmo_a_utilizar(argv, posicion, maxima_cantidad_de_tests):
     problema_tribu_del_agua = problema_tribu_del_agua_bt_greedy # por defecto
