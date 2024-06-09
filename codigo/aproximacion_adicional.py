@@ -31,11 +31,5 @@ def problema_tribu_del_agua_aprox_adicional(maestros_y_habilidades, k):
     coeficiente = sum(s**2 for s in sumas) #O(k)
     return S, coeficiente
 
-k=2
-m = [('Hasook', 915), ('Senna', 406), ('Yue', 230), ('Pakku', 568), ('Wei I', 174), ('Yakone', 439), ('Wei', 655), ('Hama', 631), ('Pakku I', 379), ('Hama I', 230)]
-# Resultado esperado: [{'Yakone', 'Wei I', 'Hasook', 'Senna', 'Pakku I'}, {'Wei', 'Hama I', 'Pakku', 'Yue', 'Hama'}]
-#Resultado esperado: 10704565
-#print(problema_tribu_del_agua_aprox_adicional(m, k))
-
 # T(n) = O(n log n)
 # Cota: 1.2157676348547717

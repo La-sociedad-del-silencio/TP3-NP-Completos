@@ -5,7 +5,7 @@ from backtracking import *
 from backtracking_con_greedy import *
 from programacion_lineal import *
 from pruebas import *
-
+import numpy as np
 import matplotlib.pyplot as plt
 
 MAESTROS = ['Yakone', 'Yue', 'Pakku', 'Wei', 'Pakku I', 'Hasook', 'Senna', 'Hama I', 'Hama', 'Wei I', 'Huu', 'Eska', 'Sura', 'Sangok', 'Ming-Hua', 'Katara', 'Rafa', 'Unalaq', 'Amon', 'Tonraq', 'Misu', 'Siku', 'La', 'Siku I', 'Desna', 'Desna I', 'Tho', 'Kya', 'Siku II', 'Misu I', 'Kuruk', 'Eska I', 'Tonraq I', 'Eska II', 'Sangok I', 'Huu I', 'Huu II', 'Kya I', 'Ming-Hua I', 'Kuruk I', 'Senna II', 'Senna I', 'Hasook I', 'Yakone I', 'Amon I', 'Pakku II', 'Yue I', 'Yue II', 'Amon II', 'Tho I', 'Rafa I', 'Sura I', 'Sangok II', 'Misu II', 'Huu III']
@@ -40,11 +40,10 @@ def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen, max_val):
         mayor_tiempo = 0
         mayor_k = 0
         maestros_y_habilidades = generar_test(i)
-        print(f'i = {i}, len = {len(maestros_y_habilidades)}')
         for k in range(i):  
             print(f"Iteración {iter}")
             ms_que_llevo = correrTest(i, k, maestros_y_habilidades, algoritmo)
-            if mayor_tiempo < ms_que_llevo:
+            if mayor_tiempo <= ms_que_llevo:
                 mayor_tiempo = ms_que_llevo
                 mayor_k = k
             iter += 1
@@ -56,8 +55,8 @@ def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen, max_val):
 def graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados):  
     plt.figure(figsize=(12, 7))
     fig, ax = plt.subplots()
+
     plt.plot(cantidad_maestros, tiempos,'o',color='red')
-    
     
     xticks_labels = [f'n={n}, k={k}' for n, k in zip(cantidad_maestros, valores_k_usados)]
     ax.set_xticks(cantidad_maestros)
@@ -65,6 +64,46 @@ def graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados
     ax.set_xlabel('Número de maestros (n) con el valor de k \nque tuvo el mayor tiempo de ejecución')
     ax.set_ylabel('Tiempo de ejecución (ms)\n')
     ax.set_title(f'{titulo}: Tiempos de ejecución para \ndiferentes valores de n y k')
+    plt.tight_layout()
+    plt.savefig(f'images/{nombre_imagen}.png', format="png")
+    plt.show()
+    
+def generar_tests_aproximacion_y_graficar(titulo, algoritmo, nombre_imagen, max_val):
+    iter = 1
+    cantidad_maestros = [i for i in range(0, max_val, 5)]
+    tiempos = []
+    
+    for i in cantidad_maestros:
+        tiempos_k = []
+        maestros_y_habilidades = generar_test(i)
+        for k in range(i):  
+            ms_que_llevo = correrTest(i, k, maestros_y_habilidades, algoritmo)
+            tiempos_k.append(ms_que_llevo)
+            print(f"Iteración: {iter}")
+            iter += 1
+        tiempos.append(sum(tiempos_k) / len(tiempos_k) if tiempos_k else 0)
+        
+    graficar_aproximacion(titulo, nombre_imagen, tiempos, cantidad_maestros)
+  
+def graficar_aproximacion(titulo, nombre_imagen, tiempos, cantidad_maestros):  
+    plt.figure(figsize=(12, 7))
+    fig, ax = plt.subplots()
+    n_log_n = []
+    for n in cantidad_maestros:
+        if n > 0:
+            n_log_n.append(n * np.log2(n))
+        else:
+            n_log_n.append(0)
+
+    n_log_n_normalized = n_log_n / n_log_n[-1] * tiempos[-1]
+
+    plt.figure()
+    plt.plot(cantidad_maestros, tiempos,'o',color='red')
+    plt.plot(cantidad_maestros, n_log_n_normalized, marker='o', color='blue', linestyle='--', label='O(n log n)')
+
+    ax.set_xlabel('Número de maestros (n)')
+    ax.set_ylabel('Tiempo de ejecución (ms)\n')
+    ax.set_title(f'{titulo}: Tiempo de ejecución promedio para \ndiferentes valores de n y k')
     plt.tight_layout()
     plt.savefig(f'images/{nombre_imagen}.png', format="png")
     plt.show()
@@ -131,3 +170,4 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
 #correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)
+generar_tests_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional2", 1501)
