@@ -175,7 +175,7 @@ Para resolver el problema utilizaremos programación lineal entera. A continuaci
         \item Asignaciones: cada maestro debe ser asignado a un solo un grupo. Luego, $sum_{j=1}^{k} X_{i,j} = 1 \quad \forall i$.
         \item Sumas: $S_{min} \leq S_j \quad \forall j$ y $S_{max} \geq S_j \quad \forall j$.
     \end{itemize}
-    \item Función objetivo $\rightarrow$ se desea minimizar $S_{min} - S_{max}$.
+    \item Función objetivo $\rightarrow$ se desea minimizar $S_{max} - S_{min}$.
 \end{itemize}
 
 Podemos observar la declaración de las variables, la función objetivo y las restricciones en el código:
@@ -250,7 +250,7 @@ Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima 
 
 Los resultados obtenidos son los siguientes:
 \begin{itemize}
-    \item Programación lineal $\rightarrow$ $r(A) = 1.0141856654211776$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
+    \item Programación lineal $\rightarrow$ $r(A) = 1,0141856654211776 \approx 1,01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
 \end{itemize}
 
 

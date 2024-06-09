@@ -15,18 +15,23 @@ def generar_test(cantidad):
     nombres_maestros = MAESTROS
     maestros_y_habilidades = []
     
-    for i in range(cantidad):
+    for i in range(min(cantidad, len(nombres_maestros))):
         habilidad = randint(50, 1000)
         maestros_y_habilidades.append((nombres_maestros[i], habilidad))
         
+    faltan = cantidad-len(nombres_maestros)
+    if faltan < 0:
+        faltan = 0
+            
+    for i in range(faltan):
+        habilidad = randint(50, 1000)
+        maestros_y_habilidades.append((f'Nombre {i}', habilidad))
+    
     return maestros_y_habilidades 
 
-def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen):
-    max_val = 11
+def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen, max_val):
 
     iter = 1
-    total_iters = 66
-    
     cantidad_maestros = [i for i in range(max_val)]
     valores_k_usados = []
     tiempos = []
@@ -35,8 +40,9 @@ def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen):
         mayor_tiempo = 0
         mayor_k = 0
         maestros_y_habilidades = generar_test(i)
-        for k in range(min(max_val, i) + 1):  
-            print(f"Iteracion {iter}/{total_iters}")
+        print(f'i = {i}, len = {len(maestros_y_habilidades)}')
+        for k in range(i):  
+            print(f"Iteración {iter}")
             ms_que_llevo = correrTest(i, k, maestros_y_habilidades, algoritmo)
             if mayor_tiempo < ms_que_llevo:
                 mayor_tiempo = ms_que_llevo
@@ -50,7 +56,7 @@ def generar_tests_y_graficar(titulo, algoritmo, nombre_imagen):
 def graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados):  
     plt.figure(figsize=(12, 7))
     fig, ax = plt.subplots()
-    plt.plot(cantidad_maestros, tiempos, color='red')
+    plt.plot(cantidad_maestros, tiempos,'o',color='red')
     
     
     xticks_labels = [f'n={n}, k={k}' for n, k in zip(cantidad_maestros, valores_k_usados)]
@@ -121,7 +127,7 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
     
     graficar(titulo, nombre_imagen, tiempos_filtrados, cantidad_filtrada, k_filtrado)
                
-#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
+#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking", 11)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)

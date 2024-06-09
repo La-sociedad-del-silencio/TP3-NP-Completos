@@ -67,3 +67,4 @@ def obtener_resultado(num_maestros, k, maestros_y_habilidades, X):
 
 # Cota set de ej adicionales: 1 
 # Cota set de mediciones: 1.0141856654211776
+# Cota set de la cátedra:
