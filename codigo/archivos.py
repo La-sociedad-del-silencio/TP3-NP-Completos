@@ -2,6 +2,7 @@ import time
 from backtracking import problema_tribu_del_agua_bt
 from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 from programacion_lineal import problema_tribu_del_agua_pl
+from aproximacion_adicional import problema_tribu_del_agua_aprox_adicional
 
 FLAGBACKTRACKING = "--bt"
 FLAGBTGREEDY = "--btg"
@@ -13,7 +14,8 @@ FLAGAPROXADICIONAL = "--a2"
 algoritmos = {
     FLAGBACKTRACKING : problema_tribu_del_agua_bt,
     FLAGBTGREEDY : problema_tribu_del_agua_bt_greedy,
-    FLAGPL : problema_tribu_del_agua_pl
+    FLAGPL : problema_tribu_del_agua_pl,
+    FLAGAPROXADICIONAL: problema_tribu_del_agua_aprox_adicional
 }
 
 def generarTestDe(archivo):
