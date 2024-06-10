@@ -271,8 +271,8 @@ Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima 
 
 Los resultados obtenidos son los siguientes:
 \begin{itemize}
-    \item Programación lineal $\rightarrow$ $r(A) = 1,0141856654211776 \approx 1,01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
-    \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usados en las mediciones y los adicionales, $r(A) = 1,2157676348547717 \approx 1,21577$.
+    \item Programación lineal $\rightarrow$ $r(A) = 1.0141856654211776 \approx 1.01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
+    \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usa-\ dos en las mediciones y los adicionales, $r(A) = 1.2157676348547717 \approx 1.21577$. También realizamos mediciones con volúmenes de datos elevados para el algoritmo exacto, con el fin de obtener más información de la cota. Probamos casos en los que sabemos que nuestro algoritmo no es óptimo. Por ejemplo, si $k = 2$ y se tiene una habilidad muy alta y el resto bastante pequeñas. Llegamos hasta $n = 100000$. Los ejemplos se pueden encontrar en \texttt{codigo/cota\_aprox\_adicional.py}. El resultado obtenido fue $r(A) = 1.2999951999748 \approx 1.3$.
 \end{itemize}
 
 
@@ -309,7 +309,7 @@ Tomamos mediciones de tiempo con los mismos sets de datos utilizados para backtr
 
 \includegraphics[scale=0.60]{images/graficoProgramacionLinealSin10.png}
 
-El mejor algoritmo de backtracking tarda aproximadamente 35.000 milisegundos en ejecutarse en el peor caso para $n = 10$. Sin embargo, PLE ya necesita 40.000 milisegundos para $n = 9$. Esto es una gran diferencia con ambos algoritmos de backtracking que conllevan menos de 20.000 milisegundos en ese caso.
+El mejor algoritmo de backtracking tarda aproximadamente 35000 milisegundos en ejecutarse en el peor caso para $n = 10$. Sin embargo, PLE ya necesita 40000 milisegundos para $n = 9$. Esto es una gran diferencia con ambos algoritmos de backtracking que conllevan menos de 20000 milisegundos en ese caso.
 
 \includegraphics[scale=0.60]{images/graficoProgramacionLineal.png}
 
@@ -323,7 +323,7 @@ Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad al
 
 \includegraphics[scale=0.60]{images/graficoAproxAdicional.png}
 
-Se puede observar una curva azul que representa $n log n$, mientras que los puntos rojos son nuestras mediciones. 
+Se puede observar una curva azul que representa $n \cdot log(n)$, mientras que los puntos rojos son nuestras mediciones. 
 
 También realizamos un gráfico con el set de datos usado en backtracking y programación lineal para mostrar la rapidez de este algoritmo en comparación con los exponenciales.
 
