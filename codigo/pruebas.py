@@ -53,7 +53,7 @@ def son_resultados_iguales(resultado_esperado, resultado_obtenido, habilidad_por
     for grupo in resultado_obtenido[0]:
         suma_grupo = 0
         if len(grupo) == 0:
-            return False
+            raise Exception("La asignación es inválida. Hay grupos vacíos.")
         for maestro in grupo:
             suma_grupo += habilidad_por_maestro[maestro]
         suma += suma_grupo ** 2

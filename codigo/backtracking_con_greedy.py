@@ -19,7 +19,7 @@ def problema_tribu_del_agua_bt_greedy(maestros_y_habilidades, k):
     sumas_grupos = [0] * k #O(k)
     
     S_con_habilidades, coeficiente = problema_tribu_del_agua_bt_greedy_recur(
-        maestros_y_habilidades, 0, list(S), list(S), float('inf'), 
+        maestros_y_habilidades, 0, S, list(S), float('inf'), 
         sumas_grupos)
 
     resultado = obtener_resultado(S_con_habilidades)
@@ -31,9 +31,7 @@ def problema_tribu_del_agua_bt_greedy_recur(maestros_y_habilidades,
     
     if indice_actual == len(maestros_y_habilidades):
         suma_actual = sum(s ** 2 for s in sumas_grupos) 
-        if suma_actual < mejor_suma:
-            return list(map(set, S_actual)), suma_actual
-        return list(map(set, S_actual)), mejor_suma
+        return list(map(set, S_actual)), suma_actual
     
     S_actual, sumas_grupos = ordenar_por_suma(S_actual, sumas_grupos)
     maestro = maestros_y_habilidades[indice_actual]
