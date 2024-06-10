@@ -57,7 +57,9 @@ def son_resultados_iguales(resultado_esperado, resultado_obtenido, habilidad_por
         for maestro in grupo:
             suma_grupo += habilidad_por_maestro[maestro]
         suma += suma_grupo ** 2
-    return suma == resultado_obtenido[1]
+    if not suma == resultado_obtenido[1]:
+        raise Exception("El coeficiente es inválido.")
+    return True
 
 def generarRtasEsperadas(archivo):
     """ 
