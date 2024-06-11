@@ -1,16 +1,12 @@
 import time
-from backtracking import problema_tribu_del_agua_bt
 from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 
-FLAGBACKTRACKING = "--bt"
 FLAGBTGREEDY = "--btg"
 FLAGPL = "--pl"
 FLAGAPROXCATEDRA = "--a1"
 FLAGAPROXADICIONAL = "--a2"
 
-
 algoritmos = {
-    FLAGBACKTRACKING : problema_tribu_del_agua_bt,
     FLAGBTGREEDY : problema_tribu_del_agua_bt_greedy,
 }
 
@@ -46,7 +42,7 @@ def procesar_archivo(argv):
         ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmos[argv[2]])  
     
     else:
-        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt)
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt_greedy)
         # PL
         # Aprox 1
         # Aprox 2  
