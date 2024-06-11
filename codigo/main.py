@@ -1,5 +1,5 @@
 from sys import argv
-from backtracking import problema_tribu_del_agua_bt
+from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 
 from archivos import procesar_archivo
 from pruebas import *
@@ -8,6 +8,7 @@ FINCO = '\033[0m'
 
 titulos = {
     FLAGBACKTRACKING: "BACKTRACKING",
+    FLAGBTGREEDY: "BACKTRACKING MEJORADO",
     FLAGPL : "PROGRAMACIÓN LINEAL",
     FLAGAPROXCATEDRA : "APROXIMACIÓN DE LA CÁTEDRA",
     FLAGAPROXADICIONAL : "APROXIMACIÓN ADICIONAL",
@@ -47,30 +48,39 @@ def main():
             procesar_algoritmo_a_utilizar(argv, 2, maxima_cantidad_de_tests)
             
         else:
-            ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt, maxima_cantidad_de_tests)
+            ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt_greedy, maxima_cantidad_de_tests, False)
             # PL
             # Aprox 1
             # Aprox 2
             
-def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests):
+def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, calcular_cota):
         print(CIAN + f"\n----{titulo}----\n\n" + FINCO)
         
         print("---Ejemplos adicionales---\n")
-        generarResultados("ejemplos_adicionales", algoritmo, None)
+        _, cota1 = generarResultados("ejemplos_adicionales", algoritmo, None, calcular_cota)
         
         print("---Ejemplos mediciones---\n")
-        generarResultados("ejemplos_mediciones", algoritmo, 54) # hasta 10_9, sin contar k=0
+        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
-        generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests)
-
+        #_, cota3 = generarResultados("faltan_pl", algoritmo, None, calcular_cota)
+        _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota) 
+                
+        if calcular_cota:
+            cota = max(cota1, cota2, cota3)
+            print(f"Cota de aproximación empírica para todos los sets de datos: {cota}\n")
+            
 def procesar_algoritmo_a_utilizar(argv, posicion, maxima_cantidad_de_tests):
-    problema_tribu_del_agua = problema_tribu_del_agua_bt # por defecto
+    problema_tribu_del_agua = problema_tribu_del_agua_bt_greedy # por defecto
     titulo = "BACKTRACKING"
     if argv[posicion] in algoritmos:
         problema_tribu_del_agua = algoritmos[argv[posicion]]
         titulo = titulos[argv[posicion]]
-    ejecutar_tests_con_algoritmo(titulo, problema_tribu_del_agua, maxima_cantidad_de_tests)
+    casos_con_cota = {titulos[FLAGPL], titulos[FLAGAPROXCATEDRA], titulos[FLAGAPROXADICIONAL]}
+    calcular_cota = False
+    if titulo in casos_con_cota:
+        calcular_cota = True
+    ejecutar_tests_con_algoritmo(titulo, problema_tribu_del_agua, maxima_cantidad_de_tests, calcular_cota)
         
             
 
