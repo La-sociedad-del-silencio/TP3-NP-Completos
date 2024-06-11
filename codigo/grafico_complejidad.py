@@ -1,7 +1,6 @@
 from random import randint
 import time
 
-from backtracking import *
 from backtracking_con_greedy import *
 
 import matplotlib.pyplot as plt
@@ -89,6 +88,3 @@ def escribir_test(carpeta, nombre_archivo, k, maestros, coeficiente, grupos, tie
         if tiempo_ejecucion is not None:
             f.write(f'Tiempo de ejecucion: {tiempo_ejecucion} ms\n')
         f.write(f"Coeficiente: {coeficiente}\n\n")
-               
-#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking")
-#generar_tests_y_graficar("Backtracking con greedy", problema_tribu_del_agua_bt_greedy, "graficoBacktrackingGreedy")

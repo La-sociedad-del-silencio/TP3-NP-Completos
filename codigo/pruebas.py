@@ -1,4 +1,3 @@
-from backtracking import problema_tribu_del_agua_bt
 from archivos import *
 import time
 
