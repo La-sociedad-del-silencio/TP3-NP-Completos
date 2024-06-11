@@ -383,6 +383,24 @@ Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp}
 
 \subsection{Algoritmos de Aproximación}
 \subsubsection{Aproximación de la cátedra}
+La cátedra planteaba el siguiente algoritmo de aproximación para el problema:
+
+\textit{Generar los k grupos vacíos. Ordenar de mayor a menor los maestros en función de su habilidad o fortaleza. Agregar al más habilidoso al grupo con menos habilidad hasta ahora (cuadrado de la suma). Repetir siguiendo con el siguiente más habilidoso, hasta que no queden más maestros por asignar.}
+
+Este algoritmo lo tradujimos a código de la siguiente manera:
+
+\inputminted[linenos, lastline=45]{python}{codigo/aproximacion_catedra.py}
+
+En la linea \texttt{18} creamos los k grupos vacíos. Luego, en la linea \texttt{19} los ordenamos por su habilidad/destreza.
+
+Luego, el ciclo \texttt{for} de las linea \texttt{21} a \texttt{32} es el que se encarga de agregar al maestro mas habilidoso al grupo con menos habilidad hasta ahora. Para calcular esto ultimo hacemos uso de la función auxiliar \texttt{obtenerCuadradoSuma}.
+
+Con respecto a la complejidad, la creación de los K grupos tiene un costo $\mathcal{O}(k)$. Luego la complejidad de ordenar la lista tiene una  $\mathcal{O}(n \cdot \log n)$.
+Además, el ciclo \texttt{for} de la linea \texttt{21} tiene  una complejidad temporal de $\mathcal{O}(n \cdot k)$; ya que por cada maestro que tiene que ser añadido a un grupo, tiene que buscar el grupo con menor habilidad acumulada hasta ahora. Adicionalmente, tenemos que calcular la habilidad de cada grupo cada vez que queremos hallar el grupo con menor habilidad acumulada, lo cual es una operación $\mathcal{O}(k)$ adicional. 
+
+Luego tenemos la reconstrucción de la respuesta en las lineas \texttt{34} a \texttt{43}, lo cual recorre el arreglo de grupos para calcular el coeficiente resultante. Esto también tiene una complejidad $\mathcal{O}(n \cdot k)$.
+
+
 \subsubsection{Aproximación adicional}
 
 La siguiente aproximación propuesta sigue una lógica similar a la sugerida por la cátedra, pero con un tiempo de ejecución menor.
@@ -391,10 +409,10 @@ La siguiente aproximación propuesta sigue una lógica similar a la sugerida por
 
 Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $O(n\cdot log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
 
-La asignación de los grupos implica iterar sobre los $n$ maestros, lo cual es lineal, $O(n)$. Por otro lado, calcular el coeficiente utilizando la lista auxiliar \texttt{sumas} conlleva $O(k)$. El resto de las operaciones son constantes. En total, la complejidad del algoritmo propuesto, para el caso general, es
+La asignación de los grupos implica iterar sobre los $n$ maestros, lo cual es lineal, $\mathcal{O}(n)$. Por otro lado, calcular el coeficiente utilizando la lista auxiliar \texttt{sumas} conlleva $\mathcal{O}(k)$. El resto de las operaciones son constantes. En total, la complejidad del algoritmo propuesto, para el caso general, es
 
 $$
-\mathcal{T}(n) = \mathcal{O}(n \cdot log (n)) + \mathcal{O}(n) + \mathcal{O}(k) = \mathcal{O}(n \cdot log (n))
+\mathcal{T}(n) = \mathcal{O}(n \cdot \log (n)) + \mathcal{O}(n) + \mathcal{O}(k) = \mathcal{O}(n \cdot \log (n))
 $$
 
 \subsection{Efecto de las variables sobre el algoritmo}
