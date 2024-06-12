@@ -53,4 +53,4 @@ def graficar(maxCant):
     plt.show()
 
 #Cambiar este numero si queres mas
-graficar(20)
+graficar(15)

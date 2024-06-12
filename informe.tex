@@ -414,7 +414,7 @@ En el peor de los casos, con $n = k$, la complejidad sería cuadratica.
 
 \paragraph{Análisis de Aproximación} \
 Para hacer el análisis de la aproximación, comparamos el coeficiente obtenido por el algoritmo de aproximacion contra el coeficiente obtenido por el algortimo de backtracking mejorado.
-Para esto, generamos 20 instancias $I$. Cada una de ellas tenia una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
+Para esto, generamos 15 instancias $I$. Cada una de ellas tenia una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
 
 El código que usamos para generar estos tests se encuentra en el archivo \texttt{codigo/comparacionAproxion.py}.
 
@@ -427,7 +427,39 @@ Definimos a $z(I)$ como la solucion optima de la instancia $I$ y a $A(I)$ como l
 En el eje Y podemos los ver la proporcion de $\frac{A(I)}{z(I)}$ y en el eje X la cantidad de maestros.
 El gráfico muestra un dato bastante muy interesante: la aproximación, obtiene un coeficiente muy próximo al coeficiente real (como mucho, en el peor de los casos $1.02$ veces peor). Todo esto con el beneficio de tener una velocidad de ejecución considerablemente superior a la del algoritmo de backtracking que obtiene la solucion optima.
 
-Si ejecutamos 
+Ademas, usando los ejemplos provistos por la catedra, vemos que este coeficiente se mantiene:
+
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ Nombre Test & Coeficiente esperado & Coeficiente obtenido & Relacion \\ 
+ \hline
+  14\_4 & 15292055  & 15292085 & 1.0000019618 \\
+ \hline
+  14\_6 & 10694510  & 10700172 & 1.00052943052 \\
+ \hline
+  15\_4 & 4311889   & 4317075  & 1.00120272113 \\
+ \hline
+  15\_6 & 6377225   & 6377501  & 1.00004327901 \\
+ \hline
+  17\_5 & 15974095  & 15975947 & 1.00011593771 \\
+ \hline
+  17\_7 & 11513230  & 11513230 & 1 \\
+ \hline
+  17\_10 & 5427764  & 5430512  & 1.00050628583 \\
+ \hline
+  18\_6 & 10322822  & 10325588 & 1.00026794998 \\
+ \hline
+  18\_8 & 11971097  & 12000279 & 1.00243770475 \\
+ \hline
+  20\_4 & 21081875  & 21083935 & 1.00009771427 \\
+ \hline
+  20\_5 & 16828799  & 16838539 & 1.00057876976 \\
+ \hline
+  20\_8 & 11417428  & 11423826 & 1.00056037139 \\
+  \hline
+\end{tabular}
+\end{center}
 
 
 \subsubsection{Aproximación adicional}

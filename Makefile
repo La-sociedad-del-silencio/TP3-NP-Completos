@@ -28,3 +28,6 @@ formato-png: con-colores-sintaxis
 
 correr_mediciones:
 	python3 codigo/grafico_complejidad.py
+
+clean:
+	rm informe.aux informe.out informe.log
