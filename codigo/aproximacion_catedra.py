@@ -25,7 +25,7 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
         grupo_con_menor_habilidad = 0
         menor_cuadrado_suma = obtenerCuadradoSuma(S[0])
         for i in range(1, k): #O(k)
-            cuadrado_suma = obtenerCuadradoSuma(S[i])
+            cuadrado_suma = obtenerCuadradoSuma(S[i]) #O(k)
             if cuadrado_suma < menor_cuadrado_suma:
                 menor_cuadrado_suma = cuadrado_suma
                 grupo_con_menor_habilidad = i

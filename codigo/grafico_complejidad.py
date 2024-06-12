@@ -1,6 +1,7 @@
 from random import randint
 import time
 
+from aproximacion_catedra import *
 from backtracking import *
 from backtracking_con_greedy import *
 from programacion_lineal import *
@@ -69,18 +70,19 @@ def graficar(titulo, nombre_imagen, tiempos, cantidad_maestros, valores_k_usados
     plt.show()
     
 def generar_tests_aproximacion_y_graficar(titulo, algoritmo, nombre_imagen, max_val):
-    iter = 1
+    # iter = 1
     cantidad_maestros = [i for i in range(0, max_val, 5)]
     tiempos = []
     
     for i in cantidad_maestros:
+        print(f"I: {i}")
         tiempos_k = []
         maestros_y_habilidades = generar_test(i)
         for k in range(i):  
             ms_que_llevo = correrTest(i, k, maestros_y_habilidades, algoritmo)
             tiempos_k.append(ms_que_llevo)
-            print(f"Iteración: {iter}")
-            iter += 1
+            # print(f"Iteración: {iter}")
+            # iter += 1
         tiempos.append(sum(tiempos_k) / len(tiempos_k) if tiempos_k else 0)
         
     graficar_aproximacion(titulo, nombre_imagen, tiempos, cantidad_maestros)
@@ -169,5 +171,6 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
 #correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)
-generar_tests_aproximacion_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional5", 1501)
+# generar_tests_aproximacion_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional5", 1501)
+generar_tests_aproximacion_y_graficar("Aproximación", problema_tribu_del_agua_aprox_catedra, "graficoAproxCatedra", 1500)
 #correr_tests_mediciones("ejemplos_mediciones",None,"Aproximación", "graficoAproxAdicionalMediciones", problema_tribu_del_agua_aprox_adicional)
