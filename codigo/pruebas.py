@@ -1,4 +1,4 @@
-from backtracking import problema_tribu_del_agua_bt
+from programacion_lineal import problema_tribu_del_agua_pl
 from archivos import *
 import time
 
@@ -44,6 +44,28 @@ class Resultado:
 
         return representacion
     
+    @classmethod
+    def cota_de_aproximacion_empirica(self, resultados):
+        mayor_razon = 0
+        for info_resultado in resultados:
+            resultado, _, _ = info_resultado
+            proporcion = resultado.obtenido[1] / resultado.esperado[1]
+            if proporcion > mayor_razon:
+                mayor_razon = proporcion
+        return mayor_razon
+    
+    @classmethod
+    def tiempos_de_ejecucion_y_valores_k_n(self, resultados):
+        tiempos = []
+        cantidad_maestros = []
+        valores_k = []
+        for info_resultado in resultados:
+            resultado, n, k = info_resultado
+            tiempos.append(resultado.tiempo)
+            cantidad_maestros.append(n)
+            valores_k.append(k)
+        return tiempos, cantidad_maestros, valores_k
+    
 def son_resultados_iguales(resultado_esperado, resultado_obtenido, habilidad_por_maestro):
     if resultado_esperado[1] != resultado_obtenido[1]:
         return False
@@ -88,7 +110,7 @@ def generarRtasEsperadas(archivo):
             
     return rtas 
 
-def generarResultados(carpeta, problema_tribu_del_agua, maximo):
+def generarResultados(carpeta, problema_tribu_del_agua, maximo, calcular_cota):
     """ 
     Dado un directorio con ejemplos y las respuestas esperadas, ejecuta
     el programa en cada uno de ellos y devuelve una lista con los resultados
@@ -97,6 +119,8 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
     archivo_rtas_esperadas = f"{carpeta}/Resultados_Esperados.txt"
     rtas = generarRtasEsperadas(archivo_rtas_esperadas)
     cantidad_tests = 0
+    resultados = []
+    
     for archivo, rtaEsperada in rtas.items():
         if maximo is not None and cantidad_tests == maximo:
             break
@@ -116,3 +140,15 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo):
 
         print(resultado)
         cantidad_tests += 1
+        resultados.append((resultado, len(maestros_y_habilidades), k))
+    
+    cota = 1
+        
+    if calcular_cota:
+        cota = Resultado.cota_de_aproximacion_empirica(resultados)
+        print(f"Cota de aproximación empírica: {cota}\n")
+        
+    return resultados, cota
+
+#resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None, True)
+#print(Resultado.cota_de_aproximacion_empirica(resultados))
