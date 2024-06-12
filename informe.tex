@@ -10,7 +10,11 @@
 \usepackage{xcolor}            % Coloreado de ecuaciones
 \usepackage{quoting, xparse}   % Usado para citar
 % \usepackage{svg}               % Para usar imagenes svg que se ven lindas independientemente del zoom. WARNING REQUIERE DE INKSCAPE. Tal vez no vale la pena
-\usepackage{amsmath}
+\usepackage{amsmath}           % Configuraciones adicionales a las ecuaciones (creo)
+
+\setcounter{tocdepth}{4}       %\
+                               % > Hace que \paragraph aparezca en el TOC
+\setcounter{secnumdepth}{4}    %/
 
 \graphicspath{ {./images/} }
 
@@ -244,6 +248,7 @@ Con esto mostramos que el problema BC es un problema NP-Completo. En la próxima
 
 
 \subsubsection{Desarrollo}
+\label{sec:np-completo-bc-desarrollo}
 El problema de decisión de BC busca minimizar el máximo valor de las maquinas, mientras que TA busca lograr que todos los subgrupos tengan una duración pareja. La pregunta entonces es: ¿Hay relación entre estas dos búsquedas?. ¡La respuesta es que si! Buscar minimizar el máximo valor de las máquinas, está implícitamente buscando lograr que todas las máquinas tengan una duración pareja.
 Para reducir el tiempo de uso de una maquina, se le tiene que dar alguno de sus trabajos a otra máquina. Cuantos más trabajos se puedan pasar a otra maquina (sin que esta se convierta en la nueva máquina de mayor duración), más se va a lograr minimizar el valor máximo de las maquinas.
 Esto implica que en el momento que se tenga todas las máquinas con similares $T_i$, es el momento en donde va a estar el mínimo valor máximo de $T_i$. 
@@ -407,6 +412,19 @@ $$
 
 En el peor de los casos, con $n = k$, la complejidad sería cuadratica.
 
+\paragraph{Análisis de Aproximación} \
+
+Más allá de la complejidad del algoritmo, sería importante determinar que tan buena es la aproximación que realiza.
+
+Se tiene una instancia $I$ del problema, la cual consiste de un conjunto de $n$ maestros y $k$ grupos.
+Esta instancia $I$ tiene una solución optima $z(I)$, la cual (considerando lo planteado en \nameref{sec:np-completo-bc-desarrollo}), es aquella en donde todos los grupos tienen la misma habilidad. Ya que esta es la que minimiza la suma de los cuadrados.
+
+Además, 
+
+Supongamos que no estamos en el caso optimo y que uno de nuestros grupos, $S_i$ tiene mas habilidad acumulada que los demás. Esto sucede porque tiene que haber habido un maestro $K_j$ que fue colocado en este grupo que hizo que ese grupo supere al resto en habilidad acumulada.
+¿Por que $K_j$ fue colocado en el grupo $S_i$ especifico? Porque, según el algoritmo, el grupo $S_i$ era el grupo con menos habilidad acumulada hasta el momento.
+
+
 \subsubsection{Aproximación adicional}
 
 La siguiente aproximación propuesta sigue una lógica similar a la sugerida por la cátedra, pero con un tiempo de ejecución menor.
@@ -554,6 +572,5 @@ También realizamos un gráfico con el set de datos usado en backtracking y prog
 \includegraphics[scale=0.60]{images/graficoAproxAdicionalMediciones.png}
 
 \section{Conclusión}
-
 
 \end{document}

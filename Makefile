@@ -1,6 +1,7 @@
 # Que es Synctex? Fuente: https://tex.stackexchange.com/questions/118489/what-exactly-is-synctex
 # Si rompe mucho las guindas se puede sacar igual
-LATEX = pdflatex -synctex=1
+LATEX = pdflatex -synctex=1 -file-line-error
+
 
 con-colores-sintaxis:
 	$(LATEX) --shell-escape informe.tex
