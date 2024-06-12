@@ -414,16 +414,6 @@ En el peor de los casos, con $n = k$, la complejidad sería cuadratica.
 
 \paragraph{Análisis de Aproximación} \
 
-Más allá de la complejidad del algoritmo, sería importante determinar que tan buena es la aproximación que realiza.
-
-Se tiene una instancia $I$ del problema, la cual consiste de un conjunto de $n$ maestros y $k$ grupos.
-Esta instancia $I$ tiene una solución optima $z(I)$, la cual (considerando lo planteado en \nameref{sec:np-completo-bc-desarrollo}), es aquella en donde todos los grupos tienen la misma habilidad. Ya que esta es la que minimiza la suma de los cuadrados.
-
-Además, 
-
-Supongamos que no estamos en el caso optimo y que uno de nuestros grupos, $S_i$ tiene mas habilidad acumulada que los demás. Esto sucede porque tiene que haber habido un maestro $K_j$ que fue colocado en este grupo que hizo que ese grupo supere al resto en habilidad acumulada.
-¿Por que $K_j$ fue colocado en el grupo $S_i$ especifico? Porque, según el algoritmo, el grupo $S_i$ era el grupo con menos habilidad acumulada hasta el momento.
-
 
 \subsubsection{Aproximación adicional}
 
