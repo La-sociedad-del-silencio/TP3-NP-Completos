@@ -1,7 +1,9 @@
 import time
 from backtracking import problema_tribu_del_agua_bt
+from aproximacion_catedra import problema_tribu_del_agua_aprox_catedra
 from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 from programacion_lineal import problema_tribu_del_agua_pl
+from aproximacion_adicional import problema_tribu_del_agua_aprox_adicional
 
 CIAN = '\033[96m'
 FINCO = '\033[0m'
@@ -14,9 +16,11 @@ FLAGAPROXADICIONAL = "--a2"
 
 
 algoritmos = {
-    FLAGBACKTRACKING : problema_tribu_del_agua_bt,
-    FLAGBTGREEDY : problema_tribu_del_agua_bt_greedy,
-    FLAGPL : problema_tribu_del_agua_pl
+    FLAGBACKTRACKING   : problema_tribu_del_agua_bt,
+    FLAGBTGREEDY       : problema_tribu_del_agua_bt_greedy,
+    FLAGPL             : problema_tribu_del_agua_pl,
+    FLAGAPROXCATEDRA   : problema_tribu_del_agua_aprox_catedra,
+    FLAGAPROXADICIONAL : problema_tribu_del_agua_aprox_adicional
 }
 
 titulos = {

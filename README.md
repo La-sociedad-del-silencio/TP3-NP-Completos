@@ -38,7 +38,11 @@ Cada elemento \(x_i\) debe estar asignado a un grupo y sólo un grupo.
 
 3. Escribir un algoritmo que, por backtracking, obtenga la solución óptima al problema en la versión de optimización planteada originalmente. Generar sets de datos para corroborar su correctitud, así como tomar mediciones de tiempos.
 
-4. Escribir un modelo de programación lineal que resuelva el problema de forma óptima. Ejecutarlo para los mismos sets de datos para corroborar su correctitud. Tomar mediciones de tiempos y compararlas con las del algoritmo que implementa Backtracking.
+4. Escribir un modelo de programación lineal que resuelva el problema. Dado la dificultad de la función objetivo para volverla lineal, planteamos dos alternativas. Ejecutar el modelo implementado para los mismos sets de datos para corroborar su correctitud, o una cota de aproximación empírica. Tomar mediciones de tiempo y compararlas con las del algoritmo que implementa Backtracking.
+
+   - Obtener la solución óptima al problema (más allá del planteo, demorará bastante en su ejecución). Considerar que esto implicará agregar bastantes variables de decisión.
+
+   - Que el objetivo sea minimizar la diferencia del grupo de mayor suma con el de menor suma. Es decir, si el grupo Z es el del mayor suma de habilidades de los maestros \(\sum_{i} Z_i\) y Y es el de menor suma, entonces se busca minimizar \(\sum_{i} Z_i - \sum_{j} Y_j\). En este caso, la solución será una aproximación al resultado óptimo.
 
 5. El Maestro Pakku nos propone el siguiente algoritmo de aproximación: Generar los \(k\) grupos vacíos. Ordenar de mayor a menor los maestros en función de su habilidad o fortaleza. Agregar al más habilidoso al grupo con menos habilidad hasta ahora (cuadrado de la suma). Repetir siguiendo con el siguiente más habilidoso, hasta que no queden más maestros por asignar.
 

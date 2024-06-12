@@ -47,11 +47,12 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, ca
         _, cota1 = generarResultados("ejemplos_adicionales", algoritmo, None, calcular_cota)
         
         print("---Ejemplos mediciones---\n")
-        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, 53, calcular_cota) 
+        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
-        _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota)
-        
+        #_, cota3 = generarResultados("faltan_pl", algoritmo, None, calcular_cota)
+        _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota) 
+                
         if calcular_cota:
             cota = max(cota1, cota2, cota3)
             print(f"Cota de aproximación empírica para todos los sets de datos: {cota}\n")
@@ -62,7 +63,7 @@ def procesar_algoritmo_a_utilizar(argv, posicion, maxima_cantidad_de_tests):
     if argv[posicion] in algoritmos:
         problema_tribu_del_agua = algoritmos[argv[posicion]]
         titulo = titulos[argv[posicion]]
-    casos_con_cota = {titulos[FLAGPL], titulos[FLAGAPROXCATEDRA]}
+    casos_con_cota = {titulos[FLAGPL], titulos[FLAGAPROXCATEDRA], titulos[FLAGAPROXADICIONAL]}
     calcular_cota = False
     if titulo in casos_con_cota:
         calcular_cota = True
