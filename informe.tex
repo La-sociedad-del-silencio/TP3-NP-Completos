@@ -331,7 +331,7 @@ Analizaremos ahora el código principal:
 
 S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos el algoritmo funciona en $O(1)$. Sin embargo, se tratan de casos particulares. Procederemos a explicar el caso general.
 
-En la \texttt{línea 14} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 13} es una operación lineal en la cantidad de grupos $k$, es decir, $O(k)$. 
+En la \texttt{línea 14} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot \log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 13} es una operación lineal en la cantidad de grupos $k$, es decir, $O(k)$. 
 
 La solución del problema viene dada por la función recursiva \texttt{problema\_tribu\
 \_del\_agua\_bt\_recur}. Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y prueba con el si-\ guiente grupo. Iniciamos con una suma con valor infinito. La cantidad de posibles asignaciones es $k^n$ pues para cada uno de los $n$ maestros hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
@@ -343,7 +343,7 @@ La solución del problema viene dada por la función recursiva \texttt{problema\
 
 Esta función pública es bastante similar a la del algoritmo original, con la excepción de crear una lista de tamaño $k$, \texttt{sumas\_grupos}, cuyo costo es lineal.
 
-Ambas versiones ordenan los maestros por mayor habilidad. Observamos que ésto mejoró el tiempo de ejecución. No es greedy, pero es una optimización. Para este caso decidimos seguir con una lógica similar, agregando otra optimización basada en el algoritmo de aproximación greedy propuesto por la cátedra. Éste consiste en asignar los maestros iterativamente en orden según su fuerza al grupo con la menor fuerza total hasta el momento. Se empieza por los más habilidosos. Utilizamos la misma idea para que cuando el algoritmo de backtracking intente agregar a un maestro a un grupo, lo haga en el grupo con menor habilidad. Si ésta no es una opción válida, continuamos con el siguiente grupo con menor fuerza. Ésto lo logramos ordenando los grupos. Como optimización adicional, guardamos en una lista la suma actual de cada grupo con el objetivo de evitar calcularlas en cada paso. La ordenamos en conjunto con los grupos usando \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort}, con un costo $O(k \cdot log(k))$.  
+Ambas versiones ordenan los maestros por mayor habilidad. Observamos que ésto mejoró el tiempo de ejecución. No es greedy, pero es una optimización. Para este caso decidimos seguir con una lógica similar, agregando otra optimización basada en el algoritmo de aproximación greedy propuesto por la cátedra. Éste consiste en asignar los maestros iterativamente en orden según su fuerza al grupo con la menor fuerza total hasta el momento. Se empieza por los más habilidosos. Utilizamos la misma idea para que cuando el algoritmo de backtracking intente agregar a un maestro a un grupo, lo haga en el grupo con menor habilidad. Si ésta no es una opción válida, continuamos con el siguiente grupo con menor fuerza. Ésto lo logramos ordenando los grupos. Como optimización adicional, guardamos en una lista la suma actual de cada grupo con el objetivo de evitar calcularlas en cada paso. La ordenamos en conjunto con los grupos usando \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort}, con un costo $O(k \cdot \log(k))$.  
 
 \inputminted[linenos, firstline=29, lastline=64]{python}{codigo/backtracking_con_greedy.py}
 
@@ -383,6 +383,8 @@ Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp}
 
 \subsection{Algoritmos de Aproximación}
 \subsubsection{Aproximación de la cátedra}
+\label{sec:algoAproxCatedra}
+
 La cátedra planteaba el siguiente algoritmo de aproximación para el problema:
 
 \textit{Generar los k grupos vacíos. Ordenar de mayor a menor los maestros en función de su habilidad o fortaleza. Agregar al más habilidoso al grupo con menos habilidad hasta ahora (cuadrado de la suma). Repetir siguiendo con el siguiente más habilidoso, hasta que no queden más maestros por asignar.}
@@ -399,7 +401,11 @@ Con respecto a la complejidad, la creación de los K grupos tiene un costo $\mat
 Además, el ciclo \texttt{for} de la linea \texttt{21} tiene  una complejidad temporal de $\mathcal{O}(n \cdot k)$; ya que por cada maestro que tiene que ser añadido a un grupo, tiene que buscar el grupo con menor habilidad acumulada hasta ahora. Adicionalmente, tenemos que calcular la habilidad de cada grupo cada vez que queremos hallar el grupo con menor habilidad acumulada, lo cual es una operación $\mathcal{O}(k)$ adicional. 
 
 Luego tenemos la reconstrucción de la respuesta en las lineas \texttt{34} a \texttt{43}, lo cual recorre el arreglo de grupos para calcular el coeficiente resultante. Esto también tiene una complejidad $\mathcal{O}(n \cdot k)$.
+$$
+\mathcal{T}(n) = \mathcal{O}(n \cdot \log (n)) + \mathcal{O}(k) + \mathcal{O}(n \cdot k) = \mathcal{O}(n \cdot k)
+$$
 
+En el peor de los casos, con $n = k$, la complejidad sería cuadratica.
 
 \subsubsection{Aproximación adicional}
 
@@ -407,7 +413,7 @@ La siguiente aproximación propuesta sigue una lógica similar a la sugerida por
 
 \inputminted[linenos, firstline=3, lastline=33]{python}{codigo/aproximacion_adicional.py}
 
-Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $O(n\cdot log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
+Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $O(n\cdot \log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
 
 La asignación de los grupos implica iterar sobre los $n$ maestros, lo cual es lineal, $\mathcal{O}(n)$. Por otro lado, calcular el coeficiente utilizando la lista auxiliar \texttt{sumas} conlleva $\mathcal{O}(k)$. El resto de las operaciones son constantes. En total, la complejidad del algoritmo propuesto, para el caso general, es
 
@@ -526,18 +532,26 @@ Analizando la totalidad de las mediciones, es evidente que nuestro algoritmo de 
 
 \subsection{Algoritmos de Aproximación}
 \subsubsection{Aproximación de la cátedra}
+Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad algorítmica de esta aproximación con valores inmanejables para el algoritmo exacto.
+
+\includegraphics[scale=0.60]{images/graficoAproxCatedraReal.png}
+
+Vemos que los puntos aparentan tomar la forma de una parábola no muy pronunciada. Lo cual refleja lo que obtuvimos en \nameref{sec:algoAproxCatedra}.
+Si la complejidad del algoritmos fuese $\mathcal{O}(n \cdot n)$ veríamos una forma parabólica mas pronunciada, ya que la cantidad de maestros ($n$) suele ser considerablemente mayor que la cantidad de grupos ($k$). 
+Sin embargo, como la complejidad del algoritmos es $\mathcal{O}(n \cdot k)$, la $k$ hace que la parábola tenga un crecimiento menos pronunciado.
+
+
 \subsubsection{Aproximación adicional}
 
 Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad algorítmica de esta aproximación con valores inmanejables para el algoritmo exacto.
 
 \includegraphics[scale=0.60]{images/graficoAproxAdicional.png}
 
-Se puede observar una curva azul que representa $n \cdot log(n)$, mientras que los puntos rojos son nuestras mediciones. 
+Se puede observar una curva azul que representa $n \cdot \log(n)$, mientras que los puntos rojos son nuestras mediciones. 
 
 También realizamos un gráfico con el set de datos usado en backtracking y programación lineal para mostrar la rapidez de este algoritmo en comparación con los exponenciales.
 
 \includegraphics[scale=0.60]{images/graficoAproxAdicionalMediciones.png}
-
 
 \section{Conclusión}
 
