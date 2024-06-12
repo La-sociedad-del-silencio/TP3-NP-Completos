@@ -3,16 +3,6 @@ from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 
 from archivos import procesar_archivo
 from pruebas import *
-CIAN = '\033[96m'
-FINCO = '\033[0m'
-
-titulos = {
-    FLAGBACKTRACKING: "BACKTRACKING",
-    FLAGBTGREEDY: "BACKTRACKING MEJORADO",
-    FLAGPL : "PROGRAMACIÓN LINEAL",
-    FLAGAPROXCATEDRA : "APROXIMACIÓN DE LA CÁTEDRA",
-    FLAGAPROXADICIONAL : "APROXIMACIÓN ADICIONAL",
-}
 
 def main():
     f'''
@@ -49,9 +39,6 @@ def main():
             
         else:
             ejecutar_tests_con_algoritmo("BACKTRACKING", problema_tribu_del_agua_bt_greedy, maxima_cantidad_de_tests, False)
-            # PL
-            # Aprox 1
-            # Aprox 2
             
 def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, calcular_cota):
         print(CIAN + f"\n----{titulo}----\n\n" + FINCO)

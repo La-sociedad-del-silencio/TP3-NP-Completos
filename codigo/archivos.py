@@ -5,6 +5,9 @@ from backtracking_con_greedy import problema_tribu_del_agua_bt_greedy
 from programacion_lineal import problema_tribu_del_agua_pl
 from aproximacion_adicional import problema_tribu_del_agua_aprox_adicional
 
+CIAN = '\033[96m'
+FINCO = '\033[0m'
+
 FLAGBACKTRACKING = "--bt"
 FLAGBTGREEDY = "--btg"
 FLAGPL = "--pl"
@@ -18,6 +21,14 @@ algoritmos = {
     FLAGPL             : problema_tribu_del_agua_pl,
     FLAGAPROXCATEDRA   : problema_tribu_del_agua_aprox_catedra,
     FLAGAPROXADICIONAL : problema_tribu_del_agua_aprox_adicional
+}
+
+titulos = {
+    FLAGBACKTRACKING: "BACKTRACKING",
+    FLAGBTGREEDY: "BACKTRACKING MEJORADO",
+    FLAGPL : "PROGRAMACIÓN LINEAL",
+    FLAGAPROXCATEDRA : "APROXIMACIÓN DE LA CÁTEDRA",
+    FLAGAPROXADICIONAL : "APROXIMACIÓN ADICIONAL",
 }
 
 def generarTestDe(archivo):
@@ -49,16 +60,16 @@ def procesar_archivo(argv):
     maestros_y_habilidades, k = generarTestDe(archivoAProcesar)
         
     if len(argv) > 2 and argv[2] in algoritmos:
-        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmos[argv[2]])  
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmos[argv[2]], titulos[argv[2]])  
     
     else:
-        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt)
-        # PL
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt_greedy, titulos[FLAGBTGREEDY])
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_pl, titulos[FLAGPL])
         # Aprox 1
         # Aprox 2  
         
         
-def ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmo):
+def ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmo, titulo):
     inicio = time.time()
 
     grupos, coeficiente = algoritmo(maestros_y_habilidades, k)
@@ -66,7 +77,8 @@ def ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmo
     fin = time.time()
 
     tiempoQueLlevo = int((fin - inicio) * 1000)
-      
+    print(CIAN + f"\n----{titulo}----\n" + FINCO)
+    
     for i, grupo in enumerate(grupos):
         print(f"Grupo {i+1}: {grupo}")
     print(f'Coeficiente: {coeficiente}')
