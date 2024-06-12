@@ -1,13 +1,3 @@
-def obtenerCuadradoSuma(S):
-    sumaActual = 0
-    for elem in S:
-        habilidad = elem[1]
-        sumaActual += habilidad
-
-    cuadrado = sumaActual ** 2
-
-    return cuadrado
-
 def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
     if k > len(maestros_y_habilidades):
         return None
@@ -17,31 +7,17 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
 
     S = [set() for _ in range(k)]
     maestros_y_habilidades = sorted(maestros_y_habilidades, key=lambda x: -x[1]) #O(n log n)
-
-    for maestro_y_habilidad in maestros_y_habilidades: #O(n * k)
-        if k == 1:
-            S[0].add(maestro_y_habilidad)
-            continue
-        grupo_con_menor_habilidad = 0
-        menor_cuadrado_suma = obtenerCuadradoSuma(S[0])
-        for i in range(1, k): #O(k)
-            cuadrado_suma = obtenerCuadradoSuma(S[i]) #O(k)
-            if cuadrado_suma < menor_cuadrado_suma:
-                menor_cuadrado_suma = cuadrado_suma
-                grupo_con_menor_habilidad = i
-        S[grupo_con_menor_habilidad].add(maestro_y_habilidad)
-
-    resultado = []
-    coeficiente = 0
-    for grupo_con_habilidades in S: #O(k * n)
-        grupo = set()
-        cuadrado_suma = 0
-        for maestro, habilidad in grupo_con_habilidades:
-            grupo.add(maestro)
-            cuadrado_suma += habilidad
-        coeficiente += cuadrado_suma**2
-        resultado.append(grupo)
-
-    return resultado, coeficiente
+    sumas_grupos = {i: 0 for i in range(k)}
+    
+    for maestro_y_habilidad in maestros_y_habilidades:
+        maestro, habilidad = maestro_y_habilidad
+        grupo_menor_suma =  min(sumas_grupos, 
+                                key=sumas_grupos.get) 
+        S[grupo_menor_suma].add(maestro)
+        sumas_grupos[grupo_menor_suma] += habilidad
+                
+    coeficiente = sum(s**2 for _,s in sumas_grupos.items())
+    
+    return S, coeficiente
 
 # T(n) = 2 * O(n * k) + O(n log n) En el peor caso n~k y T(n) = O(n * k) (puede llegar a ser cuadrático) 
