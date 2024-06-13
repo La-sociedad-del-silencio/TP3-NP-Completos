@@ -1,5 +1,4 @@
 from random import randint
-from backtracking import problema_tribu_del_agua_bt
 from grafico_complejidad import *
 
 def obtener_maestros():

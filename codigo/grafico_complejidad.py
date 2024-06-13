@@ -2,7 +2,6 @@ from random import randint
 import time
 
 from aproximacion_catedra import *
-from backtracking import *
 from backtracking_con_greedy import *
 from programacion_lineal import *
 from pruebas import *
@@ -201,11 +200,3 @@ def correr_tests_mediciones(tests, cantidad, titulo, nombre_imagen, algoritmo):
     k_filtrado.append(peor_k)
     
     graficar(titulo, nombre_imagen, tiempos_filtrados, cantidad_filtrada, k_filtrado)
-               
-#generar_tests_y_graficar("Backtracking", problema_tribu_del_agua_bt, , "graficoBacktracking", 11)
-#correr_tests_mediciones("ejemplos_mediciones",None,"Programación lineal", "graficoProgramacionLineal2", problema_tribu_del_agua_pl)
-#correr_tests_mediciones("ejemplos_mediciones",45,"Programación lineal", "graficoProgramacionLinealSin10", problema_tribu_del_agua_pl)
-#correr_tests_mediciones("ejemplos_mediciones",None,"Backtracking", "graficoBacktrackingGreedy", problema_tribu_del_agua_bt_greedy)
-# generar_tests_aproximacion_y_graficar("Aproximación", problema_tribu_del_agua_aprox_adicional, "graficoAproxAdicional5", 1501)
-generar_tests_aproximacion_catedra_y_graficar("Aproximación", problema_tribu_del_agua_aprox_catedra, "graficoAproxCatedra", 1500)
-#correr_tests_mediciones("ejemplos_mediciones",None,"Aproximación", "graficoAproxAdicionalMediciones", problema_tribu_del_agua_aprox_adicional)

@@ -1,5 +1,3 @@
-from backtracking import caso_k_igual_a_n, obtener_resultado
-
 def problema_tribu_del_agua_bt_greedy(maestros_y_habilidades, k):
     n = len(maestros_y_habilidades)
     
@@ -16,49 +14,86 @@ def problema_tribu_del_agua_bt_greedy(maestros_y_habilidades, k):
                                     key=lambda x: -x[1])
 
     S = [set() for _ in range(k)]
-    sumas_grupos = [0] * k #O(k)
+    sumas_grupos = {i: 0 for i in range(k)}
     
-    S_con_habilidades, coeficiente = problema_tribu_del_agua_bt_greedy_recur(
-        maestros_y_habilidades, 0, list(S), list(S), float('inf'), 
-        sumas_grupos)
-
-    resultado = obtener_resultado(S_con_habilidades)
+    mejor_S, mejor_suma, suma_maxima = asignacion_greedy(
+                               maestros_y_habilidades, k)
+    
+    resultado = problema_tribu_del_agua_bt_greedy_recur(
+        maestros_y_habilidades, 0, S, mejor_S, mejor_suma, 
+        sumas_grupos, suma_maxima, 0, 0)
+    
+    S_resultado, coeficiente, _ = resultado
         
-    return resultado, coeficiente
+    return S_resultado, coeficiente
 
 def problema_tribu_del_agua_bt_greedy_recur(maestros_y_habilidades, 
-    indice_actual, S_actual, mejor_S, mejor_suma, sumas_grupos):
+    indice_actual, S_actual, mejor_S, mejor_suma, sumas_grupos, 
+    suma_maxima, suma_actual, actual_suma_maxima):
     
     if indice_actual == len(maestros_y_habilidades):
-        suma_actual = sum(s ** 2 for s in sumas_grupos) 
-        if suma_actual < mejor_suma:
-            return list(map(set, S_actual)), suma_actual
-        return list(map(set, S_actual)), mejor_suma
+        cota = min(actual_suma_maxima, suma_maxima)
+        return list(map(set, S_actual)), suma_actual, cota
     
-    S_actual, sumas_grupos = ordenar_por_suma(S_actual, sumas_grupos)
-    maestro = maestros_y_habilidades[indice_actual]
+    sumas_grupos_ordenada = sorted(sumas_grupos.items(), 
+                             key=lambda item: item[1])    
     
-    for i, grupo in enumerate(S_actual):
-        grupo.add(maestro)
-        sumas_grupos[i] += maestro[1]
-        suma_actual = sum(s ** 2 for s in sumas_grupos) 
-        if suma_actual < mejor_suma:
-            nuevo_S, nueva_suma = problema_tribu_del_agua_bt_greedy_recur(
-            maestros_y_habilidades, indice_actual+1, S_actual, mejor_S, 
-            mejor_suma, sumas_grupos)
-            
-            if nueva_suma < mejor_suma:
-                mejor_S, mejor_suma = nuevo_S, nueva_suma
-        sumas_grupos[i] -= maestro[1]
-        grupo.remove(maestro)
-        
-    return mejor_S, mejor_suma
+    maestro, habilidad = maestros_y_habilidades[indice_actual]
+    
+    for suma_grupo in sumas_grupos_ordenada:
+        i, _ = suma_grupo
+        S_actual[i].add(maestro)
+        sumas_grupos[i] += habilidad
+        rama_explorada = False
+        if sumas_grupos[i] <= suma_maxima:
+            suma = sum(s ** 2 for s in sumas_grupos.values()) 
+            if suma < mejor_suma:
+                rama_explorada = True
+                
+                actual_suma_maxima = max(actual_suma_maxima, 
+                                         sumas_grupos[i])
+                
+                resultado = problema_tribu_del_agua_bt_greedy_recur(
+                maestros_y_habilidades, indice_actual+1, S_actual, 
+                mejor_S, mejor_suma, sumas_grupos, suma_maxima,suma,
+                actual_suma_maxima)
 
-def ordenar_por_suma(S, sumas_grupos):
-    grupos_con_sumas = list(zip(S, sumas_grupos))
+                nuevo_S, nueva_suma , nueva_suma_maxima = resultado
+
+                if nueva_suma < mejor_suma:
+                    mejor_S = nuevo_S
+                    mejor_suma = nueva_suma
+                    suma_maxima = nueva_suma_maxima 
+        
+        sumas_grupos[i] -= habilidad
+        S_actual[i].remove(maestro)
+        if not rama_explorada:
+            break
+        
+    return mejor_S, mejor_suma, suma_maxima
+
+def caso_k_igual_a_n(maestros_y_habilidades):
+    suma = 0
+    grupos = []
+    for maestro, habilidad in maestros_y_habilidades:
+        grupos.append({maestro})
+        suma += habilidad**2
+    return grupos, suma
+
+def asignacion_greedy(maestros_y_habilidades, k):
+    S = [set() for _ in range(k)]
+    sumas_grupos = {i: 0 for i in range(k)}
+    suma_maxima = 0
     
-    grupos_con_sumas.sort(key=lambda x: x[1])
+    for maestro_y_habilidad in maestros_y_habilidades:
+        maestro, habilidad = maestro_y_habilidad
+        grupo_menor_suma =  min(sumas_grupos, 
+                                key=sumas_grupos.get) 
+        S[grupo_menor_suma].add(maestro)
+        sumas_grupos[grupo_menor_suma] += habilidad
+        suma_maxima = max(suma_maxima, 
+                          sumas_grupos[grupo_menor_suma])
+        
+    coeficiente = sum(s**2 for _,s in sumas_grupos.items())
     
-    S, sumas_grupos = zip(*grupos_con_sumas)
-    
-    return list(S), list(sumas_grupos)
+    return S, coeficiente, suma_maxima 

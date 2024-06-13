@@ -1,4 +1,4 @@
-from backtracking import caso_k_igual_a_n
+from backtracking_con_greedy import caso_k_igual_a_n
 
 def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
     n = len(maestros_y_habilidades)
@@ -27,4 +27,4 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
     
     return S, coeficiente
 
-# T(n) = 2 * O(n * k) + O(n log n) En el peor caso n~k y T(n) = O(n * k) (puede llegar a ser cuadrático) 
+# T(n) = O(n * k) + O(n log n) En el peor caso n~k y T(n) = O(n * k) 

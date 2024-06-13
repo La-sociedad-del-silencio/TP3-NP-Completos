@@ -149,6 +149,3 @@ def generarResultados(carpeta, problema_tribu_del_agua, maximo, calcular_cota):
         print(f"Cota de aproximación empírica: {cota}\n")
         
     return resultados, cota
-
-#resultados = generarResultados("ejemplos_mediciones", problema_tribu_del_agua_pl, None, True)
-#print(Resultado.cota_de_aproximacion_empirica(resultados))

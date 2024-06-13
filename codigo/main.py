@@ -5,21 +5,6 @@ from archivos import procesar_archivo
 from pruebas import *
 
 def main():
-    f'''
-    INPUT (argv):
-        - argv[1] = Nombre del archvio a procesar o cantidad máxima de tests de la cátedar a ejecutar
-        - argv[2] = Algoritmo a utilizar
-            --b: backtracking
-            
-    OUTPUT (stdout):
-        - Grupos S_i
-        - El tiempo que llevó calcular todo
-        - argv[1] y argv[2] son opcionales
-        - Si argv[1] es el nombre de un archivo, se ejecuta solo ese. Caso contrario, se ejecutan todos
-        - Si argv[1] es un número, indica la cantidad máxima de tests de la cátedra a ejecutar
-        - Si argv[2] existe, es un flag e indica el algoritmo a utilizar
-        - Si argv[2] no existe y no se quiere limitar los tests de la cátedra, argv[1] puede ser el flag
-    '''
     
     if len(argv) > 1 and not argv[1].isdigit() and not argv[1].startswith("--"):
         procesar_archivo(argv) 
@@ -50,7 +35,6 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, ca
         _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
-        #_, cota3 = generarResultados("faltan_pl", algoritmo, None, calcular_cota)
         _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota) 
                 
         if calcular_cota:

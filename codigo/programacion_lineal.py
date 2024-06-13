@@ -1,5 +1,5 @@
 import pulp
-from backtracking import caso_k_igual_a_n
+from backtracking_con_greedy import caso_k_igual_a_n
 
 def problema_tribu_del_agua_pl(maestros_y_habilidades, k):
     num_maestros = len(maestros_y_habilidades)
