@@ -244,7 +244,7 @@ $\leftarrow$ Si existe una solución que permita minimizar el $T_i$ máximo de l
 
 Ejemplo: consideramos el conjunto \(S = \{3, 1, 1, 2, 2, 1\}\). Asignamos los trabajos ${3, 1, 1, 2, 2, 1}$ a 2 máquinas $m_1$ y $m_2$ tal que el tiempo máximo de cada una sea menor o igual a $3 + 1 + 1 + 2 + 2 + 1\over2$$ =$$ 10\over2 $$= 5$. El algoritmo que resuelve el problema de decisión de BC nos indicará que existe solución ($\{3, 1, 1\}$ y $\{2, 2, 1\}$), por lo que existe una partición en 2 subconjuntos.
 
-Con esto mostramos que el problema BC es un problema NP-Completo. En la próxima seccion usaremos este hecho para demostrar que TA tambien pertenece a los problemas NP-Completos.
+Con esto mostramos que el problema BC es un problema NP-Completo. En la \hyperref[sec:np-completo-bc-desarrollo]{próxima seccion} usaremos este hecho para demostrar que TA tambien pertenece a los problemas NP-Completos.
 
 
 \subsubsection{Desarrollo}
@@ -393,7 +393,7 @@ Este algoritmo lo tradujimos a código de la siguiente manera:
 
 \inputminted[linenos, firstline=3, lastline=29]{python}{codigo/aproximacion_catedra.py}
 
-En la línea \texttt{15} creamos los k grupos vacíos. Luego, en la línea \texttt{16} los ordenamos por su habilidad/destreza, utilizando Timsort.
+En la línea \texttt{15} creamos los k grupos vacíos. Luego, en la línea \texttt{16} los ordenamos por su habilidad/destreza, utilizando \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort}.
 
 Luego, el ciclo \texttt{for} de las lénea \texttt{20} a \texttt{25} es el que se encarga de agregar al maestro más habilidoso al grupo con menos habilidad hasta ahora. Para calcular esto último, hacemos uso del diccionario \texttt{sumas\_grupo} que guarda, para cada grupo, la suma actual del mismo. 
 
