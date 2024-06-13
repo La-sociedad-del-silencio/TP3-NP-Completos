@@ -100,7 +100,7 @@ $$
 \min \sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2
 $$
 
-En este trabajo desarrollaremos algoritmos de backtracking, programación lineal y posibles aproximaciones buscando resolver el problema de optimización planteado con el objetivo de ayudar a los mestros de la Tribu del Agua a derrotar a la Nación del Fuego. También nos dedicaremos a demostrar que el problema de la tribu del agua es NP-Completo.
+En este trabajo desarrollaremos algoritmos de backtracking, programación lineal y posibles aproximaciones buscando resolver el problema de optimización planteado con el objetivo de ayudar a los maestros de la Tribu del Agua a derrotar a la Nación del Fuego. También nos dedicaremos a demostrar que el problema de la tribu del agua es NP-Completo.
 
 \section{Demostración de problema NP-Completo}
 \label{sec:np-completo}
@@ -236,7 +236,7 @@ Finalmente, decimos que nuestro valor $C$ va a ser la mitad de la suma de todos 
 
 Cuando le pasemos este nuevo problema al validador de BC, este nos va a decir si es posible partir el conjunto en dos subconjuntos. Esto se debe a que solo va a ser posible partir el conjunto en dos si, como mucho, cada subconjunto tiene exactamente la mitad de la suma. 
 
-Podemos afirmar entones, que existe un 2-Paritition de $S$ si y solo si el mínimo valor $T_i$ resultante de las máquinas es a lo sumo $C$.
+Podemos afirmar entones, que existe un 2-Partition de $S$ si y solo si el mínimo valor $T_i$ resultante de las máquinas es a lo sumo $C$.
 
 $\rightarrow$ Si existe una solución para el problema de 2-partition, entonces existe una solución para el problema de balanceo de carga. Si tenemos 2 subconjuntos $S_1$ y $S_2$ tales que ambos tienen la misma suma, $C =$$ sum(S) \over 2$, entonces existe una asignación de trabajos en 2 máquinas distintas tal que el $T_i$ de cada una sea exacatmente $C$. Esto se debe a que los valores $a_i$ representan los tiempos de cada trabajo. Cualquier otra asignación no sería mínima. Como se tienen 2 máquinas, si quitamos trabajo de una para asignárselo a la otra, la segunda tendría $T_i > C$ necesariamente porque en total la suma de los $a_i$ es $2 \cdot C$.
 
