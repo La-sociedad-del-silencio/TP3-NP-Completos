@@ -162,7 +162,7 @@ Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tant
 \subsection{Problema 2-Partition}
 \label{subsec:partition}
 
-Para demostrar que el problema de la tribu del agua es NP-Completo haremos uso del problema 2-Partition. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
+Para demostrar que el problema de la tribu del agua es NP-Completo, vamos a hacer uso del problema 2-Partition como una reducción intermedia. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
 
 \subsubsection{Problema en NP}
 Enunciamos el problema de decisión asociado: dado un conjunto \( A =\{a_1, a_2, \ldots, a_n\} \), ¿existen dos subconjuntos \( A_1 \) y \( A_2 \) tales que \( \sum_{a \in A_1} a = \sum_{a \in A_2} a \)?
@@ -227,7 +227,7 @@ Cabe destacar que en clase nosotros estudiamos al problema de BC como un problem
 \label{sec:np-completo-bc}
 Para demostrar que BC es un problema NP-Completo, vamos a usar el problema 2P (el cual demostramos que es NP completo en \nameref{sec:np-completo-2p}). Es decir, vamos a realizar la reducción
 $$
-2P \leq_p TA
+2P \leq_p BC
 $$
 
 Nosotros partimos de una serie de números $S = \{a_1, a_2, \ldots, a_n \}$ que es la entrada de 2-Partition. Por cada número $a_i$ definimos un trabajo $n$ con duración $a_i$.  
