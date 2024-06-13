@@ -14,9 +14,9 @@ Conocemos la fuerza/maestría/habilidad de cada uno de los maestros agua, la cu�
 
 Para que los grupos estén parejos, lo que buscaremos es minimizar la adición de los cuadrados de las sumas de las fuerzas de los grupos. Es decir:
 
-$
+$$
 \min \sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2
-$
+$$
 
 El Maestro Pakku nos dice que esta es una tarea difícil, pero que con tiempo y paciencia podemos obtener el resultado ideal.
 
@@ -26,9 +26,9 @@ Para los primeros dos puntos, considerar la versión de decisión del Problema d
 
    Dado una secuencia de $n$ fuerzas/habilidades de maestros agua $x_1, x_2, \dots, x_n$, y dos números $k$ y $B$, definir si existe una partición en $k$ subgrupos $S_1, S_2, \dots, S_k$ tal que:
 
-   $
-   \sum_{i=1}^{k} \left( \sum_{x_j \in S_j} x_j \right)^2 \leq B
-   $
+$$
+\sum_{i=1}^{k} \left( \sum_{x_j \in S_i} x_j \right)^2 \leq B
+$$
 
 Cada elemento $x_i$ debe estar asignado a un grupo y sólo un grupo.
 
