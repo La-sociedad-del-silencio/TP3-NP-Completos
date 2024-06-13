@@ -6,10 +6,6 @@ import matplotlib.pyplot as plt
 
 from random import randint
 
-# from import main
-# abort
-
-
 # grupos, cota1 = generarResultados("ejemplos_catedra", problema_tribu_del_agua_aprox_catedra, None, True)
 
 def generar_test(cantidad):
@@ -53,4 +49,4 @@ def graficar(maxCant):
     plt.show()
 
 #Cambiar este numero si queres mas
-graficar(15)
+#graficar(15)

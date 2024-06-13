@@ -13,7 +13,8 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
         return caso_k_igual_a_n(maestros_y_habilidades)
 
     S = [set() for _ in range(k)]
-    maestros_y_habilidades = sorted(maestros_y_habilidades, key=lambda x: -x[1]) #O(n log n)
+    maestros_y_habilidades = sorted(maestros_y_habilidades, 
+                                    key=lambda x: -x[1]) #O(n log n)
     sumas_grupos = {i: 0 for i in range(k)}
     
     for maestro_y_habilidad in maestros_y_habilidades:

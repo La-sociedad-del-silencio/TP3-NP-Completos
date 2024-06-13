@@ -309,50 +309,45 @@ El problema de optimización de la tribu del agua fue resuelto utilizando distin
 
 \subsection{Complejidad lectura de archivos}
 A continuación mostramos la función principal de lectura de archivos. 
-\inputminted[linenos, firstline=9, lastline=24]{python}{codigo/archivos.py}
+\inputminted[linenos, firstline=30, lastline=45]{python}{codigo/archivos.py}
 
 La función lee la línea que contiene la cantidad de conjuntos de maestros a crear. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores $x_i$ de tuplas (nombre, habilidad). Esto tiene una complejidad temporal $O(n)$.
 
 \subsection{Algoritmo de Backtracking}
 
-Debido al alto tiempo de ejecución de nuestro algoritmo inicial de backtracking, buscamos alternativas que nos permitieran disminuirlo. Logramos realizar algunas mejoras, las cuales serán analizadas en \nameref{sec:bt-greedy}. En ambos casos se realiza una poda cuando el algoritmo se da cuenta que la solución parcial no sirve. Esto ocurre cuando se hace una asignación de un maestro a un grupo que implica una suma mayor o igual a nuestra suma óptima. Cuando se da esta situación, se corta y se intenta asignarlo a otro grupo. Presentaremos a continuación ambas versiones del algoritmo. 
+Debido al alto tiempo de ejecución de nuestro algoritmo inicial de backtracking, buscamos alternativas y mejoras que nos permitieran disminuirlo. Para detallar el algoritmo e indicar su complejidad, tendremos en cuenta la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fueg, $n$, y la cantidad de grupos, $k$.  
 
-\subsubsection{Backtracking inicial}
-Este algoritmo de bactracking utiliza la siguiente función auxiliar para calcular la adición de los cuadrados de la suma de las habilidades de cada grupo:
-\inputminted[linenos, firstline=47, lastline=54]{python}{codigo/backtracking.py}
+S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos nuestro algoritmo funciona en $O(1)$. Cuando la cantidad de maestros es igual a la cantidad de grupos, también sabemos el resultado del problema. Entonces, como cada grupo tendrá únicamente un maestro si $n = k$, decidimos que en ese caso particular no se aplique el algoritmo de backtracking. En su lugar, resolvemos la asignación con la función \texttt{caso\_k\_igual\_a\_n}.
 
-Esta función recorre los $k$ grupos para calcular la suma pedida. En el peor caso, la cantidad de maestros de un grupo puede ser $n$ (con $k = 1$), por lo que tiene un costo proporcional a $n \cdot k$. Diremos entonces, que la complejidad temporal de esta porción de código es $O(n \cdot k)$, con $k \leq n$ puesto que si $k > n$, nuestro algoritmo completo se ejecuta en $O(1)$.  
+\inputminted[linenos, firstline=75, lastline=81]{python}{codigo/backtracking_con_greedy.py}
 
-A continuación mostramos otras funciones que utiliza el código principal:
+Esta función recorre la lista de maestros, implicando un costo de $O(n)$. Esto nos permitió disminuir notablemente el tiempo de ejecución. Todos estos son casos particulares. Procederemos a explicar el caso general. 
 
-\inputminted[linenos, firstline=56, lastline=73]{python}{codigo/backtracking.py}
+Con el objetivo de evitar combinaciones no óptimas, partimos del resultado de una aproximación greedy. Ésta se basa completamente en la propuesta por la cátedra, aunque con algunas modificaciones ajustadas a la necesidad del algoritmo de backtracking.
 
-Como sabemos que si $n = k$ cada grupo tendrá únicamente un maestro, decidimos que en ese caso particular no se aplique el algoritmo de backtracking. En su lugar, resolvemos la asignación con la función \texttt{caso\_k\_igual\_a\_n} que itera sobre la lista de maestros, implicando un costo de $O(n)$. Esto nos permitió disminuir notablemente el tiempo de ejecución cuando $n = k$. 
+\inputminted[linenos, firstline=83]{python}{codigo/backtracking_con_greedy.py}
 
-Por otro lado, como necesitamos la habilidad de cada maestro para poder minimizar la función objetivo, nuestro algoritmo tiene en cuenta grupos con el nombre y la fuerza de cada maestro. Luego los filtramos para quedarnos únicamente con los nombres. Éste es el objetivo de \texttt{obtener\_resultado}. Su complejidad temporal es $O(n \cdot k)$, debido al mismo análisis que el de la función \texttt{sumatoria}.
+La función crea una lista de sets para las asignaciones y un diccionario para guardar la fuerza de cada grupo. Ambas operaciones son lineales en la cantidad de grupos. Luego, asigna de forma iterativa cada maestro al grupo con menor habilidad. Para lograrlo, utiliza la función \texttt{min} de python sobre el diccionario \texttt{sumas\_grupos}, que conlleva un costo $O(k)$. Ésto es realizado para cada uno de los $n$ maestros, por lo que el ciclo \texttt{for} tiene una complejidad $O(n \cdot k)$. Utilizando el diccionario se calcula el coeficiente, lo cual también es lineal en $k$. El resto de las operaciones son constantes. Por lo tanto, la complejidad temporal de esta función es 
+$$
+T(n) = 3 \cdot O(k) + O(n \cdot k) + O(1) = O(n \cdot k)
+$$
 
-Analizaremos ahora el código principal:
-\inputminted[linenos, firstline=1, lastline=45]{python}{codigo/backtracking.py}
+Ahora analizaremos el código principal:
+\inputminted[linenos, lastline=28]{python}{codigo/backtracking_con_greedy.py}
 
-S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos el algoritmo funciona en $O(1)$. Sin embargo, se tratan de casos particulares. Procederemos a explicar el caso general.
+En la \texttt{línea 13} ordenamos el conjunto de maestros por mayor habilidad con \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$. Crear los grupos vacíos y la suma por grupo en las \texttt{líneas 16 y 17} son operaciones lineales en la cantidad de grupos $k$, es decir, $O(k)$. 
 
-En la \texttt{línea 14} ordenamos el conjunto de maestros por mayor habilidad con el algoritmo \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot \log(n))$, siendo $n$ la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fuego. Crear los grupos vacíos en la línea \texttt{línea 13} es una operación lineal en la cantidad de grupos $k$, es decir, $O(k)$. 
+Como establecimos anteriormente, utilizamos la función \texttt{asignacion\_greedy} para obtener una solución inicial aproximada con la cual comparar los resultados de la función recursiva, \texttt{problema\_tribu\_del\_agua\_bt\_greedy\_recur} y poder podar rápidamente si se encuentra una solución parcial peor a ésta.
+
+\inputminted[linenos, firstline=30, lastline=71]{python}{codigo/backtracking_con_greedy.py}
 
 La solución del problema viene dada por la función recursiva \texttt{problema\_tribu\
-\_del\_agua\_bt\_recur}. Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y prueba con el si-\ guiente grupo. Iniciamos con una suma con valor infinito. La cantidad de posibles asignaciones es $k^n$ pues para cada uno de los $n$ maestros hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
+\_del\_agua\_bt\_recur}.  Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y vuelve un paso atrás. Los $k$ grupos están ordenados según la suma. Es decir, primero se intentará asignar al siguiente maestro más habilidoso al grupo actual con la menor fuerza total. Para ello, en la \texttt{línea 38} utilizamos Timsort, esta vez con un costo dependiente de la cantidad de grupos, $O(k \cdot log(k))$. El propósito de este orden es obtener grupos parejos que conduzcan a podas más tempranas.
 
-\subsubsection{Backtracking - Greedy}
-\label{sec:bt-greedy}
+Una solución parcial es válida si su coeficiente es menor al del mejor resultado y la suma del grupo al que se ha agregado un maestro no supera la habilidad máxima del mismo. La asignación actual no puede tener ningún grupo cuya suma sea mayor a la más alta de la mejor solución encontrada hasta entonces porque, al finalizar de asignar a todos los maestros, el coeficiente resultante será también mayor. Si estas condiciones se cumplen, se continúa resolviendo el problema para el siguiente maestro y, al regresar en la recursión, se puede intentar con otra asignación. Caso contrario, no tiene sentido seguir intentando con otros grupos porque los mismos están ordenados por suma.
 
-\inputminted[linenos, firstline=3, lastline=27]{python}{codigo/backtracking_con_greedy.py}
+El algoritmo realiza una búsqueda explícita del espacio de soluciones. La cantidad de posibles asignaciones es $k^n$ pues, para cada uno de los $n$ maestro,s hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
 
-Esta función pública es bastante similar a la del algoritmo original, con la excepción de crear una lista de tamaño $k$, \texttt{sumas\_grupos}, cuyo costo es lineal.
-
-Ambas versiones ordenan los maestros por mayor habilidad. Observamos que ésto mejoró el tiempo de ejecución. No es greedy, pero es una optimización. Para este caso decidimos seguir con una lógica similar, agregando otra optimización basada en el algoritmo de aproximación greedy propuesto por la cátedra. Éste consiste en asignar los maestros iterativamente en orden según su fuerza al grupo con la menor fuerza total hasta el momento. Se empieza por los más habilidosos. Utilizamos la misma idea para que cuando el algoritmo de backtracking intente agregar a un maestro a un grupo, lo haga en el grupo con menor habilidad. Si ésta no es una opción válida, continuamos con el siguiente grupo con menor fuerza. Ésto lo logramos ordenando los grupos. Como optimización adicional, guardamos en una lista la suma actual de cada grupo con el objetivo de evitar calcularlas en cada paso. La ordenamos en conjunto con los grupos usando \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort}, con un costo $O(k \cdot \log(k))$.  
-
-\inputminted[linenos, firstline=29, lastline=64]{python}{codigo/backtracking_con_greedy.py}
-
-El algoritmo sigue realizando una búsqueda explícita del espacio de soluciones, por lo que su complejidad temporal es exponencial. Sin embargo, las mejoras nos permitieron reducir notablemente el tiempo de ejecución. Esto se debe a que se asigna rápidamente un maestro a un grupo con una suma pequeña, lo cual puede conducir a futuras podas (no se encuentra una suma mayor a la mejor hasta el momento). La comparación con el algoritmo original puede encontrarse en \nameref{sec:medidas-bt-greedy}. 
 \subsection{Modelo de Programación Lineal}
 
 Debido a la dificultad de linealizar la función objetivo, nuestro modelo de programación lineal buscará, en cambio, minimizar la diferencia del grupo de mayor suma con el de menor suma. De esta forma, obtendremos una aproximación a la solución óptima. Sea $Z$ el grupo con la mayor suma de habilidades de los maestros \(\sum_{i} Z_i\) e Y el de menor suma, entonces se busca minimizar \(\sum_{i} Z_i - \sum_{j} Y_j\).
@@ -376,7 +371,7 @@ Para resolver el problema utilizaremos programación lineal entera. A continuaci
 
 Podemos observar la declaración de las variables, la función objetivo y las restricciones en el código:
 
-\inputminted[linenos, firstline=4]{python}{codigo/programacion_lineal.py}
+\inputminted[linenos, firstline=4, lastline=66]{python}{codigo/programacion_lineal.py}
 
 Definimos los mismos casos particulares que en los otros algoritmos, con el objetivo de disminuir el tiempo de ejecución cuando conocemos el resultado del problema.
 
@@ -396,43 +391,43 @@ La cátedra planteaba el siguiente algoritmo de aproximación para el problema:
 
 Este algoritmo lo tradujimos a código de la siguiente manera:
 
-\inputminted[linenos, lastline=45]{python}{codigo/aproximacion_catedra.py}
+\inputminted[linenos, firstline=3, lastline=29]{python}{codigo/aproximacion_catedra.py}
 
-En la linea \texttt{18} creamos los k grupos vacíos. Luego, en la linea \texttt{19} los ordenamos por su habilidad/destreza.
+En la línea \texttt{15} creamos los k grupos vacíos. Luego, en la línea \texttt{16} los ordenamos por su habilidad/destreza, utilizando Timsort.
 
-Luego, el ciclo \texttt{for} de las linea \texttt{21} a \texttt{32} es el que se encarga de agregar al maestro mas habilidoso al grupo con menos habilidad hasta ahora. Para calcular esto ultimo hacemos uso de la función auxiliar \texttt{obtenerCuadradoSuma}.
+Luego, el ciclo \texttt{for} de las lénea \texttt{20} a \texttt{25} es el que se encarga de agregar al maestro más habilidoso al grupo con menos habilidad hasta ahora. Para calcular esto último, hacemos uso del diccionario \texttt{sumas\_grupo} que guarda, para cada grupo, la suma actual del mismo. 
 
-Con respecto a la complejidad, la creación de los K grupos tiene un costo $\mathcal{O}(k)$. Luego la complejidad de ordenar la lista tiene una  $\mathcal{O}(n \cdot \log n)$.
-Además, el ciclo \texttt{for} de la linea \texttt{21} tiene  una complejidad temporal de $\mathcal{O}(n \cdot k)$; ya que por cada maestro que tiene que ser añadido a un grupo, tiene que buscar el grupo con menor habilidad acumulada hasta ahora. Adicionalmente, tenemos que calcular la habilidad de cada grupo cada vez que queremos hallar el grupo con menor habilidad acumulada, lo cual es una operación $\mathcal{O}(k)$ adicional. 
+Con respecto a la complejidad, la creación de los $K$ grupos y del diccionario tienen un costo $\mathcal{O}(k)$. Luego, la complejidad de ordenar la lista tiene una  $\mathcal{O}(n \cdot \log n)$.
+Además, el ciclo \texttt{for} de la línea tiene  una complejidad temporal de $\mathcal{O}(n \cdot k)$, ya que por cada maestro que tiene que ser añadido a un grupo, tiene que buscar el grupo con menor habilidad acumulada hasta ahora, utilizando la función \texttt{min}, lo cual es una operación $\mathcal{O}(k)$ adicional. 
 
-Luego tenemos la reconstrucción de la respuesta en las lineas \texttt{34} a \texttt{43}, lo cual recorre el arreglo de grupos para calcular el coeficiente resultante. Esto también tiene una complejidad $\mathcal{O}(n \cdot k)$.
+Por último tenemos el cálculo del coeficiente en la línea \texttt{27}. Esto tiene una complejidad $\mathcal{O}(k)$.
 $$
-\mathcal{T}(n) = \mathcal{O}(n \cdot \log (n)) + \mathcal{O}(k) + \mathcal{O}(n \cdot k) = \mathcal{O}(n \cdot k)
+\mathcal{T}(n) = \mathcal{O}(n \cdot \log (n)) + 3 \cdot \mathcal{O}(k) + \mathcal{O}(n \cdot k) = \mathcal{O}(n \cdot k)
 $$
 
-En el peor de los casos, con $n = k$, la complejidad sería cuadratica.
+En el peor de los casos, con $n = k$, la complejidad no sería cuadratica debido a que consideramos el caso aparte.
 
 \paragraph{Análisis de Aproximación} \
-Para hacer el análisis de la aproximación, comparamos el coeficiente obtenido por el algoritmo de aproximacion contra el coeficiente obtenido por el algortimo de backtracking mejorado.
-Para esto, generamos 15 instancias $I$. Cada una de ellas tenia una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
+Para hacer el análisis de la aproximación, comparamos el coeficiente obtenido por el algoritmo de aproximacion contra el coeficiente obtenido por el algortimo de backtracking.
+Para esto, generamos 15 instancias $I$. Cada una de ellas tenía una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
 
-El código que usamos para generar estos tests se encuentra en el archivo \texttt{codigo/comparacionAproxion.py}.
+El código que usamos para generar estos tests se encuentra en el archivo \texttt{codigo/comparacion\_aprox\_catedran.py}.
 
 Esto nos dio el siguiente resultado: 
 
 \includegraphics[scale=0.60]{images/coeficientesAprox.png}
 
-Definimos a $z(I)$ como la solucion optima de la instancia $I$ y a $A(I)$ como la solucion aproximada.
+Definimos a $z(I)$ como la solución óptima de la instancia $I$ y a $A(I)$ como la solución aproximada.
 
-En el eje Y podemos los ver la proporcion de $\frac{A(I)}{z(I)}$ y en el eje X la cantidad de maestros.
-El gráfico muestra un dato bastante muy interesante: la aproximación, obtiene un coeficiente muy próximo al coeficiente real (como mucho, en el peor de los casos $1.02$ veces peor). Todo esto con el beneficio de tener una velocidad de ejecución considerablemente superior a la del algoritmo de backtracking que obtiene la solucion optima.
+En el eje Y podemos los ver la proporción de $\frac{A(I)}{z(I)}$ y en el eje X la cantidad de maestros.
+El gráfico muestra un dato bastante muy interesante: la aproximación, obtiene un coeficiente muy próximo al coeficiente real (como mucho, en el peor de los casos $1.02$ veces peor). Todo esto con el beneficio de tener una velocidad de ejecución considerablemente superior a la del algoritmo de backtracking que obtiene la solución óptima.
 
-Ademas, usando los ejemplos provistos por la catedra, vemos que este coeficiente se mantiene:
+Además, usando los ejemplos provistos por la catedra, vemos que este coeficiente se mantiene:
 
 \begin{center}
 \begin{tabular}{ |c|c|c|c| } 
  \hline
- Nombre Test & Coeficiente esperado & Coeficiente obtenido & Relacion \\ 
+ Nombre Test & Coeficiente esperado & Coeficiente obtenido & Relación \\ 
  \hline
   14\_4 & 15292055  & 15292085 & 1.0000019618 \\
  \hline
@@ -461,6 +456,7 @@ Ademas, usando los ejemplos provistos por la catedra, vemos que este coeficiente
 \end{tabular}
 \end{center}
 
+En cambio, para los ejemplos utilizados en las mediciones la cota aumenta a $1.007$,
 
 \subsubsection{Aproximación adicional}
 
@@ -506,13 +502,11 @@ De forma adicional, agregamos la posibilidad de ejecutar los ejemplos utilizados
 
 En esta sección explicaremos las distintas formas de ejecutar el programa.
 \begin{itemize}
-    \item \texttt{python3\ codigo/main.py}: ejecutará por defecto la versión mejorada de backtracking y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra. 
+    \item \texttt{python3\ codigo/main.py}: ejecutará por defecto el algoritmo de backtracking y mostrará los grupos formados, el coeficiente resultante y el tiempo de ejecución para cada algoritmo. Se ejecutan los ejemplos adicionales, los de las mediciones y los provistos por la cátedra. 
     \item \texttt{python3\ codigo/main.py\ ruta\_a\_ejemplo}: procesará los datos del archivo dado y ejecutará todos los algoritmos, mostrando el resultado de cada uno, así como su tiempo de ejecución. 
     \item \texttt{python3\ codigo/main.py ruta\_a\_ejemplo\ --flag}: ejecutará el algoritmo según el flag utilizado. Si es inválido, por defecto actúa como el anterior.
-    
-        \texttt{--bt} $\rightarrow$ Backtracking, versión inicial
 
-        \texttt{--btg} $\rightarrow$ Backtracking, versión mejorada
+        \texttt{--btg} $\rightarrow$ Backtracking
         
         \texttt{--pl} $\rightarrow$ Programación Lineal
         
@@ -521,7 +515,7 @@ En esta sección explicaremos las distintas formas de ejecutar el programa.
         \texttt{--a2} $\rightarrow$ Algoritmo de aproximación adicional
     \item \texttt{python3\ codigo/main.py\ --flag}: Ejecuta todos los tests usando el algoritmo propuesto. Si es inválido, por defecto se comporta como si no tuviera el flag.
 
-    \item \texttt{python3\ codigo/main.py\ N}: Ejecuta los tests usando todos los algoritmos, pero limita los ejemplos de la cátedra a N. El objetivo es poder ejecutar la mayor cantidad de tests en un tiempo menor.
+    \item \texttt{python3\ codigo/main.py\ N}: Ejecuta los tests con backtracking (por defecto), pero limita los ejemplos de la cátedra a N. El objetivo es poder ejecutar la mayor cantidad de tests en un tiempo menor.
 
     \item \texttt{python3\ codigo/main.py\ N\ --flag}: Se comporta como el anterior, pero solo ejecuta los tests con el algoritmo indicado.
         
@@ -542,10 +536,9 @@ Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima 
 Los resultados obtenidos son los siguientes:
 \begin{itemize}
     \item Programación lineal $\rightarrow$ $r(A) = 1.0141856654211776 \approx 1.01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
-    \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usa-\ dos en las mediciones y los adicionales, $r(A) = 1.2157676348547717 \approx 1.21577$. También realizamos mediciones con volúmenes de datos elevados para el algoritmo exacto, con el fin de obtener más información de la cota. Probamos casos en los que sabemos que nuestro algoritmo no es óptimo. Por ejemplo, si $k = 2$ y se tiene una habilidad muy alta y el resto bastante pequeñas. Llegamos hasta $n = 100000$. Los ejemplos se pueden encontrar en \texttt{codigo/cota\_aprox\_adicional.py}. El resultado obtenido fue $r(A) = 1.2999951999748 \approx 1.3$.
+    \item Aproximación de la cátedra $\rightarrow$ $r(A) = 1.0069630817579056 \approx 1.007$.
+    \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usa-\ dos en las mediciones y los adicionales, $r(A) = 1.2157676348547717 \approx 1.21577$. También realizamos mediciones con volúmenes de datos elevados para el algoritmo exacto, con el fin de obtener más información de la cota. Probamos casos en los que sabemos que nuestro algoritmo no es óptimo. Por ejemplo, si $k = 2$ y se tiene una habilidad muy alta y el resto bastante pequeñas. Llegamos hasta $n = 100000$. Los ejemplos se pueden encontrar en \texttt{codigo/cota\_aprox\_adicional.py}. El resultado obtenido fue $r(A) = 1.2999951999748 \approx 1.3$. Como era de esperarse, la aproximación es peor que las anteriores porque no tiene en consideración la habilidad de cada grupo.
 \end{itemize}
-
-
 
 \section{Mediciones de tiempo}
 \label{sec:medTiempo}
@@ -555,23 +548,11 @@ El código que usamos para generar los tests se encuentran en el archivo
 \texttt{codigo/grafico\_complejidad.py}.
 
 \subsection{Algoritmo de backtracking}
-\subsubsection{Backtracking inicial}
-
-Con este algoritmo de backtracking obtuvimos los siguientes resultados:
-
-\includegraphics[scale=0.60]{images/graficoBacktracking.png}
-
-Como podemos observar en la tendencia de la curva, el tiempo de ejecución aumenta exponencialmente con la cantidad de maestros $n$ y también depende de $k$. El tiempo más alto ocurre cuando $k$ se acerca a $n$, con $k < n$ (es lineal cuando $k = n$). Para valores pequeños de estas variables el algoritmo es relativamente rápido. Sin embargo, al incrementarlos no se vuelve práctico debido a que el tiempo no crece polinomialmente, sino exponencialmente.  Esto corrobora el análisis de la complejidad planteado previamente.
-
-\subsubsection{Backtracking - greedy}
-\label{sec:medidas-bt-greedy}
-Procederemos a comparar esta versión del algoritmo de backtrcking con la anterior.
+Con el algoritmo de backtracking obtuvimos los siguientes resultados:
 
 \includegraphics[scale=0.60]{images/graficoBacktrackingGreedy.png}
 
-El gráfico evidencia una drástica disminución de los tiempos de ejecución, casi a la mitad de los del otro algoritmo. 
-
-Nuevamente podemos observar la tendecia exponencial de la curva, que comprueba nuestra justificación de la complejidad temporal.
+Como podemos observar en la tendencia de la curva, el tiempo de ejecución aumenta exponencialmente con la cantidad de maestros $n$ y también depende de $k$. El tiempo más alto ocurre cuando $k$ se acerca a $n$, con $k < n$ (es lineal cuando $k = n$). Para valores pequeños de estas variables el algoritmo es relativamente rápido. Sin embargo, al incrementarlos no se vuelve práctico debido a que el tiempo no crece polinomialmente, sino exponencialmente.  Esto corrobora el análisis de la complejidad planteado previamente.
 
 \subsection{Algoritmo de programación lineal}
 
@@ -579,34 +560,32 @@ Tomamos mediciones de tiempo con los mismos sets de datos utilizados para backtr
 
 \includegraphics[scale=0.60]{images/graficoProgramacionLinealSin10.png}
 
-El mejor algoritmo de backtracking tarda aproximadamente 35000 milisegundos en ejecutarse en el peor caso para $n = 10$. Sin embargo, PLE ya necesita 40000 milisegundos para $n = 9$. Esto es una gran diferencia con ambos algoritmos de backtracking que conllevan menos de 20000 milisegundos en ese caso.
+El algoritmo de backtracking tarda aproximadamente 9000 milisegundos en ejecutarse en el peor caso para $n = 10$. Sin embargo, PLE ya necesita 40000 milisegundos para $n = 9$. Esto es una gran diferencia con backtracking que conlleva menos de 2000 milisegundos en ese caso.
 
 \includegraphics[scale=0.60]{images/graficoProgramacionLineal.png}
 
 Analizando la totalidad de las mediciones para el set de datos \texttt{ejemplos\
- mediciones}, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a las dos implementaciones de backtracking. En todos los casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
-
-Al ejecutar el algoritmo de programación lineal con los ejemplos de la cátedra, notamos que el tiempo de ejecución del mismo con los casos hasta \texttt{11\_5.txt} es mayor que el de la segunda versión de backtracking. Sin embargo, para los siguientes ejemplos, la situación se revierte.
+ mediciones}, es evidente que nuestro algoritmo de programación lineal obtuvo tiempos de ejecución significativamente mayores a los de la implementación de backtracking. En ambos casos la complejidad temporal es exponencial, lo cual puede observarse en los respectivos gráficos. No obstante, para el conjunto de datos de entrada dado, el desempeño del algoritmo de PLE es peor.
 
 \subsection{Algoritmos de Aproximación}
 \subsubsection{Aproximación de la cátedra}
 Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad algorítmica de esta aproximación con valores inmanejables para el algoritmo exacto.
 
-Se puede observar una curva azul que representa $n \cdot k$, mientras que los puntos rojos son nuestras mediciones. 
+La curva azul que representa $n \cdot k$, mientras que los puntos rojos son nuestras mediciones. 
 \includegraphics[scale=0.60]{images/graficoAproxCatedra2.png}
 
 Vemos que los puntos aparentan tomar la forma de una parábola no muy pronunciada. Lo cual refleja lo que obtuvimos en \nameref{sec:algoAproxCatedra}.
 Si la complejidad del algoritmos fuese $\mathcal{O}(n \cdot n)$ veríamos una forma parabólica mas pronunciada, ya que la cantidad de maestros ($n$) suele ser considerablemente mayor que la cantidad de grupos ($k$). 
-Sin embargo, como la complejidad del algoritmos es $\mathcal{O}(n \cdot k)$, la $k$ hace que la parábola tenga un crecimiento menos pronunciado.
+Sin embargo, como la complejidad del algoritmos es $\mathcal{O}(n \cdot k)$ y sabemos que para el caso general $k < n$, la $k$ hace que la parábola tenga un crecimiento menos pronunciado.
 
 
 \subsubsection{Aproximación adicional}
 
-Realizamos mediciones con $n$ y $k$ hasta 1500 para corroborar la complejidad algorítmica de esta aproximación con valores inmanejables para el algoritmo exacto.
+Realizamos mediciones de $n$ y $k$ nuevamente hasta 1500 para comprobar la complejidad algorítmica del algoritmo y compararla con el resultado del grafico anterior.
 
 \includegraphics[scale=0.60]{images/graficoAproxAdicional.png}
 
-Se puede observar una curva azul que representa $n \cdot \log(n)$, mientras que los puntos rojos son nuestras mediciones. 
+Se puede observar una curva azul que representa $n \cdot \log(n)$, en contraposición con los puntos rojos que son nuestras mediciones. Los tiempos de ejecución son notoriamente menores a los de la otra aproximación. 
 
 También realizamos un gráfico con el set de datos usado en backtracking y programación lineal para mostrar la rapidez de este algoritmo en comparación con los exponenciales.
 
