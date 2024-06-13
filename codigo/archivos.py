@@ -60,7 +60,9 @@ def procesar_archivo(argv):
     
     else:
         ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_bt_greedy, titulos[FLAGBTGREEDY]) 
-        
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_aprox_catedra, titulos[FLAGAPROXCATEDRA]) 
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_aprox_adicional, titulos[FLAGAPROXADICIONAL]) 
+        ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, problema_tribu_del_agua_pl, titulos[FLAGPL]) 
         
 def ejecutar_algoritmo_e_imprimir_resultado(maestros_y_habilidades, k, algoritmo, titulo):
     inicio = time.time()
