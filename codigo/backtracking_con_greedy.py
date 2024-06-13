@@ -94,6 +94,6 @@ def asignacion_greedy(maestros_y_habilidades, k):
         suma_maxima = max(suma_maxima, 
                           sumas_grupos[grupo_menor_suma])
         
-    coeficiente = sum(s**2 for _,s in sumas_grupos.items())
+    coeficiente = sum(s**2 for s in sumas_grupos.values())
     
     return S, coeficiente, suma_maxima 

@@ -1,5 +1,6 @@
 def validador_2_partition(valores, s1, s2):
-    if sum(s1) != sum(s2) or len(s1) >= len(valores) or len(s2) >= len(valores):
+    if (sum(s1) != sum(s2) or len(s1) >= len(valores) or 
+        len(s2) >= len(valores)):
         return False
     
     apariciones = {}

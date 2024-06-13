@@ -2,7 +2,7 @@ def validador_problema_tribu_del_agua(habilidades_maestros_agua, k,
                                       B, S):
     if len(S) != k: #O(1)
         return False 
-    suma = 0 #O(1)
+    coeficiente = 0 #O(1)
     maestros = set() #O(1) Cada maestro debe estar en solo un grupo
     dic_habilidades = dict() #O(1)
     
@@ -20,9 +20,9 @@ def validador_problema_tribu_del_agua(habilidades_maestros_agua, k,
                 return False # Está en más de un grupo
             maestros.add(maestro) #O(1)
             suma_grupo += dic_habilidades[maestro] #O(1)
-        suma += suma_grupo ** 2 #O(1)
+        coeficiente += suma_grupo ** 2 #O(1)
             
-    if suma > B:  # O(1)
+    if coeficiente > B:  # O(1)
         return False
         
     for maestro, _habilidad in habilidades_maestros_agua: #O(n)

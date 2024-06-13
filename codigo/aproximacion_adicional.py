@@ -1,6 +1,7 @@
 from backtracking_con_greedy import caso_k_igual_a_n
 
-def problema_tribu_del_agua_aprox_adicional(maestros_y_habilidades, k):
+def problema_tribu_del_agua_aprox_adicional(maestros_y_habilidades,
+                                            k):
     n = len(maestros_y_habilidades)
     
     if k > n:
