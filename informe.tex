@@ -424,7 +424,7 @@ Definimos a $z(I)$ como la solución óptima de la instancia $I$ y a $A(I)$ como
 En el eje Y podemos los ver la proporción de $\frac{A(I)}{z(I)}$ y en el eje X la cantidad de maestros.
 El gráfico muestra un dato bastante muy interesante: la aproximación, obtiene un coeficiente muy próximo al coeficiente real (como mucho, en el peor de los casos $1.02$ veces peor). Todo esto con el beneficio de tener una velocidad de ejecución considerablemente superior a la del algoritmo de backtracking que obtiene la solución óptima.
 
-Además, usando los ejemplos provistos por la catedra, vemos que este coeficiente se mantiene:
+Además, usando los ejemplos provistos por la catedra, vemos que esta cota se mantiene:
 
 \begin{center}
 \begin{tabular}{ |c|c|c|c| } 
@@ -539,7 +539,7 @@ Sea \(I\) una instancia cualquiera del problema, \(z(I)\) una solución óptima 
 Los resultados obtenidos son los siguientes:
 \begin{itemize}
     \item Programación lineal $\rightarrow$ $r(A) = 1.0141856654211776 \approx 1.01419$. En general, los resultados coincidieron con el óptimo. En otros casos, la diferencia entre las soluciones resultó ser muy pequeña.
-    \item Aproximación de la cátedra $\rightarrow$ $r(A) = 1.0069630817579056 \approx 1.007$.
+    \item Aproximación de la cátedra $\rightarrow$ $r(A) = 1.0256009216095232 \approx 1.03$.
     \item Aproximación adicional $\rightarrow$ Para los sets de datos de la cátedra, los usa-\ dos en las mediciones y los adicionales, $r(A) = 1.2157676348547717 \approx 1.21577$. También realizamos mediciones con volúmenes de datos elevados para el algoritmo exacto, con el fin de obtener más información de la cota. Probamos casos en los que sabemos que nuestro algoritmo no es óptimo. Por ejemplo, si $k = 2$ y se tiene una habilidad muy alta y el resto bastante pequeñas. Llegamos hasta $n = 100000$. Los ejemplos se pueden encontrar en \texttt{codigo/cota\_aprox\_adicional.py}. El resultado obtenido fue $r(A) = 1.2999951999748 \approx 1.3$. Como era de esperarse, la aproximación es peor que las anteriores porque no tiene en consideración la habilidad de cada grupo.
 \end{itemize}
 

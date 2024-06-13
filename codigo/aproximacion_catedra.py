@@ -24,7 +24,7 @@ def problema_tribu_del_agua_aprox_catedra(maestros_y_habilidades, k):
         S[grupo_menos_habilidoso].add(maestro)
         sumas_grupos[grupo_menos_habilidoso] += habilidad
                 
-    coeficiente = sum(s**2 for _,s in sumas_grupos.items())
+    coeficiente = sum(s**2 for s in sumas_grupos.values())
     
     return S, coeficiente
 
