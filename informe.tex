@@ -143,21 +143,21 @@ Dados estos datos y restricciones, proponemos el siguiente certificador.
 
 Para que el verificador presentado pueda ser considerado un certificador eficiente, debe ejecutarse en tiempo polinomial. Por lo tanto, procedemos a explicar y justificar la complejidad del código.
 
-Realizamos operaciones aritméticas, asignaciones y verificaciones. Todas estas son operaciones $O(1)$ puesto que consumen tiempo constante según la \docuPy. Recorremos dos veces la lista de maestros y habilidades con diferentes propósitos. Como contiene \texttt{n} tuplas, cada ciclo \texttt{for} tiene un costo $O(n)$. Con el objetivo de obtener la adición de los cuadrados de las sumas de las fuerzas de los grupos y compararla con \texttt{B}, tenemos dos ciclos anidados. El segundo recorre los maestros de un grupo que, en el peor caso, son \texttt{n}. Esto se realiza \texttt{k} veces, por lo que en total es $O(k \times n)$.
+Realizamos operaciones aritméticas, asignaciones y verificaciones. Todas estas son operaciones $\mathcal{O}(1)$ puesto que consumen tiempo constante según la \docuPy. Recorremos dos veces la lista de maestros y habilidades con diferentes propósitos. Como contiene \texttt{n} tuplas, cada ciclo \texttt{for} tiene un costo $\mathcal{O}(n)$. Con el objetivo de obtener la adición de los cuadrados de las sumas de las fuerzas de los grupos y compararla con \texttt{B}, tenemos dos ciclos anidados. El segundo recorre los maestros de un grupo que, en el peor caso, son \texttt{n}. Esto se realiza \texttt{k} veces, por lo que en total es $\mathcal{O}(k \times n)$.
 
 Entonces,
 
 $$
-T(n) = O(1) + 2 \cdot O(n) + O(k \times n) = O(k \times n)  
+T(n) = \mathcal{O}(1) + 2 \cdot \mathcal{O}(n) + \mathcal{O}(k \times n) = \mathcal{O}(k \times n)  
 $$
 
 En el peor caso, $k = n$ y
 
 $$
-T(n) = O(n \times n) = O(n^2)
+T(n) = \mathcal{O}(n \times n) = \mathcal{O}(n^2)
 $$
 
-Ambas cotas, $O(k \times n)$ y $O(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
+Ambas cotas, $\mathcal{O}(k \times n)$ y $\mathcal{O}(n^2)$ conllevan tiempo polinomial. Por lo tanto, podemos afirmar que existe un certificador eficiente para el problema de la Tribu del Agua y entonces este problema está en NP.
 
 \subsection{Problema 2-Partition}
 \label{subsec:partition}
@@ -170,7 +170,7 @@ Enunciamos el problema de decisión asociado: dado un conjunto \( A =\{a_1, a_2,
 A continuación mostramos la implementación de un validador:
 \inputminted[linenos]{python}{codigo/certificador_2_partition.py}
 
-Hay tres ciclos \texttt{for}. Uno de ellos recorre todos los valores del conjunto. Considerando que hay \texttt{n}, es una operación $O(n)$. Los conjuntos $A_1$ y $A_2$ deberían contener en total $n$ elementos, pudiendo uno de ellos tener hasta  $n-1$. En total, ambos conllevan $O(n)$. Por lo tanto, la complejidad temporal del validador es $O(n)$, constituyendo un certificador eficiente. Como el problema 2-Partition puede ser verificado en tiempo polinomial, podemos afirmar que se encuentra en NP.
+Hay tres ciclos \texttt{for}. Uno de ellos recorre todos los valores del conjunto. Considerando que hay \texttt{n}, es una operación $\mathcal{O}(n)$. Los conjuntos $A_1$ y $A_2$ deberían contener en total $n$ elementos, pudiendo uno de ellos tener hasta  $n-1$. En total, ambos conllevan $\mathcal{O}(n)$. Por lo tanto, la complejidad temporal del validador es $\mathcal{O}(n)$, constituyendo un certificador eficiente. Como el problema 2-Partition puede ser verificado en tiempo polinomial, podemos afirmar que se encuentra en NP.
 
 \subsubsection{Reducción}
 \label{sec:np-completo-2p}
@@ -179,7 +179,7 @@ Como hemos visto en clase, el problema de subset sum es NP-Completo. Utilizaremo
 
 Dado un conjunto de números \( S = \{s_1, s_2, \ldots, s_n\} \) y un número \( V \), queremos saber si hay un subconjunto de \( S \) cuya suma sea igual a \( V \).
 
-Para realizar la reducción $SS \leq_p 2P$, con SS haciendo referencia a subset sum y 2P a 2-Partition, debemos definir cuál es la entrada (conjunto) de la caja negra que resuelve 2-Partition. Sea $s = sum(S)$ la suma de los valores del conjunto $S$, definimos \( S' = S \cup \{s - 2\cdot V\} \). Aplicamos el algoritmo en $S'$. Agregar un elemento a un conjunto es $O(1)$, mientras que si se desea copiar $S$ para no modificarlo, la operación es lineal en el tamaño del set. Por lo tanto, esta transformación es polinomial.
+Para realizar la reducción $SS \leq_p 2P$, con SS haciendo referencia a subset sum y 2P a 2-Partition, debemos definir cuál es la entrada (conjunto) de la caja negra que resuelve 2-Partition. Sea $s = sum(S)$ la suma de los valores del conjunto $S$, definimos \( S' = S \cup \{s - 2\cdot V\} \). Aplicamos el algoritmo en $S'$. Agregar un elemento a un conjunto es $\mathcal{O}(1)$, mientras que si se desea copiar $S$ para no modificarlo, la operación es lineal en el tamaño del set. Por lo tanto, esta transformación es polinomial.
 
 Si \( T \subseteq S \) es un subconjunto con suma \( V \):
 
@@ -279,7 +279,7 @@ Dados los datos de entrada del problema de 2-Partition, \( \{a_1, a_2, \ldots, a
     \item La fuerzas de los maestros \( \{x_1, x_2, \ldots, x_n\} \) serán \( \{a_1, a_2, \ldots, a_n\} \).
     \item \( B \) es el valor obtenido cuando las sumas de los elementos en cada subconjunto son iguales. Es decir, suponiendo que el problema de decisión de 2-Partition tiene solución y sabiendo que en ese caso la suma de cada subconjunto es s = \(sum(A)\over2\), entonces $B = s^2 + s^2$. 
 \end{itemize}
-Esta transformación requiere recorrer el conjunto $A = \{a_1, a_2, \ldots, a_n\}$ para crear las tuplas (maestro, habilidad), lo cual implica una operación $O(n)$, que es polinomial.
+Esta transformación requiere recorrer el conjunto $A = \{a_1, a_2, \ldots, a_n\}$ para crear las tuplas (maestro, habilidad), lo cual implica una operación $\mathcal{O}(n)$, que es polinomial.
 
 El problema original de la partición tiene una solución si y solo si es posible obtener dos grupos de maestros tal que la adición de los cuadrados de las sumas de las habilidades en cada grupo sea mínima y menor o igual a $B$.
 
@@ -311,42 +311,42 @@ El problema de optimización de la tribu del agua fue resuelto utilizando distin
 A continuación mostramos la función principal de lectura de archivos. 
 \inputminted[linenos, firstline=30, lastline=45]{python}{codigo/archivos.py}
 
-La función lee la línea que contiene la cantidad de conjuntos de maestros a crear. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores $x_i$ de tuplas (nombre, habilidad). Esto tiene una complejidad temporal $O(n)$.
+La función lee la línea que contiene la cantidad de conjuntos de maestros a crear. Una vez hecho eso, lee $n$ líneas para almacenar los distintos valores $x_i$ de tuplas (nombre, habilidad). Esto tiene una complejidad temporal $\mathcal{O}(n)$.
 
 \subsection{Algoritmo de Backtracking}
 
 Debido al alto tiempo de ejecución de nuestro algoritmo inicial de backtracking, buscamos alternativas y mejoras que nos permitieran disminuirlo. Para detallar el algoritmo e indicar su complejidad, tendremos en cuenta la cantidad de maestros de la tribu que se enfrentarán a la Nación del Fueg, $n$, y la cantidad de grupos, $k$.  
 
-S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos nuestro algoritmo funciona en $O(1)$. Cuando la cantidad de maestros es igual a la cantidad de grupos, también sabemos el resultado del problema. Entonces, como cada grupo tendrá únicamente un maestro si $n = k$, decidimos que en ese caso particular no se aplique el algoritmo de backtracking. En su lugar, resolvemos la asignación con la función \texttt{caso\_k\_igual\_a\_n}.
+S $k > n$ no existe solución y si $k = 0$ no podemos formar grupos. En ambos casos nuestro algoritmo funciona en $\mathcal{O}(1)$. Cuando la cantidad de maestros es igual a la cantidad de grupos, también sabemos el resultado del problema. Entonces, como cada grupo tendrá únicamente un maestro si $n = k$, decidimos que en ese caso particular no se aplique el algoritmo de backtracking. En su lugar, resolvemos la asignación con la función \texttt{caso\_k\_igual\_a\_n}.
 
 \inputminted[linenos, firstline=75, lastline=81]{python}{codigo/backtracking_con_greedy.py}
 
-Esta función recorre la lista de maestros, implicando un costo de $O(n)$. Esto nos permitió disminuir notablemente el tiempo de ejecución. Todos estos son casos particulares. Procederemos a explicar el caso general. 
+Esta función recorre la lista de maestros, implicando un costo de $\mathcal{O}(n)$. Esto nos permitió disminuir notablemente el tiempo de ejecución. Todos estos son casos particulares. Procederemos a explicar el caso general. 
 
 Con el objetivo de evitar combinaciones no óptimas, partimos del resultado de una aproximación greedy. Ésta se basa completamente en la propuesta por la cátedra, aunque con algunas modificaciones ajustadas a la necesidad del algoritmo de backtracking.
 
 \inputminted[linenos, firstline=83]{python}{codigo/backtracking_con_greedy.py}
 
-La función crea una lista de sets para las asignaciones y un diccionario para guardar la fuerza de cada grupo. Ambas operaciones son lineales en la cantidad de grupos. Luego, asigna de forma iterativa cada maestro al grupo con menor habilidad. Para lograrlo, utiliza la función \texttt{min} de python sobre el diccionario \texttt{sumas\_grupos}, que conlleva un costo $O(k)$. Ésto es realizado para cada uno de los $n$ maestros, por lo que el ciclo \texttt{for} tiene una complejidad $O(n \cdot k)$. Utilizando el diccionario se calcula el coeficiente, lo cual también es lineal en $k$. El resto de las operaciones son constantes. Por lo tanto, la complejidad temporal de esta función es 
+La función crea una lista de sets para las asignaciones y un diccionario para guardar la fuerza de cada grupo. Ambas operaciones son lineales en la cantidad de grupos. Luego, asigna de forma iterativa cada maestro al grupo con menor habilidad. Para lograrlo, utiliza la función \texttt{min} de python sobre el diccionario \texttt{sumas\_grupos}, que conlleva un costo $\mathcal{O}(k)$. Ésto es realizado para cada uno de los $n$ maestros, por lo que el ciclo \texttt{for} tiene una complejidad $\mathcal{O}(n \cdot k)$. Utilizando el diccionario se calcula el coeficiente, lo cual también es lineal en $k$. El resto de las operaciones son constantes. Por lo tanto, la complejidad temporal de esta función es 
 $$
-T(n) = 3 \cdot O(k) + O(n \cdot k) + O(1) = O(n \cdot k)
+T(n) = 3 \cdot \mathcal{O}(k) + \mathcal{O}(n \cdot k) + \mathcal{O}(1) = \mathcal{O}(n \cdot k)
 $$
 
 Ahora analizaremos el código principal:
 \inputminted[linenos, lastline=28]{python}{codigo/backtracking_con_greedy.py}
 
-En la \texttt{línea 13} ordenamos el conjunto de maestros por mayor habilidad con \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $O(n \cdot log(n))$. Crear los grupos vacíos y la suma por grupo en las \texttt{líneas 16 y 17} son operaciones lineales en la cantidad de grupos $k$, es decir, $O(k)$. 
+En la \texttt{línea 13} ordenamos el conjunto de maestros por mayor habilidad con \href{https://svn.python.org/projects/python/trunk/Objects/listsort.txt}{Timsort} cuya complejidad es $\mathcal{O}(n \cdot log(n))$. Crear los grupos vacíos y la suma por grupo en las \texttt{líneas 16 y 17} son operaciones lineales en la cantidad de grupos $k$, es decir, $\mathcal{O}(k)$. 
 
 Como establecimos anteriormente, utilizamos la función \texttt{asignacion\_greedy} para obtener una solución inicial aproximada con la cual comparar los resultados de la función recursiva, \texttt{problema\_tribu\_del\_agua\_bt\_greedy\_recur} y poder podar rápidamente si se encuentra una solución parcial peor a ésta.
 
 \inputminted[linenos, firstline=30, lastline=71]{python}{codigo/backtracking_con_greedy.py}
 
 La solución del problema viene dada por la función recursiva \texttt{problema\_tribu\
-\_del\_agua\_bt\_recur}.  Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y vuelve un paso atrás. Los $k$ grupos están ordenados según la suma. Es decir, primero se intentará asignar al siguiente maestro más habilidoso al grupo actual con la menor fuerza total. Para ello, en la \texttt{línea 38} utilizamos Timsort, esta vez con un costo dependiente de la cantidad de grupos, $O(k \cdot log(k))$. El propósito de este orden es obtener grupos parejos que conduzcan a podas más tempranas.
+\_del\_agua\_bt\_recur}.  Su objetivo es probar todas las combinaciones de asignaciones de maestros a los grupos de forma tal de minimizar la adición de los cuadrados de la suma de las habilidades de cada uno. Para cada maestro comprueba si, al asignarlo al grupo $i \in [0, k-1]$, se puede obtener una combinación con una suma menor a la actual. Caso contrario, poda y vuelve un paso atrás. Los $k$ grupos están ordenados según la suma. Es decir, primero se intentará asignar al siguiente maestro más habilidoso al grupo actual con la menor fuerza total. Para ello, en la \texttt{línea 38} utilizamos Timsort, esta vez con un costo dependiente de la cantidad de grupos, $\mathcal{O}(k \cdot log(k))$. El propósito de este orden es obtener grupos parejos que conduzcan a podas más tempranas.
 
 Una solución parcial es válida si su coeficiente es menor al del mejor resultado y la suma del grupo al que se ha agregado un maestro no supera la habilidad máxima del mismo. La asignación actual no puede tener ningún grupo cuya suma sea mayor a la más alta de la mejor solución encontrada hasta entonces porque, al finalizar de asignar a todos los maestros, el coeficiente resultante será también mayor. Si estas condiciones se cumplen, se continúa resolviendo el problema para el siguiente maestro y, al regresar en la recursión, se puede intentar con otra asignación. Caso contrario, no tiene sentido seguir intentando con otros grupos porque los mismos están ordenados por suma.
 
-El algoritmo realiza una búsqueda explícita del espacio de soluciones. La cantidad de posibles asignaciones es $k^n$ pues, para cada uno de los $n$ maestro,s hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $O(k^n)$.
+El algoritmo realiza una búsqueda explícita del espacio de soluciones. La cantidad de posibles asignaciones es $k^n$ pues, para cada uno de los $n$ maestro,s hay $k$ opciones de grupos. Por lo tanto, la complejidad de esta función y del algoritmo en general es exponencial, más específicamente $\mathcal{O}(k^n)$.
 
 \subsection{Modelo de Programación Lineal}
 
@@ -375,9 +375,10 @@ Podemos observar la declaración de las variables, la función objetivo y las re
 
 Definimos los mismos casos particulares que en los otros algoritmos, con el objetivo de disminuir el tiempo de ejecución cuando conocemos el resultado del problema.
 
-Crear las variables $X_{i,j}$ y calcular las sumas implican, para cada grupo, iterar sobre los $n$ maestros que pueden ser asignados al mismo. Por lo tanto, cada una de estas operaciones conlleva $O(k \cdot n)$. Con el objetivo de definir la restricción de las asignaciones, se obtiene, para cada maestro, todas las variables asociadas según el grupo. Luego, ésto también es $O(n \cdot k)$. En cambio, las restricciones para $S_{min}$ y $S_{max}$ implican iterar por los $k$ grupos, con un costo $O(k)$. 
+Crear las variables $X_{i,j}$ y calcular las sumas implican, para cada grupo, iterar sobre los $n$ maestros que pueden ser asignados al mismo. Por lo tanto, cada una de estas operaciones conlleva $\mathcal{O}(k \cdot n)$. Con el objetivo de definir la restricción de las asignaciones, se obtiene, para cada maestro, todas las variables asociadas según el grupo. Luego, ésto también es $\mathcal{O}(n \cdot k)$. En cambio, las restricciones para $S_{min}$ y $S_{max}$ implican iterar por los $k$ grupos, con un costo $\mathcal{O}(k)$. 
 
-La función \texttt{obtener\_resultado} tiene dos ciclos anidados que realizan operaciones constantes para cada maestro según el grupo. La creación de las listas de \texttt{resultado} y \texttt{suma\_por\_grupo}, así como el cálculo del coeficiente, son operaciones lineales en la cantidad de grupos. Entonces, la complejidad temporal de la función es $T(n) = 3 \cdot O(k) + O(n \cdot k) = O(n \cdot k)$.
+La función \texttt{obtener\_resultado} tiene dos ciclos anidados que realizan operaciones constantes para cada maestro según el grupo. La creación de las listas de \texttt{resultado} y \texttt{suma\_por\_grupo}, así como el cálculo del coeficiente, son operaciones lineales en la cantidad de grupos. Entonces, la complejidad temporal de la función es:
+$$T(n) = 3 \cdot \mathcal{O}(k) + \mathcal{O}(n \cdot k) = \mathcal{O}(n \cdot k)$$.
 
 Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp} consume tiempo exponencial porque se trata de programación lineal entera.
 
@@ -385,7 +386,7 @@ Por último, la resolución del algoritmo utilizando la biblioteca \texttt{pulp}
 \subsubsection{Aproximación de la cátedra}
 \label{sec:algoAproxCatedra}
 
-La cátedra planteaba el siguiente algoritmo de aproximación para el problema:
+La cátedra \footnote{(con la ayuda del maestro Pakku)} planteaba el siguiente algoritmo de aproximación para el problema:
 
 \textit{Generar los k grupos vacíos. Ordenar de mayor a menor los maestros en función de su habilidad o fortaleza. Agregar al más habilidoso al grupo con menos habilidad hasta ahora (cuadrado de la suma). Repetir siguiendo con el siguiente más habilidoso, hasta que no queden más maestros por asignar.}
 
@@ -464,7 +465,7 @@ La siguiente aproximación propuesta sigue una lógica similar a la sugerida por
 
 \inputminted[linenos, firstline=3, lastline=33]{python}{codigo/aproximacion_adicional.py}
 
-Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $O(n\cdot \log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
+Nuevamente ordenamos los maestros por habilidad descendiente, con un costo $\mathcal{O}(n\cdot \log(n))$. Luego, este algoritmo sigue la regla sencilla de asignar de forma iterativa el maestro con la mayor habilidad al siguiente grupo en una secuencia cíclica, es decir, el maestro más habilidoso estará en el grupo 1, el $k$ en el grupo $k$ y el $k+1$ nuevamente en el primer grupo. El objetivo es distribuir los maestros de mayor habilidad primero y de manera uniforme a través de todos los grupos, lo cual evita la acumulación de habilidades altas en un solo grupo. El algoritmo es greedy porque sigue la estrategia mencionada para obtener un óptimo local en cada paso, dado por el grupo actual según el ciclo, con la esperanza de encontrar una solución globalmente óptima. Sin embargo, como el problema es NP-Completo y la solución exacta conlleva un costo exponencial, podemos afirmar que este algoritmo no es óptimo, sino tan solo una aproximación. 
 
 La asignación de los grupos implica iterar sobre los $n$ maestros, lo cual es lineal, $\mathcal{O}(n)$. Por otro lado, calcular el coeficiente utilizando la lista auxiliar \texttt{sumas} conlleva $\mathcal{O}(k)$. El resto de las operaciones son constantes. En total, la complejidad del algoritmo propuesto, para el caso general, es
 
@@ -475,9 +476,9 @@ $$
 \subsection{Efecto de las variables sobre el algoritmo}
 Todos los algoritmos propuestos consideran los siguientes casos
 \begin{itemize}
-    \item $k > n$: No existe solución. Devolvemos \texttt{None} en $O(1)$.
-    \item $k = 0$: Todos los algoritmos se ejecutan en $O(1)$, devolviendo una lista vacía y coeficiente 0. 
-    \item $k = n$: Cada grupo tendrá un solo maestro. Lo resolvemos en tiempo lineal $O(n)$.
+    \item $k > n$: No existe solución. Devolvemos \texttt{None} en $\mathcal{O}(1)$.
+    \item $k = 0$: Todos los algoritmos se ejecutan en $\mathcal{O}(1)$, devolviendo una lista vacía y coeficiente 0. 
+    \item $k = n$: Cada grupo tendrá un solo maestro. Lo resolvemos en tiempo lineal $\mathcal{O}(n)$.
     \item $k < n$: Es el caso general y la complejidad depende del algoritmo utilizado. Los algoritmos exactos conllevan tiempo exponencial, aumetando considerablemente con el valor de $k$ y $n$.
 \end{itemize}
 
