@@ -32,7 +32,7 @@ def ejecutar_tests_con_algoritmo(titulo, algoritmo, maxima_cantidad_de_tests, ca
         _, cota1 = generarResultados("ejemplos_adicionales", algoritmo, None, calcular_cota)
         
         print("---Ejemplos mediciones---\n")
-        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, None, calcular_cota) 
+        _, cota2 = generarResultados("ejemplos_mediciones", algoritmo, 53, calcular_cota) 
     
         print("---Ejemplos de la cátedra---\n")
         _, cota3 = generarResultados("ejemplos_catedra", algoritmo, maxima_cantidad_de_tests, calcular_cota) 
