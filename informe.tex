@@ -162,7 +162,7 @@ Ambas cotas, $\mathcal{O}(k \times n)$ y $\mathcal{O}(n^2)$ conllevan tiempo pol
 \subsection{Problema 2-Partition}
 \label{subsec:partition}
 
-Para demostrar que el problema de la tribu del agua es NP-Completo, vamos a hacer uso del problema 2-Partition como una reducción intermedia. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
+Para demostrar que el problema de la tribu del agua es NP-Completo, vamos a hacer uso del problema 2-Partition. Este se define de la siguiente manera: se tiene un conjunto de n elementos, cada uno con un valor, y se desea separarlos en 2 subconjuntos tal que la suma de los valores de cada uno sea igual para ambos. Procederemos a justificar que se trata de un problema NP-Completo.
 
 \subsubsection{Problema en NP}
 Enunciamos el problema de decisión asociado: dado un conjunto \( A =\{a_1, a_2, \ldots, a_n\} \), ¿existen dos subconjuntos \( A_1 \) y \( A_2 \) tales que \( \sum_{a \in A_1} a = \sum_{a \in A_2} a \)?
@@ -458,8 +458,9 @@ Además, usando los ejemplos provistos por la catedra, vemos que este coeficient
 \end{tabular}
 \end{center}
 
-En cambio, para los ejemplos utilizados en las mediciones la cota aumenta a $1.007$.
+De forma análoga, para los ejemplos utilizados en las mediciones, la cota corresponde a $1.007$.
 
+Para corroborar la cota encontrada, $r(A) = 1.02$, también realizamos mediciones con mayores volúmenes de datos, con $n$ \in {10, 100, 1000, 10000}. Obtuvimos $r(A) = 1.0256009216095232 \approx 1.0256$.
 \subsubsection{Aproximación adicional}
 
 La siguiente aproximación propuesta sigue una lógica similar a la sugerida por la cátedra, pero con un tiempo de ejecución menor.
@@ -602,7 +603,7 @@ A pesar de la complejidad exponencial del algoritmo de backtracking, su importan
 El modelo de programación lineal propuesto constituye una aproximación al problema, al minimizar una función objetivo distinta a la del problema de optimización planteado originalmente. La aproximación es generalmente buena, pero es exponencial porque utiliza programación lineal entera. Por lo tanto, al comparar el modelo con backtracking, consideramos que el segundo es mejor porque, para la misma complejidad temporal, obtiene la solución óptima en todos los casos. 
 
 A diferencia del algoritmo de programación lineal, la aproximación propuesta por la cátedra constituye una mejora significativa en cuanto al tiempo de ejecución. Si bien no siempre obtiene la asignación y el coeficiente óptimos, la disminución de la complejidad nos permite utilizarla para instancias grandes del problema donde el algoritmo exacto deja de ser práctico.
-Este algoritmo tiene una complejidad de $\mathcal{O}(n \cdot k)$; sin embargo, en general los valores de $k$ suelen ser más chicos que $n$ (ya que si $n \leq k$ la solución es trivial). Lo destacable de este algoritmo es que, ademas de tener un tiempo ejecución considerablemente menor al de backtracking, obtiene resultadossolamente $1.02$ veces peor que el resultado optimo.
+Este algoritmo tiene una complejidad de $\mathcal{O}(n \cdot k)$; sin embargo, en general los valores de $k$ suelen ser más chicos que $n$ (ya que si $n = k$ la solución es trivial). Lo destacable de este algoritmo es que, además de tener un tiempo ejecución considerablemente menor al de backtracking, obtiene resultados solamente $1.03$ veces peor que el resultado óptimo.
 
 La aproximación adicional que implementamos es una alternativa a la anterior, que nos permite resolver el problema de manera aún más rápido. Sin embargo, al no considerar la habilidad total de cada grupo, no es una aproximación tan eficiente. 
 
