@@ -409,7 +409,7 @@ En el peor de los casos, con $n = k$, la complejidad no sería cuadratica debido
 
 \paragraph{Análisis de Aproximación} \
 Para hacer el análisis de la aproximación, comparamos el coeficiente obtenido por el algoritmo de aproximacion contra el coeficiente obtenido por el algortimo de backtracking.
-Para esto, generamos 15 instancias $I$. Cada una de ellas tenía una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
+Para esto, generamos 13 instancias $I$. Cada una de ellas tenía una cantidad ascendente de maestros, habilidades aleatorias y una cantidad $k$ aleatoria (menor que $n$).
 
 El código que usamos para generar estos tests se encuentra en el archivo \texttt{codigo/comparacion\_aprox\_catedran.py}.
 
@@ -600,7 +600,7 @@ A pesar de la complejidad exponencial del algoritmo de backtracking, su importan
 El modelo de programación lineal propuesto constituye una aproximación al problema, al minimizar una función objetivo distinta a la del problema de optimización planteado originalmente. La aproximación es generalmente buena, pero es exponencial porque utiliza programación lineal entera. Por lo tanto, al comparar el modelo con backtracking, consideramos que el segundo es mejor porque, para la misma complejidad temporal, obtiene la solución óptima en todos los casos. 
 
 A diferencia del algoritmo de programación lineal, la aproximación propuesta por la cátedra constituye una mejora significativa en cuanto al tiempo de ejecución. Si bien no siempre obtiene la asignación y el coeficiente óptimos, la disminución de la complejidad nos permite utilizarla para instancias grandes del problema donde el algoritmo exacto deja de ser práctico.
-PÁRRAFO SOBRE LA APROX DE LA CATEDRA: MENCIONAR COMPLEJIDAD, SU CAPACIDAD PARA ENCONTRAR SOLUCIONES CERCANAS A LA OPTIMA, ETC
+Esta tiene una complejidad de $\mathcal{O}(n \cdot k)$, sin embargo, en general los valores de $k$ suelen ser más chicos que $n$ (ya que si $n \leq k$ la solución es trivial). Y ademas, lo destacable de este algoritmo es que no solo tiene un tiempo de ejecución considerablemente menor; sino que ademas da un resultado que ronda suele ser solamente $1.02$ veces peor que el resultado optimo.
 
 La aproximación adicional que implementamos es una alternativa a la anterior, que nos permite resolver el problema de manera aún más rápido. Sin embargo, al no considerar la habilidad total de cada grupo, no es una aproximación tan eficiente. 
 
